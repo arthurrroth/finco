@@ -26,7 +26,7 @@ const Account = () => {
       <img src={grayCircle} alt="profilePicture" />
     </header>
 
-    <main>
+    <main className="accountMain">
       <div className="accountOptions">
         <img src={featherIcon} alt="My Wallet" />
         <h5>My Wallet</h5>
