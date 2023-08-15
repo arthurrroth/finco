@@ -18,7 +18,7 @@ const Account = () => {
   <>
     <header className="accountHeader">
       <div>
-        <p>Welcome back.</p>
+        <p className="accountHeaderP">Welcome back.</p>
         {/* Change to Username from DB */}
         <h3>Name</h3>
       </div>
@@ -28,37 +28,51 @@ const Account = () => {
 
     <main className="accountMain">
       <div className="accountOptions">
-        <img src={featherIcon} alt="My Wallet" />
-        <h5>My Wallet</h5>
+        <div className="innerOptionDiv">
+          <img className="accountOptionImg" src={featherIcon} alt="My Wallet" />
+          <h5>My Wallet</h5>
+        </div>
         <img src={openIcon} alt="open" />
       </div>
 
-      <section>
-        <div className="accountOptions">
-          <img src={notificationIcon} alt="Notification" />
-          <h5>Notification</h5>
+      <section className="accountOptionsSection">
+        <div className="accountOptions2">
+          <div className="innerOptionDiv">
+            <img className="accountOptionImg" src={notificationIcon} alt="Notification" />
+            <h5>Notification</h5>
+          </div>  
           <label className="switch">
           <input type="checkbox" />
           <span className="slider round"></span>
           </label>
         </div>
 
-        <div className="accountOptions">
-          <img src={settingIcon} alt="Settings" />
-          <h5>Settings</h5>
+        <hr />
+
+        <div className="accountOptions2">
+          <div className="innerOptionDiv">
+            <img className="accountOptionImg" src={settingIcon} alt="Settings" />
+            <h5>Settings</h5>
+          </div>
           <img src={openIcon} alt="open" />
         </div>
+
+        <hr />
         
-        <div className="accountOptions">
-          <img src={faqIcon} alt="FAQ" />
-          <h5>FAQ</h5>
+        <div className="accountOptions2">
+          <div className="innerOptionDiv">
+            <img className="accountOptionImg" src={faqIcon} alt="FAQ" />
+            <h5>FAQ</h5>
+          </div>
           <img src={openIcon} alt="open" />
         </div>
       </section>
 
       <div className="accountOptions">
-      <img src={logoutIcon} alt="Logout" />
-        <h5>Logout</h5>
+        <div className="innerOptionDiv">
+          <img className="accountOptionImg" src={logoutIcon} alt="Logout" />
+          <h5>Logout</h5>
+        </div>
         <img src={openIcon} alt="open" />
       </div>
 

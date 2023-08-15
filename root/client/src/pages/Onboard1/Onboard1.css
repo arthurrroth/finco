@@ -41,3 +41,18 @@
 .onboardArrow{
     padding-left: 2rem;
 }
+
+.blueBtnShort{
+    background: linear-gradient(0deg,#1E78FE, #44BBFE);
+    border: none;
+    border-radius: 20rem;
+    padding: 2rem 6rem;
+    color: var(--text-color-white);
+    font-weight: 500;
+    text-decoration: none;
+    text-align: center;
+    font-size: 1.8rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

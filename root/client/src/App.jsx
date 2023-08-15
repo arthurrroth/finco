@@ -32,7 +32,7 @@ function App() {
         <Route path="/onboard1" element={<Onboard1/>}/>
         <Route path="/onboard2" element={<Onboard2/>}/>
       </Routes>
-    </BrowserRouter>
+    </BrowserRouter>   
   </>
   )
 }

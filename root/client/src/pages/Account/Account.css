@@ -1,19 +1,56 @@
 .accountHeader{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin: var(--main-padding);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 5rem var(--main-padding);
+}
+
+.accountHeaderP{
+  margin-bottom: 0.5rem;
 }
 
 .accountMain{
-margin: var(--main-padding);
+  margin: var(--main-padding);
 }
 
 .accountOptions{
-    display: flex;
-    align-items: center;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: var(--background-lightgrey);
+  padding: 2rem;
+  margin: 2rem 0;
+  border-radius: 15px;
 }
 
+.accountOptions2{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 2rem;
+}
+
+.accountOptionsSection{
+  display: flex;
+  flex-direction: column;
+  background-color: var(--background-lightgrey);
+  margin: 3rem 0;
+  border-radius: 15px;
+}
+
+.innerOptionDiv{
+  display: flex;
+}
+
+.accountOptionImg{
+  margin-right: 1rem;
+}
+
+hr{
+  border-top: 1px solid #EBEBEB;
+}
+
+/* ! Toggle */
 /* The switch - the box around the slider */
 .switch {
     position: relative;
