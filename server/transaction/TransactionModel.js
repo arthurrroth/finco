@@ -11,12 +11,31 @@ const TransactionSchema = new Schema({
   },
   category: {
     type: String,
+    enum: [
+      "food & drink",
+      "sallary",
+      "other income",
+      "insurance bill",
+      "fitness",
+      "transport & car",
+      "subscriptions",
+      "bars & restaurants",
+      "work expenses",
+      "education",
+      "family & friends",
+      "health",
+      "travel & vacation",
+      "media & electronics",
+    ],
     required: true,
   },
-  transactionDate: {
-    type: Date,
-    default: Date.now(),
-    expires: 7200,
+  date: {
+    type: String,
+    required: true,
+  },
+  time: {
+    type: String,
+    required: true,
   },
 });
 

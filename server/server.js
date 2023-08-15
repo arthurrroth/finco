@@ -20,7 +20,7 @@ app.get("/api/status", (req, res) => {
 app.use("/api/wallet/cards", cardRouter);
 
 //! TransactionRouter
-app.use("/api/wallet/cards/transactions", transactionRouter);
+app.use("/api/wallet/transactions", transactionRouter);
 
 const PORT = process.env.PORT;
 app.listen(PORT, () => {

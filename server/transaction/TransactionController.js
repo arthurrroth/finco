@@ -7,11 +7,16 @@ export const createTransaction = async (cardId, amount, category) => {
   if (!card) throw new Error("No Card with this Id");
 
   // create new transaction
+  let date = new Date();
+  const time = date.toLocaleTimeString();
+  date = date.toLocaleDateString();
+
   const newTransaction = await Transaction.create({
     cardId: card.cardNumber,
     amount,
     category,
-    transactionDate: Date.now(),
+    date,
+    time,
   });
 
   // push transaction to card

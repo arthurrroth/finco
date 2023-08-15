@@ -1,0 +1,30 @@
+.single-transaction {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 2rem;
+}
+
+.symbol-category {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+}
+
+.amount {
+  font-size: 2rem;
+}
+
+.calendar-btn {
+  position: relative;
+  display: flex;
+}
+
+.date-picker {
+  height: 2rem;
+  width: 2rem;
+  border-radius: 100%;
+  opacity: 0;
+  position: absolute;
+}

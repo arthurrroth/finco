@@ -1,0 +1,22 @@
+.income-expense img {
+  height: 12rem;
+}
+
+.income-expense .box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #f7f7f7;
+  border-radius: 50px;
+}
+
+.income-expense .box div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.box p {
+  font-size: 1.5rem;
+}

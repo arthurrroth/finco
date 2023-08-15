@@ -1,0 +1,63 @@
+.main-transaction {
+  width: 400px;
+  padding-top: 3rem;
+}
+
+.header-transaction {
+  display: flex;
+  justify-content: space-between;
+  padding: 2rem;
+}
+
+.logo-transaction {
+  width: 5rem;
+  height: 5.5rem;
+}
+
+.profile {
+  height: 4.5rem;
+}
+
+.all-transaction {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 2rem;
+}
+
+h1 {
+  font-size: 2.5rem;
+}
+
+.searchbar-transaction {
+  height: 6vh;
+  width: 100%;
+  border-radius: 20px;
+  border: none;
+  background-color: #f7f7f7;
+  padding: 1rem;
+  font-size: 1.8rem;
+}
+
+.all-transaction-btns {
+  display: flex;
+  gap: 1rem;
+}
+
+.all-transaction-btns button {
+  padding: 10px;
+  border-radius: 100%;
+  border: none;
+  cursor: pointer;
+}
+
+.income-expense {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+}
+
+.transactions {
+  padding: 2rem;
+}
