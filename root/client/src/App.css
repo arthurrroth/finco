@@ -12,6 +12,7 @@
 :root {
     font-family: "Urbanist", Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
     font-size: 62.5%;
+    line-height: 1.2;
 
     --main-padding: 28px;
 
@@ -57,9 +58,21 @@ h5 {
   }
 
 p {
-    font-size: 1.6rem;
+    font-size: 1.4rem;
   }
 
 button{
     font-size: 1.6rem;
+}
+
+.blueBtn{
+  background: linear-gradient(0deg,#1E78FE, #44BBFE);
+  padding: 2rem 6rem;
+  border-radius: 20rem;
+  color: var(--text-color-white);
+  text-decoration: none;
+  font-size: 1.8rem;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
 }
