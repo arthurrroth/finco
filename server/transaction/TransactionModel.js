@@ -9,6 +9,10 @@ const TransactionSchema = new Schema({
     type: Number,
     required: true,
   },
+  category: {
+    type: String,
+    required: true,
+  },
   transactionDate: {
     type: Date,
     default: Date.now(),
