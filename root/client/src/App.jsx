@@ -16,10 +16,16 @@ import AddTransaction from "./pages/AddTransaction/AddTransaction.jsx"
 import Reports from "./pages/Reports/Reports.jsx"
 // 07 Account/ Menu
 import Account from "./pages/Account/Account.jsx"
+import { useState } from "react";
+import { PageContext } from "./context/context";
+
 
 function App() {
+  const [page, setPage] = useState("")
+
   return (
   <>
+  <PageContext.Provider value={{page, setPage}}>
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Home/>}/>
@@ -33,6 +39,7 @@ function App() {
         <Route path="/onboard2" element={<Onboard2/>}/>
       </Routes>
     </BrowserRouter>
+  </PageContext.Provider>
   </>
   )
 }
