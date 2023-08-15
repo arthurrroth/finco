@@ -1,6 +1,8 @@
 import Card from "./CardModel.js";
 import { Router } from "express";
 
+import { createCard } from "./CardController.js";
+
 export const cardRouter = Router();
 
 //! get all cards
@@ -26,14 +28,14 @@ cardRouter.get("/:id", async (req, res) => {
 
 //! create new card
 cardRouter.post("/newcard", async (req, res) => {
-  const { cardNumber, cardTitle, cardDescription } = req.body;
-  const newCard = new Card({ cardNumber, cardTitle, cardDescription });
-  try {
-    await newCard.save();
-    res.send({ newCard });
-  } catch (error) {
-    res.status(400).send("error in creating new card");
-  }
+  const { userId, cardNumber, cardTitle, cardDescription } = req.body;
+  const newCard = await createCard(
+    userId,
+    cardNumber,
+    cardTitle,
+    cardDescription
+  );
+  res.send(newCard);
 });
 
 //! delete card

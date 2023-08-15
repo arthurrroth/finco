@@ -1,7 +1,7 @@
 import Card from "../card/CardModel.js";
 import Transaction from "./TransactionModel.js";
 
-//! create new Transaction with cardId
+//! create new transaction with cardId
 export const createTransaction = async (cardId, amount) => {
   const card = await Card.findOne({ cardNumber: cardId });
   if (!card) throw new Error("No Card with this Id");
