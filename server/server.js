@@ -24,5 +24,5 @@ app.use("/api/wallet/cards/transactions", transactionRouter);
 
 const PORT = process.env.PORT;
 app.listen(PORT, () => {
-  console.log("Server is running on port ", PORT);
+  console.log(`Server is running faaaast on port ${PORT} 🏎️💨 `);
 });
