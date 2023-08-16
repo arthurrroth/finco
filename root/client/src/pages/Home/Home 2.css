@@ -1,9 +1,0 @@
-nav{
-    display: flex;
-    justify-content: space-around;
-    align-items: flex-end;
-}
-
-nav h5{
-    display: none;
-}
