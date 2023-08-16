@@ -1,5 +1,4 @@
 import "./AddTransaction.css";
-import { useState, useEffect } from 'react';
 import { NavLink } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import BackIcon from "../../icon/Back-icon.png";
@@ -11,7 +10,7 @@ import Creditcard from "../../components/Creditcard/Creditcard.jsx"
 import grayCircle from "../../icon/grayCircle.png"
 
 // # Custom select
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import { PageContext } from "../../context/context";
 
 // # Functions add income & expenses
