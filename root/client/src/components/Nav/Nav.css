@@ -1,22 +1,22 @@
 .nav-container {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    padding: 10px 0;
-  }
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 10px 0;
+}
 
-  .nav-link {
-    text-decoration: none;
-    color: #333; /* Textfarbe anpassen */
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
+.nav-link {
+  text-decoration: none;
+  color: #333; /* Textfarbe anpassen */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 
-nav{
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    padding: 2rem 0;
+nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 2rem 0;
 }
