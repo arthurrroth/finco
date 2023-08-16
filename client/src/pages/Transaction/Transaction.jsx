@@ -26,7 +26,11 @@ const Transaction = () => {
   const [dateIsActive, setDateIsActive] = useState(false);
   const [selectedDate, setSelectedDate] = useState(null);
 
-  console.log(selectedDate);
+  useEffect(() => {
+    const date = selectedDate;
+    const dateFormat = date.replaceAll("-", ".");
+    console.log(dateFormat);
+  }, [selectedDate]);
 
   //! fetch data
   useEffect(() => {
