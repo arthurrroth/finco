@@ -5,6 +5,8 @@ import { useContext, useEffect, useState } from "react";
 
 import Nav from "../../components/Nav/Nav";
 import OneTransaction from "../../components/OneTransaction/OneTransaction";
+import IncomeExpense from "../../components/IncomeExpense/IncomeExpense";
+import { OpenBoxContext, PageContext } from "../../context/context";
 
 // import img
 import BackIcon from "../../icon/Back-icon.png";
@@ -12,35 +14,25 @@ import logo from "../../icon/logo.png";
 import profile from "../../icon/grayCircle.png";
 import search from "../../icon/search.png";
 import calendar from "../../icon/calendar.png";
-import IncomeExpense from "../../components/IncomeExpense/IncomeExpense";
-import { PageContext } from "../../context/context";
 
 const Transaction = () => {
-const {page, setPage} = useContext(PageContext)
-
-useEffect(() => {
-  setPage("Transaction")
-},[]);
+  const { page, setPage } = useContext(PageContext);
+  const { openBox, setOpenBox } = useContext(OpenBoxContext);
 
   const [transactions, setTransactions] = useState([]);
   const [dates, setDates] = useState([]);
-  const [income, setIncome] = useState(null);
-  const [expense, setExpense] = useState(null);
 
   const [searchIsActive, setSearchIsActive] = useState(false);
   const [searchInput, setSearchInput] = useState("");
 
-  const [dateIsActive, setDateIsActive] = useState(false);
   const [selectedDate, setSelectedDate] = useState(null);
-
-  // useEffect(() => {
-  //   const date = selectedDate;
-  //   const dateFormat = date.replaceAll("-", ".");
-  //   console.log(dateFormat);
-  // }, [selectedDate]);
+  const [dateTransaction, setDateTransaction] = useState([]);
 
   //! fetch data
   useEffect(() => {
+    setPage("Transaction");
+    setOpenBox(false);
+
     const fetchData = async () => {
       try {
         const { data } = await axios.get("./api/wallet/transactions");
@@ -57,11 +49,29 @@ useEffect(() => {
     let allDates = [];
     transactions.map((transaction) => {
       allDates.push(transaction.date);
-      allDates.reverse();
       const sortedDates = [...new Set(allDates)];
+      sortedDates.sort((a, b) => b - a);
       setDates(sortedDates);
     });
   }, [transactions]);
+
+  //! search transaction for date
+  const handleSearchDate = (e) => {
+    const date = e.target.value;
+    setSelectedDate(date);
+    const searchDateTransaction = transactions.filter((transaction) => {
+      return transaction.date === date;
+    });
+    setDateTransaction(searchDateTransaction);
+  };
+
+  //! Reset
+  const handleReset = () => {
+    setSearchIsActive(false);
+    setSearchInput("");
+    setSelectedDate(null);
+    setDateTransaction([]);
+  };
 
   return (
     <>
@@ -96,31 +106,28 @@ useEffect(() => {
             <button
               onClick={() => setSearchIsActive(true)}
               className="search-btn">
-              <img
-                onSelect={(e) => setSelectedDate(e.target.value)}
-                src={search}
-                alt="search symbol"
-              />
+              <img src={search} alt="search symbol" />
             </button>
             {/* Calendar Btn */}
-            <button
-              onClick={() => setDateIsActive((prev) => !prev)}
-              className="calendar-btn">
-              <img src={calendar} alt="calendar symbol" />
-              <input
-                onChange={(e) => setSelectedDate(e.target.value)}
-                className="date-picker"
-                type="date"
-              />
-            </button>
+            {searchIsActive ? null : (
+              <button className="calendar-btn">
+                <img src={calendar} alt="calendar symbol" />
+                <input
+                  onChange={(e) => handleSearchDate(e)}
+                  className="date-picker"
+                  type="date"
+                />
+              </button>
+            )}
+            <button onClick={handleReset}>X</button>
           </div>
         </article>
 
         {/* Income & Expense */}
         {searchIsActive ? null : (
           <article className="income-expense">
-            <IncomeExpense amount={"income"} />
-            <IncomeExpense amount={"expense"} />
+            <IncomeExpense sortAmount={"income"} transaction={transactions} />
+            <IncomeExpense sortAmount={"expense"} transaction={transactions} />
           </article>
         )}
 
@@ -135,6 +142,14 @@ useEffect(() => {
                 return <OneTransaction transaction={elm} key={elm._id} />;
               }
             })}
+          </section>
+        ) : // SEARCH FOR DATE
+        selectedDate ? (
+          <section className="transactions">
+            <h2>{selectedDate}</h2>
+            {dateTransaction.map((elm) => (
+              <OneTransaction transaction={elm} key={elm._id} />
+            ))}
           </section>
         ) : (
           <section className="transactions">
@@ -151,7 +166,7 @@ useEffect(() => {
           </section>
         )}
       </main>
-      <Nav page = {page}/>
+      <Nav page={page} />
     </>
   );
 };

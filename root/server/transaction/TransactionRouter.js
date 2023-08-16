@@ -1,7 +1,6 @@
-import Transaction from "./TransactionModel.js";
 import { Router } from "express";
-
 import { createTransaction } from "./TransactionController.js";
+import Transaction from "./TransactionModel.js";
 
 export const transactionRouter = Router();
 
@@ -28,7 +27,13 @@ transactionRouter.get("/:id", async (req, res) => {
 
 //! create new transaction
 transactionRouter.post("/newtransaction", async (req, res) => {
-  const { cardId, amount, category } = req.body;
-  const newTransaction = await createTransaction(cardId, amount, category);
+  const { cardId, amount, category, date, time } = req.body;
+  const newTransaction = await createTransaction(
+    cardId,
+    amount,
+    category,
+    date,
+    time
+  );
   res.json(newTransaction);
 });

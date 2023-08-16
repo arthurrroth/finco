@@ -10,7 +10,7 @@ const OneTransaction = ({ transaction }) => {
   return (
     <div className="single-transaction">
       <div className="symbol-category">
-        <img
+        {/* <img
           src={
             transaction.category === "food & drink"
               ? foodDrink
@@ -43,7 +43,7 @@ const OneTransaction = ({ transaction }) => {
               : null
           }
           alt="category-symbol"
-        />
+        /> */}
         <div>
           <h1>{transaction.category}</h1>
           <p>{transaction.date}</p>
