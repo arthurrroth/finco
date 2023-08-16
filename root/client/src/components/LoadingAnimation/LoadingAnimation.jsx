@@ -1,10 +1,16 @@
 import "./LoadingAnimation.css"
-import logo from "../../icon/Logo.png"
+import logoLeft from "../../icon/logoLeft.png"
+import logoCircle from "../../icon/logoCircle.png"
+import logoRight from "../../icon/logoRight.png"
 
 const LoadingAnimation = () => {
     return ( 
         <main className="loading">
-          <img src={logo} alt="Logo" /> 
+          <div className="container">
+            <img className="logo-left" src={logoLeft} alt="logo" />
+            <img className="logo-circle" src={logoCircle} alt="logo" />
+            <img className="logo-right" src={logoRight} alt="logo" />
+          </div>
         </main>
      );
 }
