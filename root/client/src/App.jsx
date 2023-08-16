@@ -17,7 +17,7 @@ import Reports from "./pages/Reports/Reports.jsx"
 // 07 Account/ Menu
 import Account from "./pages/Account/Account.jsx"
 import { useState } from "react";
-import { PageContext } from "./context/context";
+import {PageContext} from "../src/context/context.jsx";
 
 
 function App() {
