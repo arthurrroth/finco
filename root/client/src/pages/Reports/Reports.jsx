@@ -2,33 +2,22 @@ import "./Reports.css";
 import { NavLink } from "react-router-dom";
 import { useState } from "react";
 import Nav from "../../components/Nav/Nav";
-<<<<<<< HEAD
 import { useContext, useEffect } from "react";
 import { PageContext } from "../../context/context";
-
-const Reports = () => {
-  const {page, setPage} = useContext(PageContext)
-
-  useEffect(() => {
-    setPage("Reports")
-  },[]);
-
-  return <>
-  <h1>Reports</h1>
-  <Link to="/">
-      <img src={BackIcon} alt="" />
-  </Link>
-  <Nav page = {page}/>
-=======
 import ReportDiagram from "../../components/ReportDiagram/ReportDiagram.jsx"
 import logo from "../../icon/Logo.png";
-import iconUp from "../../icon/Icon up.png"
-import iconDown from "../../icon/Icon down.png"
+import iconUp from "../../icon/icon-up.png"
+import iconDown from "../../icon/icon-down.png"
 
 // # delete and change to Profile Picture
 import grayCircle from "../../icon/grayCircle.png"
 
 const Reports = () => {
+  const {page, setPage} = useContext(PageContext)
+  
+  useEffect(() => {
+    setPage("Reports")
+  },[]);
 
   const [loadMore, setLoadMore] = useState(false);
 
@@ -68,7 +57,6 @@ const Reports = () => {
     </main>
 
   <Nav/>
->>>>>>> e8066298ad4676bd1f9d2caa6d1b4fc3eb6e9290
   </>
   )
 };

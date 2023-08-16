@@ -1,19 +1,17 @@
 import "./AddTransaction.css";
-import { useState, useEffect } from 'react';
+import { useState, useContext, useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import BackIcon from "../../icon/Back-icon.png";
 import selectImg from "../../icon/open-add.png"
 import selectDownImg from "../../icon/down.png"
 import Creditcard from "../../components/Creditcard/Creditcard.jsx"
+import { PageContext } from "../../context/context";
 
 // # delete and change to Profile Picture
 import grayCircle from "../../icon/grayCircle.png"
 
 // # Custom select
-import { useContext, useEffect } from "react";
-import { PageContext } from "../../context/context";
-
 // # Functions add income & expenses
 // # Connection DB
 

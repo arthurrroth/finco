@@ -8,6 +8,67 @@ html {
   font-size: 62.5%;
 }
 
+@font-face {
+  font-family: "Urbanist";
+  src: url(./assets/font/Urbanist/Urbanist-VariableFont_wght.ttf);
+}
+
+:root {
+  font-family: "Urbanist", Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-size: 62.5%;
+  line-height: 1.2;
+
+  --main-padding: 28px;
+
+  --text-color-white: white;
+  --text-color-black: black;
+  --text-color-darkgray: #0D1636;
+  --text-color-blue: #298BFF;
+  --text-color-yellow: #FFAA1A;
+
+  --icon-color: #565C72;
+
+  --border-red: #F44545;
+
+  --background-lightgrey: #F7F7F7;
+
+  --graph-linear-darkred: #FB2467;
+
+  --linear-lightblue: #44BBFE;
+  --linear-darkblue: #1E78FE;
+
+  --linear-yellow: #FFCF53 ;
+  --linear-orange: #FF9900 ; 
+}
+
+h1 {
+  font-size: 3.6rem;
+}
+
+h2 {
+  font-size: 2.8rem;
+}
+
+h3 {
+  font-size: 2rem;
+}
+
+h4 {
+  font-size: 1.8rem;
+}
+
+h5 {
+  font-size: 1.6rem;
+}
+
+p {
+  font-size: 1.4rem;
+}
+
+button{
+  font-size: 1.6rem;
+}
+
 .blueBtn{
   width: 100%;
   background: linear-gradient(0deg,#1E78FE, #44BBFE);
