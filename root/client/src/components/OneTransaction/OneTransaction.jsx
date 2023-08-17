@@ -6,7 +6,7 @@ import sallary from "../../icon/sallary.png";
 import otherIncome from "../../icon/other-income.png";
 import insuranceBill from "../../icon/insurance-bill.png";
 
-const OneTransaction = ({ transaction }) => {
+const OneTransaction = ({ transaction, amount }) => {
   return (
     <div className="single-transaction">
       <div className="symbol-category">
@@ -45,11 +45,14 @@ const OneTransaction = ({ transaction }) => {
           alt="category-symbol"
         /> */}
         <div>
-          <h1>{transaction.category}</h1>
-          <p>{transaction.date}</p>
+          <p className="transactionCategoryName">{transaction.category}</p>
+          <div className="oneTransDateDiv">
+            <p className="transactionDate">{transaction.time},</p>
+            <p className="transactionDate">{transaction.date}</p>
+          </div>
         </div>
       </div>
-      <p className="amount">{transaction.amount}</p>
+      <p className="amount">€ {transaction.amount}</p>
     </div>
   );
 };

@@ -31,8 +31,8 @@ const IncomeExpense = ({ sortAmount, transaction }) => {
         alt="income symbol"
       />
       <div>
-        <h3>{sortAmount === "income" ? "Income" : "Expense"}</h3>
-        {sortAmount === "income" ? <p>+ {income} €</p> : <p>- {expenses} €</p>}
+        <p className="reportP">{sortAmount === "income" ? "Income" : "Expense"}</p>
+        {sortAmount === "income" ? <p className="reportBeginningCurrentP">+ {income} €</p> : <p className="reportBeginningCurrentP">- {expenses} €</p>}
       </div>
     </div>
   );

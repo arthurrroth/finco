@@ -10,8 +10,12 @@ const AddIncome = () => {
 
   useEffect(() => {
     setPage("Income");
-  }, []);
-
+    document.body.classList.add(page.toLowerCase() + "Page");
+    return () => {
+      document.body.classList.remove(page.toLowerCase() + "Page");
+    };
+  }, [page]);
+  
   return (
     <>
       <AddTransaction page={page} />

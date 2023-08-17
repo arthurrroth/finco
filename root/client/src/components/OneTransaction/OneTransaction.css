@@ -12,6 +12,20 @@
   gap: 1.5rem;
 }
 
+.transactionCategoryName{
+  font-weight: 600;
+}
+
+.oneTransDateDiv{
+  display: flex;
+  gap: .5rem;
+}
+
+.transactionDate{
+  font-size: 1.2rem;
+}
+
 .amount {
-  font-size: 2rem;
+  font-size: 1.6rem;
+  font-weight: 600;
 }

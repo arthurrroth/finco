@@ -14,14 +14,16 @@
   margin: var(--main-padding);
 }
 
-.addIncomeH2 {
-  color: var(--text-color-blue);
+.addTransactionH2{
   margin-bottom: 2rem;
 }
 
-.addExpensesH2 {
+.incomePage .addIncomeExpenseH2 {
+  color: var(--text-color-blue);
+}
+
+.expensesPage .addIncomeExpenseH2 {
   color: var(--text-color-yellow);
-  margin-bottom: 2rem;
 }
 
 .addForm {

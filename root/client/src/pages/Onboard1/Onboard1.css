@@ -12,6 +12,90 @@
     margin-bottom: 5rem;
 }
 
+.illustrationContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 180px;
+    height: 265px;
+    position: relative;
+    margin-bottom: 5rem;
+  }
+  
+  @keyframes yellow-money-anim {
+      from { top: 90px; }
+      50% { top: 83px; }
+      100% { top: 90px; }
+  }
+  
+  @keyframes money-blue-anim {
+      from { top: 10px; }
+      50% { top: 0px; }
+      100% { top: 10px; }
+  }
+  @keyframes dollar-blue-anim {
+      from { top: 45px; }
+      50% { top: 25px; }
+      100% { top: 45px; }
+  }
+  @keyframes coin-big-anim {
+      from { top: 55px; }
+      50% { top: 60px; }
+      100% { top: 55px; }
+  }
+  @keyframes coin-small-anim {
+      from { top:110px; }
+      50% { top: 115px; }
+      100% { top: 110px; }
+  }
+  
+  .moneyYellow{
+      position: absolute;
+      top: 90px;
+      right: 35px;
+      animation-duration: 4s;
+      animation-name: yellow-money-anim;
+      animation-iteration-count: infinite;
+  }
+  .moneyBlue{
+      position: absolute;
+      top: 10px;
+      right: 70px;
+      animation-duration: 5.5s;
+      animation-name: money-blue-anim;
+      animation-iteration-count: infinite;
+  }
+  .dollarBlue{
+      position: absolute;
+      top: 40px;
+      left: 40px;
+      animation-duration: 5s;
+      animation-name: dollar-blue-anim;
+      animation-iteration-count: infinite;
+  }
+  .coinBig{
+      position: absolute;
+      top: 55px;
+      right: 65px;
+      animation-duration: 3s;
+      animation-name: coin-big-anim;
+      animation-iteration-count: infinite;
+  }
+  .coinSmall{
+      position: absolute;
+      top: 110px;
+      left: 70px;
+      animation-duration: 4.5s;
+      animation-name: coin-small-anim;
+      animation-iteration-count: infinite;
+  }
+  
+  .bankcard{
+      position: absolute;
+      bottom: 0;
+  }
+
 .onboardH2{
     margin-bottom: 2rem;
 }

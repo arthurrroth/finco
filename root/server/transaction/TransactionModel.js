@@ -3,7 +3,7 @@ import { Schema, model } from "mongoose";
 const TransactionSchema = new Schema({
   cardId: {
     type: String,
-    required: true,
+    required: false,
   },
   amount: {
     type: Number,

@@ -7,7 +7,6 @@ import TimeIcon from "../../icon/pie-chart-icon.png";
 import { useContext } from "react";
 import { OpenBoxContext } from "../../context/context";
 
-import box from "../../icon/Group.png";
 
 const Nav = ({ page }) => {
   const { openBox, setOpenBox } = useContext(OpenBoxContext);
@@ -22,7 +21,7 @@ const Nav = ({ page }) => {
         <div className="nav-container">
           <NavLink to="/" className="nav-link">
             <div className="nav-site">
-              {page === "Home" ? <p>Home</p> : <img src={HomeIcon} alt="" />}
+              {page === "Home" ? <p>Home</p> : <img src={HomeIcon} alt="home" />}
             </div>
           </NavLink>
 
@@ -31,16 +30,17 @@ const Nav = ({ page }) => {
               {page === "Transaction" ? (
                 <p>Transaction</p>
               ) : (
-                <img src={CardIcon} alt="" />
+                <img src={CardIcon} alt="transaction" />
               )}
             </div>
           </NavLink>
+
           {openBox ? (
             <div className="openbox-addtrans">
-              {/* <img src={box} alt="openbox" /> */}
               <NavLink to="/addincome" className="links">
                 Income
               </NavLink>
+              <hr className="incomeExpensesHR" />
               <NavLink to="/addexpenses" className="links">
                 Expenses
               </NavLink>
@@ -51,13 +51,13 @@ const Nav = ({ page }) => {
             {openBox ? <p>Add</p> : <img src={AddIcon} alt="add icon" />}
           </button>
 
+          {/* <NavLink onClick={handleAddTransaction} to="/transaction" className="nav-link">
+          {openBox ? <p>Add</p> : <img src={AddIcon} alt="add icon" />}
+          </NavLink> */}
+
           <NavLink to="/reports" className="nav-link">
             <div className="nav-site">
-              {page === "Reports" ? (
-                <p>Reports</p>
-              ) : (
-                <img src={TimeIcon} alt="" />
-              )}
+              {page === "Reports" ? <p>Reports</p> : <img src={TimeIcon} alt="reports" />}
             </div>
           </NavLink>
         </div>
