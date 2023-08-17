@@ -6,11 +6,38 @@ export const transactionRouter = Router();
 
 //! get all transactions
 transactionRouter.get("/", async (req, res) => {
-  try {
-    const transactions = await Transaction.find();
-    res.json(transactions);
-  } catch (error) {
-    res.status(400).send("error in finding all transactions");
+  const { category, date } = req.query;
+  console.log(date);
+  // get search transactions
+  if (category) {
+    try {
+      let response = await Transaction.find();
+      response = response.filter((data) => {
+        return data.category.toLowerCase().includes(category.toLowerCase());
+      });
+      res.json(response);
+    } catch (error) {
+      res.status(400).send("error in finding searched transactions");
+    }
+    // get transactions by date
+  } else if (date) {
+    try {
+      let response = await Transaction.find();
+      response = response.filter((data) => {
+        return data.date === date;
+      });
+      res.json(response);
+    } catch (error) {
+      res.status(400).send("error in finding searched transactions");
+    }
+    // get all transactions
+  } else {
+    try {
+      const allTransactions = await Transaction.find();
+      res.json(allTransactions);
+    } catch (error) {
+      res.status(400).send("error in finding all transactions");
+    }
   }
 });
 

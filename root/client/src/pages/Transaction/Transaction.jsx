@@ -35,14 +35,16 @@ const Transaction = () => {
 
     const fetchData = async () => {
       try {
-        const { data } = await axios.get("./api/wallet/transactions");
+        const { data } = await axios.get("./api/wallet/transactions", {
+          params: { category: searchInput, date: selectedDate },
+        });
         setTransactions(data);
       } catch (error) {
         console.log({ fetchData: error });
       }
     };
     fetchData();
-  }, []);
+  }, [searchInput, selectedDate]);
 
   //! set dates for transactions
   useEffect(() => {
@@ -132,39 +134,34 @@ const Transaction = () => {
         )}
 
         {/* Transactions */}
-        {searchIsActive ? (
-          <section className="transactions">
-            {transactions?.map((elm) => {
-              if (
-                elm.category.includes(searchInput) &&
-                searchInput.length > 0
-              ) {
-                return <OneTransaction transaction={elm} key={elm._id} />;
-              }
-            })}
-          </section>
-        ) : // SEARCH FOR DATE
-        selectedDate ? (
-          <section className="transactions">
-            <h2>{selectedDate}</h2>
-            {dateTransaction.map((elm) => (
-              <OneTransaction transaction={elm} key={elm._id} />
-            ))}
-          </section>
-        ) : (
-          <section className="transactions">
-            {dates?.map((date, index) => (
+        <section className="transactions">
+          {!searchInput && !selectedDate ? (
+            dates?.map((date, index) => (
               <div key={index}>
                 <h2>{date}</h2>
-                {transactions?.map((elm) =>
-                  elm.date == date ? (
-                    <OneTransaction transaction={elm} key={elm._id} />
-                  ) : null
+                {transactions?.map(
+                  (elm) =>
+                    elm.date === date && (
+                      <OneTransaction transaction={elm} key={elm._id} />
+                    )
                 )}
               </div>
-            ))}
-          </section>
-        )}
+            ))
+          ) : // selected date
+          selectedDate ? (
+            <div>
+              <h2>{selectedDate}</h2>
+              {transactions?.map((elm) => (
+                <OneTransaction transaction={elm} key={elm._id} />
+              ))}
+            </div>
+          ) : (
+            // search transactions
+            transactions?.map((elm) => (
+              <OneTransaction transaction={elm} key={elm._id} />
+            ))
+          )}
+        </section>
       </main>
       <Nav page={page} />
     </>
