@@ -14,7 +14,7 @@ const Onboard1 = () => {
     setLoading(true);
     setTimeout(() => {
       setLoading(false);
-    }, 5500);
+    }, 6000);
   }, []);
 
   return(

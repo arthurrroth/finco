@@ -1,3 +1,8 @@
+@font-face {
+  font-family: "Urbanist";
+  src: url(./assets/font/Urbanist/Urbanist-VariableFont_wght.ttf);
+}
+
 * {
   padding: 0;
   margin: 0;
@@ -8,29 +13,9 @@ html {
   font-size: 62.5%;
 }
 
-.blueBtn{
-  width: 100%;
-  background: linear-gradient(0deg,#1E78FE, #44BBFE);
-  border: none;
-  border-radius: 20rem;
-  padding: 2rem 6rem;
-  color: var(--text-color-white);
-  font-weight: 500;
-  text-decoration: none;
-  text-align: center;
-  font-size: 1.8rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-@font-face {
-  font-family: "Urbanist";
-  src: url(./assets/font/Urbanist/Urbanist-VariableFont_wght.ttf);
-}
-
 :root {
-  font-family: "Urbanist", Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-family: "Urbanist", Inter, system-ui, Avenir, Helvetica, Arial,
+    sans-serif;
   font-size: 62.5%;
   line-height: 1.2;
 
@@ -38,23 +23,23 @@ html {
 
   --text-color-white: white;
   --text-color-black: black;
-  --text-color-darkgray: #0D1636;
-  --text-color-blue: #298BFF;
-  --text-color-yellow: #FFAA1A;
+  --text-color-darkgray: #0d1636;
+  --text-color-blue: #298bff;
+  --text-color-yellow: #ffaa1a;
 
-  --icon-color: #565C72;
+  --icon-color: #565c72;
 
-  --border-red: #F44545;
+  --border-red: #f44545;
 
-  --background-lightgrey: #F7F7F7;
+  --background-lightgrey: #f7f7f7;
 
-  --graph-linear-darkred: #FB2467;
+  --graph-linear-darkred: #fb2467;
 
-  --linear-lightblue: #44BBFE;
-  --linear-darkblue: #1E78FE;
+  --linear-lightblue: #44bbfe;
+  --linear-darkblue: #1e78fe;
 
-  --linear-yellow: #FFCF53 ;
-  --linear-orange: #FF9900 ; 
+  --linear-yellow: #ffcf53;
+  --linear-orange: #ff9900;
 }
 
 h1 {
@@ -81,6 +66,22 @@ p {
   font-size: 1.4rem;
 }
 
-button{
+button {
   font-size: 1.6rem;
+}
+
+.blueBtn {
+  width: 100%;
+  background: linear-gradient(0deg, #1e78fe, #44bbfe);
+  border: none;
+  border-radius: 20rem;
+  padding: 2rem 6rem;
+  color: var(--text-color-white);
+  font-weight: 500;
+  text-decoration: none;
+  text-align: center;
+  font-size: 1.8rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

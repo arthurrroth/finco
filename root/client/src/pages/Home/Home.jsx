@@ -1,18 +1,19 @@
 import "./Home.css";
 import Nav from "../../components/Nav/Nav.jsx";
-import { PageContext } from "../../context/context";
+import { OpenBoxContext, PageContext } from "../../context/context";
 import { useContext, useEffect } from "react";
 import CircleIcon from "../../icon/grayCircle.png"
 import LogoIcon from "../../icon/Logo-icon.png"
 import GroupIcon from "../../icon/Group-Icon.png"
 
 const Home = () => {
-  const {page, setPage} = useContext(PageContext)
+  const { page, setPage } = useContext(PageContext);
+  const { openBox, setOpenBox } = useContext(OpenBoxContext);
 
   useEffect(() => {
-    setPage("Home")
-  
-  },[]);
+    setPage("Home");
+    setOpenBox(false);
+  }, []);
 
   return (
     <>
@@ -37,8 +38,7 @@ const Home = () => {
     </div>
     <Nav page = {page}/>
     </>
-  )
-
+  );
 };
 
 export default Home;

@@ -1,22 +1,24 @@
 import "./Reports.css";
-import React, { useContext, useEffect, useState } from "react";
-import { Link, NavLink } from "react-router-dom";
-import { PageContext } from "../../context/context";
+import { NavLink } from "react-router-dom";
+import { useState } from "react";
 import Nav from "../../components/Nav/Nav";
+import { useContext, useEffect } from "react";
+import { PageContext } from "../../context/context";
 import ReportDiagram from "../../components/ReportDiagram/ReportDiagram.jsx";
 import logo from "../../icon/Logo.png";
+import iconUp from "../../icon/icon-up.png"
+import iconDown from "../../icon/icon-down.png"
+
+// # delete and change to Profile Picture
 import grayCircle from "../../icon/grayCircle.png";
-import iconUp from "../../icon/icon-up.png";
-import iconDown from "../../icon/icon-down.png";
 
 const Reports = () => {
+  const [loadMore, setLoadMore] = useState(false);
   const { page, setPage } = useContext(PageContext);
 
   useEffect(() => {
     setPage("Reports");
   }, []);
-
-  const [loadMore, setLoadMore] = useState(false);
 
   return (
     <>
@@ -29,19 +31,14 @@ const Reports = () => {
         </NavLink>
       </header>
       <main className="reportMain">
-        <h1>Reports</h1>
-        <Link to="/">
-          {/* <img src={BackIcon} alt="" /> */}
-          Back
-        </Link>
-        <Nav page={page} />
+        <h2>Report</h2>
 
         <section className="beginningCurrentSection">
           <div className="beginningCurrentDiv">
             <img src={iconUp} alt="skala up" />
             <div>
               <p className="reportP">Beginning</p>
-              <p className="reportBeginningCurrentP">+ € {/* Add value here */}</p>
+              <p className="reportBeginningCurrentP">+ € {}</p>
             </div>
           </div>
 
@@ -49,7 +46,7 @@ const Reports = () => {
             <img src={iconDown} alt="skala down" />
             <div>
               <p className="reportP">Beginning</p>
-              <p className="reportBeginningCurrentP">€ {/* Add value here */}</p>
+              <p className="reportBeginningCurrentP">€ {}</p>
             </div>
           </div>
         </section>
@@ -62,6 +59,8 @@ const Reports = () => {
           {loadMore ? "show less" : "load more"}
         </button>
       </main>
+
+      <Nav />
     </>
   );
 };
