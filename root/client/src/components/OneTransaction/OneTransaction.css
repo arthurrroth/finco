@@ -15,16 +15,3 @@
 .amount {
   font-size: 2rem;
 }
-
-.calendar-btn {
-  position: relative;
-  display: flex;
-}
-
-.date-picker {
-  height: 2rem;
-  width: 2rem;
-  border-radius: 100%;
-  opacity: 0;
-  position: absolute;
-}
