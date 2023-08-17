@@ -2,8 +2,8 @@ import "./IncomeExpense.css";
 
 import { useEffect, useState } from "react";
 
-import iconUp from "../../icon/icon-up.png";
-import iconDown from "../../icon/icon-down.png";
+import iconUp from "../../icon/icon-up.svg";
+import iconDown from "../../icon/icon-down.svg";
 
 const IncomeExpense = ({ sortAmount, transaction }) => {
   const [income, setIncome] = useState(null);
