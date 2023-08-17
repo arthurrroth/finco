@@ -6,6 +6,7 @@ export const createTransaction = async (
   cardId,
   amount,
   category,
+  transactionType,
   date,
   time
 ) => {
@@ -16,6 +17,7 @@ export const createTransaction = async (
     cardId: card.cardNumber,
     amount,
     category,
+    transactionType,
     date,
     time,
   });

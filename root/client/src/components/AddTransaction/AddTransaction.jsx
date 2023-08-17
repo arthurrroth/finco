@@ -7,7 +7,6 @@ import axios from "axios";
 import BackIcon from "../../icon/Back-icon.png";
 import selectImg from "../../icon/open-add.png";
 import selectDownImg from "../../icon/down.png";
-import Creditcard from "../../components/Creditcard/Creditcard.jsx";
 
 // # delete and change to Profile Picture
 import grayCircle from "../../icon/grayCircle.png";
@@ -22,11 +21,14 @@ const AddTransaction = ({ page }) => {
   const [category, setCategory] = useState("");
   const [currentDate, setCurrentDate] = useState("");
   const [currentTime, setCurrentTime] = useState("");
+  const [transactionType, setTransactionType] = useState("");
 
   const [refresh, setRefresh] = useState(false);
 
-  // ! defaultValue: date and time
   useEffect(() => {
+    setTransactionType(page);
+
+    // ! defaultValue: date and time
     const today = new Date();
     const year = today.getFullYear();
     const month = (today.getMonth() + 1).toString().padStart(2, "0");
@@ -36,15 +38,15 @@ const AddTransaction = ({ page }) => {
     const hours = today.getHours().toString().padStart(2, "0");
     const minutes = today.getMinutes().toString().padStart(2, "0");
     setCurrentTime(`${hours}:${minutes}`);
-  }, []);
+  }, [page]);
 
   //! onSubmit function
   const addTransaction = async (e) => {
-    // e.preventDefault();
     const newTransaction = {
       cardId: "567546783456",
       amount: transaction,
       category,
+      transactionType,
       date: currentDate,
       time: currentTime,
     };
@@ -75,7 +77,7 @@ const AddTransaction = ({ page }) => {
 
       <main className="addTransactionMain">
         <h2 className="addIncomeH2">
-          Add {page === "Income" ? "Income" : "Expense"}
+          Add {page === "income" ? "Income" : "Expense"}
         </h2>
         {/* <Creditcard/> */}
         <form className="addForm" onSubmit={addTransaction}>
@@ -93,7 +95,7 @@ const AddTransaction = ({ page }) => {
             Category
           </label>
           <div className="addCustomSelect">
-            {page === "Income" ? (
+            {page === "income" ? (
               <select
                 required
                 name="category"
@@ -165,7 +167,7 @@ const AddTransaction = ({ page }) => {
           </section>
 
           <button className="blueBtn">
-            Add {page === "Income" ? "Income" : "Expense"}
+            Add {page === "income" ? "Income" : "Expense"}
           </button>
         </form>
       </main>

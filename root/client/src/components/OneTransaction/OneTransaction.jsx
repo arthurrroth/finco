@@ -49,7 +49,14 @@ const OneTransaction = ({ transaction }) => {
           <p>{transaction.date}</p>
         </div>
       </div>
-      <p className="amount">{transaction.amount}</p>
+      <p className="amount">
+        {" "}
+        {transaction.category === "sallary" ||
+        transaction.category === "other income"
+          ? "+"
+          : "-"}{" "}
+        {transaction.amount} €
+      </p>
     </div>
   );
 };

@@ -1,45 +1,40 @@
-.reportsHeader{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin: 5rem var(--main-padding);
-  }
-
-.headerLogo{
-    height: 5.3rem;
+.reportsHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 5rem var(--main-padding);
 }
 
-.reportMain{
-    margin: var(--main-padding);
+.headerLogo {
+  height: 5.3rem;
 }
 
-.beginningCurrentSection{
-    display: flex;
+.reportMain {
+  margin: var(--main-padding);
 }
 
-.beginningCurrentDiv{
-    display: flex;
-    padding: 2rem;
-    background-color: var(--background-lightgrey);
-    border-radius: 36px;
-    margin-bottom: 2rem;
+.loadMoreBtn {
+  width: 100%;
+  color: var(--text-color-black);
+  text-align: center;
+  font-size: 1.8rem;
+  font-weight: 600;
+  background: none;
+  border: none;
+  margin: 2rem 0;
 }
 
-.reportP{
-    font-size: 1.2rem;
+.areaChart {
+  width: 90%;
+  display: flex;
+  justify-content: center;
 }
 
-.reportBeginningCurrentP{
-    font-weight: 600;
+.income-expenses-btn {
+  border: none;
+  background-color: transparent;
 }
 
-.loadMoreBtn{
-    width: 100%;
-    color: var(--text-color-black);
-    text-align: center;
-    font-size: 1.8rem;
-    font-weight: 600;
-    background: none;
-    border: none;
-    margin: 2rem 0;
+.btn-clicked {
+  background-color: red;
 }

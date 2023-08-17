@@ -1,7 +1,7 @@
 import "./IncomeExpense.css";
-
+// import methods
 import { useEffect, useState } from "react";
-
+// import img
 import iconUp from "../../icon/icon-up.png";
 import iconDown from "../../icon/icon-down.png";
 
@@ -14,7 +14,7 @@ const IncomeExpense = ({ sortAmount, transaction }) => {
     let expenseAmount = 0;
 
     transaction?.map((elm) => {
-      if (elm.category === "sallary" || elm.category === "other income") {
+      if (elm.transactionType === "income") {
         incomeAmount += elm.amount;
         setIncome(incomeAmount);
       } else {

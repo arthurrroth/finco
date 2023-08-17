@@ -9,7 +9,7 @@ const AddIncome = () => {
   const { page, setPage } = useContext(PageContext);
 
   useEffect(() => {
-    setPage("Income");
+    setPage("income");
   }, []);
 
   return (

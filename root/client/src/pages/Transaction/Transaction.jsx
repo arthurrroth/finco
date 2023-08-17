@@ -17,7 +17,7 @@ import calendar from "../../icon/calendar.png";
 
 const Transaction = () => {
   const { page, setPage } = useContext(PageContext);
-  const { openBox, setOpenBox } = useContext(OpenBoxContext);
+  const { setOpenBox } = useContext(OpenBoxContext);
 
   const [transactions, setTransactions] = useState([]);
   const [dates, setDates] = useState([]);

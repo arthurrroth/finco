@@ -29,6 +29,10 @@ const TransactionSchema = new Schema({
     ],
     required: true,
   },
+  transactionType: {
+    type: String,
+    required: true,
+  },
   date: {
     type: String,
     required: true,

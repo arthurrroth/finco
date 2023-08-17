@@ -7,7 +7,6 @@ export const transactionRouter = Router();
 //! get all transactions
 transactionRouter.get("/", async (req, res) => {
   const { category, date } = req.query;
-  console.log(date);
   // get search transactions
   if (category) {
     try {
@@ -54,11 +53,12 @@ transactionRouter.get("/:id", async (req, res) => {
 
 //! create new transaction
 transactionRouter.post("/newtransaction", async (req, res) => {
-  const { cardId, amount, category, date, time } = req.body;
+  const { cardId, amount, category, transactionType, date, time } = req.body;
   const newTransaction = await createTransaction(
     cardId,
     amount,
     category,
+    transactionType,
     date,
     time
   );

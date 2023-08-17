@@ -9,7 +9,7 @@ const AddExpenses = () => {
   const { page, setPage } = useContext(PageContext);
 
   useEffect(() => {
-    setPage("Expenses");
+    setPage("expense");
   }, []);
 
   return (
