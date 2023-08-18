@@ -143,7 +143,8 @@ const Transaction = () => {
         <section className="transactions">
           {!searchInput && !selectedDate ? (
             dates?.map((date, index) => (
-              <div key={index}>
+              <div className="dateSectionTransaction" key={index}>
+                <p className="weekday">{new Date(date).toLocaleDateString("en-EN", { weekday: "long" })}</p>
                 <h4 className="transactionBigDate">
                   {date.split("-").reverse().join(".")}
                 </h4>
@@ -158,6 +159,7 @@ const Transaction = () => {
           ) : // selected date
           selectedDate ? (
             <div>
+              <p className="weekday">{new Date(selectedDate).toLocaleDateString("en-EN", { weekday: "long" })}</p>
               <h4 className="transactionBigDate">
                 {selectedDate.split("-").reverse().join(".")}
               </h4>

@@ -7,6 +7,7 @@
 
 .main-transaction {
   margin: 0 var(--main-padding);
+  margin-bottom: 8rem;
 }
 
 .allTransactionsH2{
@@ -73,4 +74,14 @@
 
 .transactionBigDate{
   margin-bottom: 1rem;
+}
+
+.weekday{
+  font-size: 1.2rem;
+  color: var(--text-color-darkgray);
+  margin-bottom: .5rem;
+}
+
+.dateSectionTransaction{
+  margin-bottom: 3rem;
 }

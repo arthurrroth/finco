@@ -11,6 +11,7 @@
 
 .reportMain {
   margin: var(--main-padding);
+  margin-bottom: 8rem;
 }
 
 .loadMoreBtn {
@@ -28,4 +29,34 @@
   width: 90%;
   display: flex;
   justify-content: center;
+  padding: 2rem 0;
+}
+
+.beginningCurrentSection{
+  display: flex;
+}
+
+.beginningCurrentDiv{
+  display: flex;
+  padding: 2rem;
+  background-color: var(--background-lightgrey);
+  border-radius: 36px;
+  margin-bottom: 2rem;
+}
+
+.reportP{
+  font-size: 1.2rem;
+}
+
+.reportBeginningCurrentP{
+  font-weight: 600;
+}
+
+.reportHeading{
+  margin-bottom: 2rem;
+  padding-left: 1rem;
+}
+
+.reportH4{
+  padding-left: 2rem;
 }

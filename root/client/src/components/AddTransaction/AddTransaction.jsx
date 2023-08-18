@@ -121,7 +121,7 @@ const AddTransaction = ({ page }) => {
                 <option selected disabled value="">
                   Select a category
                 </option>
-                {/* <option value="food & drink">Food & Drink</option> */}
+                <option value="food & drink">Food & Drink</option>
                 <option value="insurance bill">Insurance</option>
                 <option value="fitness">Fitness</option>
                 <option value="transport & car">Transport & Car</option>

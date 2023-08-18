@@ -88,7 +88,7 @@ const Reports = () => {
         </NavLink>
       </header>
       <main className="reportMain">
-        <h2>Report</h2>
+        <h2 className="reportHeading">Report</h2>
 
         {/* INCOME & EXPENSE */}
         <article className="income-expense">
@@ -122,8 +122,8 @@ const Reports = () => {
         </div>
 
         {/* TOTAL TRANSACTIONS */}
-        <h2>Total Transactions</h2>
-        <section className="totalTransactions">
+        <h4 className="reportH4">Total Transactions</h4>
+        <section className="transactions">
           {transactions?.map((elm) => (
             <OneTransaction key={elm._id} transaction={elm} />
           ))}

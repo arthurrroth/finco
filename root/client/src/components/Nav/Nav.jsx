@@ -35,25 +35,23 @@ const Nav = ({ page }) => {
             </div>
           </NavLink>
 
-          {openBox ? (
-            <div className="openbox-addtrans">
-              <NavLink to="/addincome" className="links">
-                Income
-              </NavLink>
-              <hr className="incomeExpensesHR" />
-              <NavLink to="/addexpenses" className="links">
-                Expenses
-              </NavLink>
+          {openBox && (
+            <div className="overlay">
+              <div className="openbox-addtrans">
+                <NavLink to="/addincome" className="links">
+                  Income
+                </NavLink>
+                <hr className="incomeExpensesHR" />
+                <NavLink to="/addexpenses" className="links">
+                  Expenses
+                </NavLink>
+              </div>
             </div>
-          ) : null}
+          )}
 
           <button onClick={handleAddTransaction} className="nav-link">
             {openBox ? <p>Add</p> : <img src={AddIcon} alt="add icon" />}
           </button>
-
-          {/* <NavLink onClick={handleAddTransaction} to="/transaction" className="nav-link">
-          {openBox ? <p>Add</p> : <img src={AddIcon} alt="add icon" />}
-          </NavLink> */}
 
           <NavLink to="/reports" className="nav-link">
             <div className="nav-site">
