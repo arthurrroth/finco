@@ -1,7 +1,12 @@
 import "./Account.css";
+// import methods
+import { useContext, useEffect } from "react";
+import { NavLink } from "react-router-dom";
+// import components
 import Nav from "../../components/Nav/Nav.jsx";
-
-// Icons
+// import context
+import { OpenBoxContext } from "../../context/context";
+// import img
 import featherIcon from "../../icon/feather.png";
 import notificationIcon from "../../icon/bell-icon.png";
 import settingIcon from "../../icon/settings-icon.png";
@@ -11,9 +16,14 @@ import openIcon from "../../icon/open.png";
 
 // # delete and change to Profile Picture
 import grayCircle from "../../icon/grayCircle.png";
-import { NavLink } from "react-router-dom";
 
 const Account = () => {
+  const { openBox, setOpenBox } = useContext(OpenBoxContext);
+
+  useEffect(() => {
+    setOpenBox(false);
+  }, []);
+
   return (
     <>
       <header className="accountHeader">
@@ -27,17 +37,19 @@ const Account = () => {
       </header>
 
       <main className="accountMain">
-        <div className="accountOptions">
-          <div className="innerOptionDiv">
-            <img
-              className="accountOptionImg"
-              src={featherIcon}
-              alt="My Wallet"
-            />
-            <h5>My Wallet</h5>
+        <NavLink to="/mywallet">
+          <div className="accountOptions">
+            <div className="innerOptionDiv">
+              <img
+                className="accountOptionImg"
+                src={featherIcon}
+                alt="My Wallet"
+              />
+              <h5>My Wallet</h5>
+            </div>
+            <img src={openIcon} alt="open" />
           </div>
-          <img src={openIcon} alt="open" />
-        </div>
+        </NavLink>
 
         <section className="accountOptionsSection">
           <div className="accountOptions2">

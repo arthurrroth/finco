@@ -1,15 +1,8 @@
-.transactionHeader{
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin: 5rem var(--main-padding);
-}
-
 .main-transaction {
   margin: 0 var(--main-padding);
 }
 
-.allTransactionsH2{
+.allTransactionsH2 {
   font-size: 2.5rem;
 }
 
@@ -25,7 +18,7 @@
   width: 60vw;
   border-radius: 25px;
   border: none;
-  background-color: var( --background-lightgrey);
+  background-color: var(--background-lightgrey);
   padding: 1rem;
   font-size: 1.6rem;
   margin-right: 1rem;
@@ -71,6 +64,6 @@
   position: absolute;
 }
 
-.transactionBigDate{
+.transactionBigDate {
   margin-bottom: 1rem;
 }

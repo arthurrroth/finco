@@ -30,7 +30,7 @@ cardRouter.get("/:id", async (req, res) => {
 cardRouter.post("/newcard", async (req, res) => {
   const { userId, cardNumber, cardTitle, cardDescription } = req.body;
   const newCard = await createCard(
-    userId,
+    // userId,
     cardNumber,
     cardTitle,
     cardDescription
@@ -51,17 +51,13 @@ cardRouter.delete("/:id", async (req, res) => {
 
 //! edit existing card
 cardRouter.put("/:id", async (req, res) => {
-  const { editTitle, editDescription } = req.body;
+  const cardDescription = req.body;
   const cardId = req.params.id;
+  console.log(cardDescription);
   try {
-    const dbRes = await Card.findByIdAndUpdate(
-      cardId,
-      editTitle,
-      editDescription,
-      {
-        new: true,
-      }
-    );
+    const dbRes = await Card.findByIdAndUpdate(cardId, cardDescription, {
+      new: true,
+    });
     res.json(dbRes);
   } catch (error) {
     res.status(400).send("error in editing card");

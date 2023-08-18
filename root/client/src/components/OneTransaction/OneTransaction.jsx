@@ -58,7 +58,7 @@ const OneTransaction = ({ transaction, amount }) => {
         transaction.category === "other income"
           ? "+"
           : "-"}{" "}
-        € {transaction.amount} €
+        {transaction.amount} €
       </p>
     </div>
   );

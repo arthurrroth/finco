@@ -5,16 +5,11 @@
   margin: 5rem var(--main-padding);
 }
 
-.goBackBtn {
-  background: none;
-  border: none;
-}
-
 .addTransactionMain {
   margin: var(--main-padding);
 }
 
-.addTransactionH2{
+.addTransactionH2 {
   margin-bottom: 2rem;
 }
 

@@ -1,0 +1,63 @@
+.transactionHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 5rem var(--main-padding);
+}
+
+.headerLogo {
+  height: 5.3rem;
+}
+
+.goBackBtn {
+  background: none;
+  border: none;
+}
+
+.creditCard-icon {
+  width: 3.5rem;
+}
+
+.card-profile {
+  display: flex;
+  align-items: flex-start;
+  gap: 3rem;
+}
+
+.card-btn {
+  width: 10rem;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.card-btn p {
+  font-size: 1rem;
+}
+
+.btn-hidden {
+  border: none;
+  background-color: transparent;
+  position: relative;
+}
+
+.cardBox {
+  position: absolute;
+  right: -100%;
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  border: 2px solid black;
+  padding: 1rem 2rem;
+  z-index: 10;
+}
+
+.cardBox button {
+  border: none;
+  background-color: transparent;
+  margin-bottom: 1rem;
+}
+
+.cardBox button:active {
+  transform: scale(1.3);
+}
