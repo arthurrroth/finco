@@ -80,8 +80,10 @@ const AddTransaction = ({ page }) => {
       </header>
 
       <main className="addTransactionMain">
-        <h2 className="addIncomeH2">
-          Add {page === "income" ? "Income" : "Expense"}
+        <h2 className="addTransactionH2">
+          <span className="addIncomeExpenseH2">
+            Add {page === "Income" ? "income" : "expense"}
+          </span>
         </h2>
         {/* <Creditcard/> */}
         <form className="addForm" onSubmit={addTransaction}>
@@ -119,6 +121,7 @@ const AddTransaction = ({ page }) => {
                 <option selected disabled value="">
                   Select a category
                 </option>
+                {/* <option value="food & drink">Food & Drink</option> */}
                 <option value="insurance bill">Insurance</option>
                 <option value="fitness">Fitness</option>
                 <option value="transport & car">Transport & Car</option>

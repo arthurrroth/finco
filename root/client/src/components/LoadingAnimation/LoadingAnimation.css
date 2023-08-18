@@ -47,6 +47,7 @@
       bottom: 0px;
     animation-duration: 2s;
     animation-name: logo-anim-right;
+    transition-timing-function: ease-out;
   
   }
   

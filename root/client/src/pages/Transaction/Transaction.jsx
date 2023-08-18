@@ -7,6 +7,7 @@ import Nav from "../../components/Nav/Nav";
 import OneTransaction from "../../components/OneTransaction/OneTransaction";
 import IncomeExpense from "../../components/IncomeExpense/IncomeExpense";
 import { OpenBoxContext, PageContext } from "../../context/context";
+import { NavLink } from "react-router-dom";
 
 // import img
 import BackIcon from "../../icon/Back-icon.png";
@@ -77,20 +78,25 @@ const Transaction = () => {
 
   return (
     <>
+      <header className="transactionHeader">
+        {searchIsActive ? (
+          <button
+            className="goBackBtn"
+            onClick={() => setSearchIsActive(false)}>
+            <img src={BackIcon} alt="back icon" />
+          </button>
+        ) : (
+          <NavLink to={"/"}>
+            <img className="headerLogo" src={logo} alt="logo" />
+          </NavLink>
+        )}
+
+        <NavLink to={"/account"}>
+          <img src={profile} alt="Profile" />
+        </NavLink>
+      </header>
+
       <main className="main-transaction">
-        {/* Header */}
-        <div className="header-transaction">
-          {searchIsActive ? (
-            <button onClick={() => setSearchIsActive(false)}>
-              <img src={BackIcon} alt="back icon" />
-            </button>
-          ) : (
-            <img className="logo-transaction" src={logo} alt="logo" />
-          )}
-
-          <img className="profile" src={profile} alt="" />
-        </div>
-
         {/* All transaction */}
         <article className="all-transaction">
           {/* SearchBar */}
@@ -102,7 +108,7 @@ const Transaction = () => {
               placeholder="Search for Transactions"
             />
           ) : (
-            <h1>All transaction</h1>
+            <h2 className="allTransactionsH2">All transaction</h2>
           )}
           <div className="all-transaction-btns">
             <button
@@ -121,7 +127,7 @@ const Transaction = () => {
                 />
               </button>
             )}
-            <button onClick={handleReset}>X</button>
+            <button onClick={handleReset}>✕</button>
           </div>
         </article>
 
@@ -138,7 +144,9 @@ const Transaction = () => {
           {!searchInput && !selectedDate ? (
             dates?.map((date, index) => (
               <div key={index}>
-                <h2>{date.split("-").reverse().join(".")}</h2>
+                <h4 className="transactionBigDate">
+                  {date.split("-").reverse().join(".")}
+                </h4>
                 {transactions?.map(
                   (elm) =>
                     elm.date === date && (
@@ -150,7 +158,9 @@ const Transaction = () => {
           ) : // selected date
           selectedDate ? (
             <div>
-              <h2>{selectedDate.split("-").reverse().join(".")}</h2>
+              <h4 className="transactionBigDate">
+                {selectedDate.split("-").reverse().join(".")}
+              </h4>
               {transactions?.map((elm) => (
                 <OneTransaction transaction={elm} key={elm._id} />
               ))}

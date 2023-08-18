@@ -55,7 +55,7 @@ transactionRouter.get("/:id", async (req, res) => {
 transactionRouter.post("/newtransaction", async (req, res) => {
   const { cardId, amount, category, transactionType, date, time } = req.body;
   const newTransaction = await createTransaction(
-    cardId,
+    // cardId,
     amount,
     category,
     transactionType,

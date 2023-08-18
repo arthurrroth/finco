@@ -12,6 +12,9 @@ const AddExpenses = () => {
     setPage("expense");
   }, []);
 
+  const pageTitle = "expenses";
+  document.body.classList.add(pageTitle.toLowerCase() + "Page");
+
   return (
     <>
       <AddTransaction page={page} />

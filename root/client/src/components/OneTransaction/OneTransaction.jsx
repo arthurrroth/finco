@@ -6,7 +6,7 @@ import sallary from "../../icon/sallary.png";
 import otherIncome from "../../icon/other-income.png";
 import insuranceBill from "../../icon/insurance-bill.png";
 
-const OneTransaction = ({ transaction }) => {
+const OneTransaction = ({ transaction, amount }) => {
   return (
     <div className="single-transaction">
       <div className="symbol-category">
@@ -58,7 +58,7 @@ const OneTransaction = ({ transaction }) => {
         transaction.category === "other income"
           ? "+"
           : "-"}{" "}
-        {transaction.amount} €
+        € {transaction.amount} €
       </p>
     </div>
   );

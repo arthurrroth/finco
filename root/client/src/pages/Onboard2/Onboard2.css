@@ -6,6 +6,7 @@
     width: 180px;
     height: 290px;
     position: relative;
+    margin-bottom: 4rem;
   }
   
   @keyframes big-gift-anim {
