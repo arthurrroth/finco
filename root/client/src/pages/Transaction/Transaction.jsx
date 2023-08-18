@@ -138,7 +138,7 @@ const Transaction = () => {
           {!searchInput && !selectedDate ? (
             dates?.map((date, index) => (
               <div key={index}>
-                <h2>{date}</h2>
+                <h2>{date.split("-").reverse().join(".")}</h2>
                 {transactions?.map(
                   (elm) =>
                     elm.date === date && (
@@ -150,7 +150,7 @@ const Transaction = () => {
           ) : // selected date
           selectedDate ? (
             <div>
-              <h2>{selectedDate}</h2>
+              <h2>{selectedDate.split("-").reverse().join(".")}</h2>
               {transactions?.map((elm) => (
                 <OneTransaction transaction={elm} key={elm._id} />
               ))}

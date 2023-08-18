@@ -46,7 +46,10 @@ const OneTransaction = ({ transaction }) => {
         /> */}
         <div>
           <h1>{transaction.category}</h1>
-          <p>{transaction.date}</p>
+          <div className="date-time">
+            <p>{transaction.date.split("-").reverse().join(".")}</p>
+            <p>{transaction.time}</p>
+          </div>
         </div>
       </div>
       <p className="amount">

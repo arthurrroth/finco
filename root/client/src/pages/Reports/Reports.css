@@ -29,12 +29,3 @@
   display: flex;
   justify-content: center;
 }
-
-.income-expenses-btn {
-  border: none;
-  background-color: transparent;
-}
-
-.btn-clicked {
-  background-color: red;
-}

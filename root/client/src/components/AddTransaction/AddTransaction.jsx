@@ -1,7 +1,7 @@
 import "./AddTransaction.css";
 
 import { useState, useEffect } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, Navigate, useNavigate } from "react-router-dom";
 import axios from "axios";
 
 import BackIcon from "../../icon/Back-icon.png";
@@ -25,6 +25,8 @@ const AddTransaction = ({ page }) => {
 
   const [refresh, setRefresh] = useState(false);
 
+  const Navigate = useNavigate();
+
   useEffect(() => {
     setTransactionType(page);
 
@@ -42,6 +44,7 @@ const AddTransaction = ({ page }) => {
 
   //! onSubmit function
   const addTransaction = async (e) => {
+    e.preventDefault();
     const newTransaction = {
       cardId: "567546783456",
       amount: transaction,
@@ -50,7 +53,6 @@ const AddTransaction = ({ page }) => {
       date: currentDate,
       time: currentTime,
     };
-    console.log(newTransaction);
     const response = await axios.post(
       "/api/wallet/transactions/newtransaction",
       newTransaction
@@ -60,6 +62,8 @@ const AddTransaction = ({ page }) => {
     e.target.reset();
     setTransaction(null);
     setCategory("");
+
+    Navigate("/transaction");
   };
 
   return (

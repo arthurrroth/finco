@@ -15,3 +15,8 @@
 .amount {
   font-size: 2rem;
 }
+
+.date-time {
+  display: flex;
+  gap: 1rem;
+}
