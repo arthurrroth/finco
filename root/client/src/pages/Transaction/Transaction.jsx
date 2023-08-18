@@ -1,24 +1,26 @@
 import "./Transaction.css";
-
+// import methods
 import axios from "axios";
 import { useContext, useEffect, useState } from "react";
-
+// import components
 import Nav from "../../components/Nav/Nav";
 import OneTransaction from "../../components/OneTransaction/OneTransaction";
 import IncomeExpense from "../../components/IncomeExpense/IncomeExpense";
-import { OpenBoxContext, PageContext } from "../../context/context";
-import { NavLink } from "react-router-dom";
-
+// import context
+import {
+  OpenBoxContext,
+  PageContext,
+  SelectedCardContext,
+} from "../../context/context";
 // import img
-import BackIcon from "../../icon/Back-icon.png";
-import logo from "../../icon/logo.png";
-import profile from "../../icon/grayCircle.png";
 import search from "../../icon/search.png";
 import calendar from "../../icon/calendar.png";
+import Header from "../../components/Header/Header";
 
 const Transaction = () => {
   const { page, setPage } = useContext(PageContext);
   const { setOpenBox } = useContext(OpenBoxContext);
+  const { selectedCard } = useContext(SelectedCardContext);
 
   const [transactions, setTransactions] = useState([]);
   const [dates, setDates] = useState([]);
@@ -37,7 +39,7 @@ const Transaction = () => {
     const fetchData = async () => {
       try {
         const { data } = await axios.get("./api/wallet/transactions", {
-          params: { category: searchInput, date: selectedDate },
+          params: { category: searchInput, date: selectedDate, selectedCard },
         });
         setTransactions(data);
       } catch (error) {
@@ -45,7 +47,7 @@ const Transaction = () => {
       }
     };
     fetchData();
-  }, [searchInput, selectedDate]);
+  }, [searchInput, selectedDate, selectedCard]);
 
   //! set dates for transactions
   useEffect(() => {
@@ -78,23 +80,10 @@ const Transaction = () => {
 
   return (
     <>
-      <header className="transactionHeader">
-        {searchIsActive ? (
-          <button
-            className="goBackBtn"
-            onClick={() => setSearchIsActive(false)}>
-            <img src={BackIcon} alt="back icon" />
-          </button>
-        ) : (
-          <NavLink to={"/"}>
-            <img className="headerLogo" src={logo} alt="logo" />
-          </NavLink>
-        )}
-
-        <NavLink to={"/account"}>
-          <img src={profile} alt="Profile" />
-        </NavLink>
-      </header>
+      <Header
+        searchIsActive={searchIsActive}
+        setSearchIsActive={setSearchIsActive}
+      />
 
       <main className="main-transaction">
         {/* All transaction */}

@@ -2,11 +2,13 @@ import "./Reports.css";
 // import methods
 import { useState } from "react";
 import { useContext, useEffect } from "react";
-import { NavLink } from "react-router-dom";
 // inport context
 import { OpenBoxContext, PageContext } from "../../context/context";
 // import components
 import Nav from "../../components/Nav/Nav";
+import Header from "../../components/Header/Header";
+import IncomeExpense from "../../components/IncomeExpense/IncomeExpense";
+import OneTransaction from "../../components/OneTransaction/OneTransaction";
 // import npm packages
 import axios from "axios";
 import {
@@ -16,14 +18,7 @@ import {
   YAxis,
   CartesianGrid,
   Tooltip,
-  Legend,
 } from "recharts";
-// import img
-import logo from "../../icon/Logo.png";
-// delete and change to Profile Picture
-import grayCircle from "../../icon/grayCircle.png";
-import IncomeExpense from "../../components/IncomeExpense/IncomeExpense";
-import OneTransaction from "../../components/OneTransaction/OneTransaction";
 
 const Reports = () => {
   const { page, setPage } = useContext(PageContext);
@@ -78,15 +73,8 @@ const Reports = () => {
 
   return (
     <>
-      {/* HEADER */}
-      <header className="reportsHeader">
-        <NavLink to={"/"}>
-          <img className="headerLogo" src={logo} alt="logo" />
-        </NavLink>
-        <NavLink to={"/account"}>
-          <img src={grayCircle} alt="Profile" />
-        </NavLink>
-      </header>
+      <Header />
+
       <main className="reportMain">
         <h2 className="reportHeading">Report</h2>
 

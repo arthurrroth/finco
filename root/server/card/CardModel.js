@@ -1,11 +1,11 @@
 import { Schema, model } from "mongoose";
 
 const CardSchema = new Schema({
-  userId: {
-    type: Schema.Types.ObjectId,
-    ref: "User",
-    required: false,
-  },
+  // userId: {
+  //   type: Schema.Types.ObjectId,
+  //   ref: "User",
+  //   required: true,
+  // },
   cardNumber: {
     type: String,
     required: true,
@@ -14,6 +14,7 @@ const CardSchema = new Schema({
   cardTitle: {
     type: String,
     required: true,
+    unique: true,
   },
   cardDescription: {
     type: String,

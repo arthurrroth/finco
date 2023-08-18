@@ -14,34 +14,45 @@ import AddExpenses from "./pages/AddExpenses/AddExpenses.jsx";
 import Reports from "./pages/Reports/Reports.jsx";
 import Account from "./pages/Account/Account.jsx";
 import FAQ from "./pages/FAQ/FAQ";
+import MyWallet from "./pages/MyWallet/MyWallet";
+import NewCard from "./pages/NewCard/NewCard";
 // import context
-import { OpenBoxContext, PageContext } from "../src/context/context.jsx";
+import {
+  OpenBoxContext,
+  PageContext,
+  SelectedCardContext,
+} from "../src/context/context.jsx";
 
 function App() {
   const [page, setPage] = useState("");
   const [openBox, setOpenBox] = useState(false);
+  const [selectedCard, setSelectedCard] = useState("");
 
   return (
     <>
-      <OpenBoxContext.Provider value={{ openBox, setOpenBox }}>
-        <PageContext.Provider value={{ page, setPage }}>
-          <BrowserRouter>
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/signUp" element={<SignUp />} />
-              <Route path="/login" element={<Login />} />
-              <Route path="/transaction" element={<Transaction />} />
-              <Route path="/addincome" element={<AddIncome />} />
-              <Route path="/addexpenses" element={<AddExpenses />} />
-              <Route path="/reports" element={<Reports />} />
-              <Route path="/account" element={<Account />} />
-              <Route path="/onboard1" element={<Onboard1 />} />
-              <Route path="/onboard2" element={<Onboard2 />} />
-              <Route path="/faq" element={<FAQ />} />
-            </Routes>
-          </BrowserRouter>
-        </PageContext.Provider>
-      </OpenBoxContext.Provider>
+      <SelectedCardContext.Provider value={{ selectedCard, setSelectedCard }}>
+        <OpenBoxContext.Provider value={{ openBox, setOpenBox }}>
+          <PageContext.Provider value={{ page, setPage }}>
+            <BrowserRouter>
+              <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/signUp" element={<SignUp />} />
+                <Route path="/login" element={<Login />} />
+                <Route path="/transaction" element={<Transaction />} />
+                <Route path="/addincome" element={<AddIncome />} />
+                <Route path="/addexpenses" element={<AddExpenses />} />
+                <Route path="/reports" element={<Reports />} />
+                <Route path="/account" element={<Account />} />
+                <Route path="/onboard1" element={<Onboard1 />} />
+                <Route path="/onboard2" element={<Onboard2 />} />
+                <Route path="/faq" element={<FAQ />} />
+                <Route path="/mywallet" element={<MyWallet />} />
+                <Route path="/newcard" element={<NewCard />} />
+              </Routes>
+            </BrowserRouter>
+          </PageContext.Provider>
+        </OpenBoxContext.Provider>
+      </SelectedCardContext.Provider>
     </>
   );
 }

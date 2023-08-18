@@ -6,7 +6,16 @@ export const transactionRouter = Router();
 
 //! get all transactions
 transactionRouter.get("/", async (req, res) => {
-  const { category, date } = req.query;
+  const { category, date, selectedCard } = req.query;
+  // find card
+  if (selectedCard) {
+    let res = await Transaction.find();
+    res = res.filter((card) => {
+      return card._id == selectedCard;
+    });
+    console.log(res);
+  }
+
   // get search transactions
   if (category) {
     try {
