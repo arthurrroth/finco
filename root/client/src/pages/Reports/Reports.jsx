@@ -3,7 +3,11 @@ import "./Reports.css";
 import { useState } from "react";
 import { useContext, useEffect } from "react";
 // inport context
-import { OpenBoxContext, PageContext } from "../../context/context";
+import {
+  OpenBoxContext,
+  PageContext,
+  SelectedCardContext,
+} from "../../context/context";
 // import components
 import Nav from "../../components/Nav/Nav";
 import Header from "../../components/Header/Header";
@@ -23,6 +27,7 @@ import {
 const Reports = () => {
   const { page, setPage } = useContext(PageContext);
   const { setOpenBox } = useContext(OpenBoxContext);
+  const { selectedCard } = useContext(SelectedCardContext);
 
   const [transactions, setTransactions] = useState([]);
   const [dataForGraph, setDataForGraph] = useState([]);
@@ -34,7 +39,9 @@ const Reports = () => {
 
     const fetchData = async () => {
       try {
-        const { data } = await axios.get("./api/wallet/transactions");
+        const { data } = await axios.get("./api/wallet/transactions", {
+          params: { selectedCard },
+        });
         setTransactions(data);
         handleDataforGraph(data);
       } catch (error) {
@@ -42,7 +49,7 @@ const Reports = () => {
       }
     };
     fetchData();
-  }, []);
+  }, [selectedCard]);
 
   //! function for dataForGraph
   const handleDataforGraph = (data) => {

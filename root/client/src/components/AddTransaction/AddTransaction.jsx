@@ -84,7 +84,7 @@ const AddTransaction = ({ page }) => {
       <main className="addTransactionMain">
         <h2 className="addTransactionH2">
           <span className="addIncomeExpenseH2">
-            Add {page === "Income" ? "income" : "expense"}
+            Add {page === "income" ? "Income" : "Expense"}
           </span>
         </h2>
 

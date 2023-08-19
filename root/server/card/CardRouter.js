@@ -53,7 +53,6 @@ cardRouter.delete("/:id", async (req, res) => {
 cardRouter.put("/:id", async (req, res) => {
   const cardDescription = req.body;
   const cardId = req.params.id;
-  console.log(cardDescription);
   try {
     const dbRes = await Card.findByIdAndUpdate(cardId, cardDescription, {
       new: true,

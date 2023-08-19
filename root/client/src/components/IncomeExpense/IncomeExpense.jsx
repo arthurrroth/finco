@@ -1,13 +1,17 @@
 import "./IncomeExpense.css";
 // import methods
-import { useEffect, useState } from "react";
-
+import { useContext, useEffect, useState } from "react";
+// import context
+import { SelectedCardContext } from "../../context/context";
+// import img
 import iconUp from "../../icon/icon-up.svg";
 import iconDown from "../../icon/icon-down.svg";
 
 const IncomeExpense = ({ sortAmount, transaction }) => {
-  const [income, setIncome] = useState(null);
-  const [expenses, setExpenses] = useState(null);
+  const [income, setIncome] = useState(0);
+  const [expenses, setExpenses] = useState(0);
+
+  const { selectedCard } = useContext(SelectedCardContext);
 
   useEffect(() => {
     let incomeAmount = 0;
@@ -22,7 +26,7 @@ const IncomeExpense = ({ sortAmount, transaction }) => {
         setExpenses(expenseAmount);
       }
     });
-  }, [transaction]);
+  }, [transaction, selectedCard]);
 
   return (
     <div className="box">
@@ -31,8 +35,14 @@ const IncomeExpense = ({ sortAmount, transaction }) => {
         alt="income symbol"
       />
       <div>
-        <p className="reportP">{sortAmount === "income" ? "Income" : "Expense"}</p>
-        {sortAmount === "income" ? <p className="reportBeginningCurrentP">+ {income} €</p> : <p className="reportBeginningCurrentP">- {expenses} €</p>}
+        <p className="reportP">
+          {sortAmount === "income" ? "Income" : "Expense"}
+        </p>
+        {sortAmount === "income" ? (
+          <p className="reportBeginningCurrentP">+ {income} €</p>
+        ) : (
+          <p className="reportBeginningCurrentP">- {expenses} €</p>
+        )}
       </div>
     </div>
   );

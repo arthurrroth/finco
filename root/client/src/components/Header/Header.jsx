@@ -24,6 +24,16 @@ const Header = ({ searchIsActive, setSearchIsActive, goBack, welcome }) => {
     Navigate(-1);
   };
 
+  //! set default card
+  useEffect(() => {
+    const fetchData = async () => {
+      const { data } = await axios.get("/api/wallet/cards");
+      setSelectedCard(data[0].cardNumber);
+      setCardTitle(data[0].cardTitle);
+    };
+    fetchData();
+  }, []);
+
   //! fetch Cards
   useEffect(() => {
     const fetchData = async () => {
@@ -74,11 +84,13 @@ const Header = ({ searchIsActive, setSearchIsActive, goBack, welcome }) => {
             {openCardBox && (
               <div className="cardBox">
                 {cards?.map((card) => (
-                  <button
+                  <p
                     key={card._id}
-                    onClick={() => handleSelectCard(card._id, card.cardTitle)}>
+                    onClick={() =>
+                      handleSelectCard(card.cardNumber, card.cardTitle)
+                    }>
                     {card.cardTitle}
-                  </button>
+                  </p>
                 ))}
               </div>
             )}

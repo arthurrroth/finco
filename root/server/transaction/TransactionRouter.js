@@ -7,46 +7,30 @@ export const transactionRouter = Router();
 //! get all transactions
 transactionRouter.get("/", async (req, res) => {
   const { category, date, selectedCard } = req.query;
+  let transactions = await Transaction.find();
   // find card
   if (selectedCard) {
-    let res = await Transaction.find();
-    res = res.filter((card) => {
-      return card._id == selectedCard;
+    transactions = transactions.filter((transaction) => {
+      console.log("cardId ", transaction.cardId);
+      console.log("selectedCard ", selectedCard);
+      return transaction.cardId === selectedCard;
     });
-    console.log(res);
-  }
-
-  // get search transactions
-  if (category) {
-    try {
-      let response = await Transaction.find();
-      response = response.filter((data) => {
-        return data.category.toLowerCase().includes(category.toLowerCase());
+    // get search transactions
+    if (category) {
+      transactions = transactions.filter((transaction) => {
+        return transaction.category
+          .toLowerCase()
+          .includes(category.toLowerCase());
       });
-      res.json(response);
-    } catch (error) {
-      res.status(400).send("error in finding searched transactions");
-    }
-    // get transactions by date
-  } else if (date) {
-    try {
-      let response = await Transaction.find();
-      response = response.filter((data) => {
-        return data.date === date;
+      // get transactions by date
+    } else if (date) {
+      transactions = transactions.filter((transaction) => {
+        return transaction.date === date;
       });
-      res.json(response);
-    } catch (error) {
-      res.status(400).send("error in finding searched transactions");
-    }
-    // get all transactions
-  } else {
-    try {
-      const allTransactions = await Transaction.find();
-      res.json(allTransactions);
-    } catch (error) {
-      res.status(400).send("error in finding all transactions");
     }
   }
+  // console.log(transactions);
+  res.json(transactions);
 });
 
 //! get one transaction by id
@@ -64,7 +48,7 @@ transactionRouter.get("/:id", async (req, res) => {
 transactionRouter.post("/newtransaction", async (req, res) => {
   const { cardId, amount, category, transactionType, date, time } = req.body;
   const newTransaction = await createTransaction(
-    // cardId,
+    cardId,
     amount,
     category,
     transactionType,

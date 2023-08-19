@@ -41,7 +41,11 @@ const Transaction = () => {
         const { data } = await axios.get("./api/wallet/transactions", {
           params: { category: searchInput, date: selectedDate, selectedCard },
         });
-        setTransactions(data);
+        const sortedData = data.sort((a, b) => {
+          a.date - b.date;
+          return 1;
+        });
+        setTransactions(sortedData);
       } catch (error) {
         console.log({ fetchData: error });
       }
@@ -133,7 +137,11 @@ const Transaction = () => {
           {!searchInput && !selectedDate ? (
             dates?.map((date, index) => (
               <div className="dateSectionTransaction" key={index}>
-                <p className="weekday">{new Date(date).toLocaleDateString("en-EN", { weekday: "long" })}</p>
+                <p className="weekday">
+                  {new Date(date).toLocaleDateString("en-EN", {
+                    weekday: "long",
+                  })}
+                </p>
                 <h4 className="transactionBigDate">
                   {date.split("-").reverse().join(".")}
                 </h4>
@@ -148,7 +156,11 @@ const Transaction = () => {
           ) : // selected date
           selectedDate ? (
             <div>
-              <p className="weekday">{new Date(selectedDate).toLocaleDateString("en-EN", { weekday: "long" })}</p>
+              <p className="weekday">
+                {new Date(selectedDate).toLocaleDateString("en-EN", {
+                  weekday: "long",
+                })}
+              </p>
               <h4 className="transactionBigDate">
                 {selectedDate.split("-").reverse().join(".")}
               </h4>

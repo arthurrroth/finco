@@ -9,7 +9,7 @@ const AddIncome = () => {
   const { page, setPage } = useContext(PageContext);
 
   useEffect(() => {
-    setPage("Income");
+    setPage("income");
     document.body.classList.add(page.toLowerCase() + "Page");
     return () => {
       document.body.classList.remove(page.toLowerCase() + "Page");
