@@ -1,7 +1,7 @@
 import "./Creditcard.css";
 // import img
 import LogoIcon from "../../icon/Logo-icon.png";
-import GroupIcon from "../../icon/Group-Icon.png";
+import GroupIcon from "../../icon/Group-icon.png";
 import active from "../../icon/active-icon.png";
 import ellipse1 from "../../icon/Ellipse-1.png";
 import ellipse2 from "../../icon/Ellipse-2.png";
