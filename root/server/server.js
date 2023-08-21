@@ -1,15 +1,10 @@
 import "./config/index.js";
 
 import express from "express";
-import dotenv from "dotenv";
 import path from "path";
 
 import { cardRouter } from "./card/CardRouter.js";
 import { transactionRouter } from "./transaction/TransactionRouter.js";
-
-dotenv.config({
-  path: path.join(path.resolve(), "..", ".env"),
-});
 
 const PORT = process.env.PORT;
 const ReactAppDistPath = path.join(path.resolve(), "..", "client", "dist");
