@@ -19,7 +19,7 @@ import {
 // import img
 import active from "../../icon/active-icon.png";
 import LogoIcon from "../../icon/Logo-icon.png";
-import GroupIcon from "../../icon/Group-Icon.png";
+import GroupIcon from "../../icon/Group-icon.png";
 import DangerIcon from "../../icon/icon-danger.svg";
 import ThreeDot from "../../icon/threedot-icon.svg";
 
