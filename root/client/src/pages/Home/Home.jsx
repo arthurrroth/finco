@@ -17,6 +17,7 @@ import {
 } from "../../context/context";
 
 // import img
+import active from "../../icon/active-icon.png";
 import LogoIcon from "../../icon/Logo-icon.png";
 import GroupIcon from "../../icon/Group-Icon.png";
 import DangerIcon from "../../icon/icon-danger.svg";
@@ -27,12 +28,11 @@ const Home = () => {
   const { page, setPage } = useContext(PageContext);
   const { setOpenBox } = useContext(OpenBoxContext);
 
-
   const [income, setIncome] = useState(0);
   const [expenses, setExpenses] = useState(0);
   const [transactions, setTransactions] = useState([]);
   const [limit, setLimit] = useState(0);
-  const [editLimit, setEditLimit] = useState(false)
+  const [editLimit, setEditLimit] = useState(false);
 
   const handleEditLimit = () => {
     setEditLimit(true);
@@ -46,7 +46,7 @@ const Home = () => {
     setPage("Home");
     setOpenBox(false);
 
-    //! fetch data
+    //! fetch transactions
     const fetchData = async () => {
       try {
         const { data } = await axios.get("./api/wallet/transactions", {
@@ -54,7 +54,13 @@ const Home = () => {
         });
         setTransactions(data);
       } catch (error) {
-        console.log({ fetchData: error });
+        console.log("fetch transactions: ", error);
+      }
+      try {
+        const { data } = await axios.get("/api/wallet/cards");
+        setCards(data);
+      } catch (error) {
+        console.log("fetch cards: ", error);
       }
     };
     fetchData();
@@ -71,6 +77,7 @@ const Home = () => {
 
       <div className="creditcard">
         <img className="cc-logo" src={LogoIcon} alt="" />
+        <img className="activeCardImg" src={active} alt="active" />
         <div className="inner-creditcard">
           <h5>Credit Card</h5>
           <p>**** 1289</p>
@@ -104,9 +111,9 @@ const Home = () => {
           )}
         </div>
         {editLimit ? (
-          <button className="save-button"
-          onClick={handleSaveLimit}>
-            Save</button>
+          <button className="save-button" onClick={handleSaveLimit}>
+            Save
+          </button>
         ) : (
           <img
             src={ThreeDot}

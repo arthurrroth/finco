@@ -1,19 +1,3 @@
-.creditcard {
-  width: 75vw;
-  height: 20vh;
-  background-color: lightseagreen;
-  margin: 0 auto;
-  border-radius: 10px;
-}
-
-.cc-logo {
-  margin: 15px 0 15px 15px;
-}
-
-.inner-creditcard {
-  margin: 5px 15px;
-}
-
 .bottom-creditcard {
   display: flex;
   justify-content: space-between;
@@ -24,7 +8,7 @@
   margin: 25px;
 }
 
-.monthly-spending{
+.monthly-spending {
   background-color: #f7f7f7;
   display: flex;
   justify-content: space-around;
@@ -35,14 +19,14 @@
   text-align: center;
 }
 
-.save-button{
+.save-button {
   border: none;
   border-radius: 15px;
   width: 6rem;
   color: #ffffff;
-  background: 
-  linear-gradient(180deg, 
-  rgba(68,187,254,1) 35%, 
-  rgba(30,120,254,1) 100%);
-  
+  background: linear-gradient(
+    180deg,
+    rgba(68, 187, 254, 1) 35%,
+    rgba(30, 120, 254, 1) 100%
+  );
 }
