@@ -4,7 +4,7 @@ import { NavLink, useNavigate } from "react-router-dom";
 import axios from "axios";
 // import img
 import BackIcon from "../../icon/Back-icon.png";
-import logo from "../../icon/logo.png";
+import logo from "../../icon/Logo.png";
 import profile from "../../icon/default-profile.png";
 import creditCard from "../../icon/credit-card.png";
 import { useContext, useEffect, useState } from "react";
