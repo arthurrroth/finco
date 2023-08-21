@@ -1,8 +1,6 @@
 import "./IncomeExpense.css";
 // import methods
-import { useContext, useEffect, useState } from "react";
-// import context
-import { SelectedCardContext } from "../../context/context";
+import { useEffect, useState } from "react";
 // import img
 import iconUp from "../../icon/icon-up.svg";
 import iconDown from "../../icon/icon-down.svg";
@@ -11,22 +9,23 @@ const IncomeExpense = ({ sortAmount, transaction }) => {
   const [income, setIncome] = useState(0);
   const [expenses, setExpenses] = useState(0);
 
-  const { selectedCard } = useContext(SelectedCardContext);
-
   useEffect(() => {
     let incomeAmount = 0;
     let expenseAmount = 0;
 
     transaction?.map((elm) => {
-      if (elm.transactionType === "income") {
-        incomeAmount += elm.amount;
-        setIncome(incomeAmount);
-      } else {
-        expenseAmount += elm.amount;
-        setExpenses(expenseAmount);
+      if (elm.amount > 0) {
+        if (elm.transactionType === "income") {
+          incomeAmount += elm.amount;
+        } else {
+          expenseAmount += elm.amount;
+        }
       }
+      setIncome(incomeAmount);
+
+      setExpenses(expenseAmount);
     });
-  }, [transaction, selectedCard]);
+  }, [transaction]);
 
   return (
     <div className="box">

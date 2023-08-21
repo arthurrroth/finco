@@ -2,7 +2,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin: 5rem var(--main-padding);
+  margin: 4rem var(--main-padding);
 }
 
 .headerLogo {
@@ -32,7 +32,7 @@
 }
 
 .card-btn p {
-  font-size: 1rem;
+  font-size: 1.2rem;
 }
 
 .btn-hidden {
@@ -43,13 +43,18 @@
 
 .cardBox {
   position: absolute;
-  right: -100%;
+  right: -200%;
   display: flex;
   flex-direction: column;
+  gap: 1.5rem;
   background-color: white;
-  border: 2px solid black;
-  padding: 1rem 2rem;
+  padding: 2rem 3rem;
   z-index: 10;
+  border-radius: 20px;
+}
+
+.cardBox p {
+  font-size: 1.8rem;
 }
 
 .cardBox button {
@@ -60,4 +65,69 @@
 
 .cardBox button:active {
   transform: scale(1.3);
+}
+
+.heading {
+  font-weight: lighter;
+}
+
+.navCard-separator {
+  height: 1px;
+  background-color: grey;
+  width: 30vw;
+}
+
+.navCard-list {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.navCard-list:last-child .navCard-separator {
+  display: none;
+}
+
+.profile-img {
+  background-color: var(--text-color-blue);
+  height: 4.5rem;
+  width: 4.5rem;
+  border-radius: 100%;
+  display: flex;
+  align-items: center;
+  justify-self: center;
+}
+
+.selectedProfile-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+  margin: auto;
+}
+
+.defaultProfile-img {
+  width: 90%;
+  height: 90%;
+  object-fit: contain;
+  display: block;
+  margin: auto;
+}
+
+.header-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 10;
+}
+
+.icon-creditCard {
+  display: flex;
+  gap: 1rem;
+}
+
+.creditCard-mini {
+  height: 2rem;
 }

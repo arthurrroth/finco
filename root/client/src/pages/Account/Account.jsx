@@ -16,6 +16,7 @@ import openIcon from "../../icon/open.png";
 
 // # delete and change to Profile Picture
 import grayCircle from "../../icon/grayCircle.png";
+import Header from "../../components/Header/Header";
 
 const Account = () => {
   const { openBox, setOpenBox } = useContext(OpenBoxContext);
@@ -26,18 +27,11 @@ const Account = () => {
 
   return (
     <>
-      <header className="accountHeader">
-        <div>
-          <p className="accountHeaderP">Welcome back.</p>
-          {/* Change to Username from DB */}
-          <h3>Name</h3>
-        </div>
-        {/* Change to Profile Picture from DB */}
-        <img src={grayCircle} alt="profilePicture" />
-      </header>
+      <Header welcome={true} />
 
       <main className="accountMain">
-        <NavLink className="myWalletLink" to="/mywallet">
+        {/* My Wallet */}
+        <NavLink className="text-link" to="/mywallet">
           <div className="accountOptions">
             <div className="innerOptionDiv">
               <img
@@ -51,6 +45,7 @@ const Account = () => {
           </div>
         </NavLink>
 
+        {/* Notification */}
         <section className="accountOptionsSection">
           <div className="accountOptions2">
             <div className="innerOptionDiv">
@@ -69,6 +64,7 @@ const Account = () => {
 
           <hr />
 
+          {/* Settings */}
           <div className="accountOptions2">
             <div className="innerOptionDiv">
               <img
@@ -83,6 +79,7 @@ const Account = () => {
 
           <hr />
 
+          {/* FAQ */}
           <NavLink className="accountOptions2" to="/faq">
             <div className="innerOptionDiv">
               <img className="accountOptionImg" src={faqIcon} alt="FAQ" />
@@ -92,6 +89,7 @@ const Account = () => {
           </NavLink>
         </section>
 
+        {/* Logout */}
         <div className="accountOptions">
           <div className="innerOptionDiv">
             <img className="accountOptionImg" src={logoutIcon} alt="Logout" />
