@@ -3,7 +3,6 @@ import "./OneCard.css";
 import { useState } from "react";
 import axios from "axios";
 // import img
-
 import EditIcon from "../../icon/pencil-icon.png";
 import Creditcard from "../Creditcard/Creditcard";
 
