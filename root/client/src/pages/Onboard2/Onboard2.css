@@ -1,0 +1,48 @@
+.giftContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 180px;
+    height: 290px;
+    position: relative;
+    margin-bottom: 4rem;
+  }
+  
+  @keyframes big-gift-anim {
+    from { top: -400px; }
+    to { top: 55px}
+  }
+  
+  @keyframes medium-gift-anim {
+      from { top: -400px; }
+      to { top: 18px}
+  }
+  @keyframes small-gift-anim {
+      from { top: -400px; }
+      to { top: 5px}
+  }
+  
+  .bigGift{
+      position: absolute;
+      top: 55px;
+      left: 20px;
+      animation-duration: 3s;
+      animation-name: big-gift-anim;
+  }
+
+  .mediumGift{
+      position: absolute;
+      top: 18px;
+      right: 10px;
+      animation-duration: 4s;
+      animation-name: medium-gift-anim;
+  }
+  
+  .smallGift{
+      position: absolute;
+      top: 5px;
+      left: 50px;
+      animation-duration: 5s;
+      animation-name: small-gift-anim;
+  }

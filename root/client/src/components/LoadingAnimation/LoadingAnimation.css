@@ -1,0 +1,61 @@
+.loading {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 103px;
+    height: 121px;
+    position: relative;
+  }
+  
+  @keyframes logo-anim-left {
+    from { top: 0; }
+    50% { top: 10px; }
+    100% { top: 0; }
+  }
+  
+  @keyframes logo-anim-right {
+    from { bottom: 0px; }
+    50% { bottom: 45px; }
+    100% { bottom: 0px; }
+  }
+  @keyframes logo-anim-circle {
+    from { top: 0px; }
+    50% { top: -45px; }
+    100% { top: 0px; }
+  }
+  
+   .logo-left {
+      position: absolute;
+      top: 0px;
+      left: 0px;
+    animation-duration: 3s;
+    animation-name: logo-anim-left;
+    animation-iteration-count: 2;
+  }
+  
+  .logo-right {
+      position: absolute;
+      right: 0px;
+      bottom: 0px;
+    animation-duration: 2s;
+    animation-name: logo-anim-right;
+    transition-timing-function: ease-out;
+  
+  }
+  
+  .logo-circle{
+      position: absolute;
+      top: 8px;
+      right: 10px;
+      animation-duration: 3s;
+      animation-name: logo-anim-circle;
+      animation-iteration-count: 2; 
+  }
