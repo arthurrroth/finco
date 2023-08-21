@@ -47,29 +47,38 @@ const NewCard = () => {
       </header>
 
       <form onSubmit={handleCreate} className="newCard-form">
-        <label name="cardtittle">CardTitle</label>
-        <input
-          type="text"
-          name="cardtittle"
-          required
-          onChange={(e) => setCardTitle(e.target.value)}
-        />
-        <label name="cardnumber">Cardnumber</label>
-        <input
-          type="text"
-          name="cardnumber"
-          required
-          onChange={(e) => setCardNumber(e.target.value)}
-        />
-        <label name="carddescription">Carddescription</label>
-        <input
-          type="text"
-          name="carddescription"
-          required
-          onChange={(e) => setCardDescription(e.target.value)}
-        />
-        <button className="createCard-btn" type="submit">
-          create card
+        <div>
+          <label name="cardtittle">Cardtitle</label>
+          <input
+            className="newCardInput"
+            type="text"
+            placeholder=" Add Title here"
+            name="cardtittle"
+            required
+            onChange={(e) => setCardTitle(e.target.value)}
+          />
+          <label name="cardnumber">Cardnumber</label>
+          <input
+            className="newCardInput"
+            type="text"
+            placeholder=" Add Number here"
+            name="cardnumber"
+            required
+            onChange={(e) => setCardNumber(e.target.value)}
+          />
+          <label name="carddescription">Carddescription</label>
+          <input
+            className="newCardInput"
+            type="text"
+            placeholder=" Add Description here"
+            name="carddescription"
+            required
+            onChange={(e) => setCardDescription(e.target.value)}
+          />
+        </div>
+
+        <button className="blueBtn" type="submit">
+          Create Card
         </button>
       </form>
 
