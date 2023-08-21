@@ -8,4 +8,5 @@
   overflow-x: scroll;
   display: flex;
   gap: 2rem;
+  -webkit-overflow-scrolling: touch;
 }
