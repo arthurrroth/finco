@@ -1,7 +1,12 @@
+.myWallet-main{
+  width: 100vw;
+  padding: 0 var( --main-padding);
+  margin-bottom: 12rem;
+}
+
 .cardsList {
   overflow-x: scroll;
   display: flex;
-  gap: 5rem;
-  margin-bottom: 4rem;
-  padding-bottom: 3rem;
+  gap: 2rem;
+  -webkit-overflow-scrolling: touch;
 }

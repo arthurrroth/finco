@@ -5,6 +5,10 @@ import axios from "axios";
 // import img
 
 import EditIcon from "../../icon/pencil-icon.png";
+import GroupIcon from "../../icon/Group-Icon.png";
+import active from "../../icon/active-icon.png";
+import ellipse1 from "../../icon/Ellipse-1.png";
+import ellipse2 from "../../icon/Ellipse-2.png";
 import Creditcard from "../Creditcard/Creditcard";
 
 const OneCard = ({ card, setRefresh }) => {
@@ -45,43 +49,57 @@ const OneCard = ({ card, setRefresh }) => {
       <Creditcard card={card} />
 
       <div className="cardDescription">
-        <div className="card-box">
-          <h5>Cardholder</h5>
-          <h3>Max Müller</h3>
-        </div>
-        <div className="card-box">
-          <h5>Cardtitle</h5>
-          <h3>{card?.cardTitle}</h3>
-        </div>
-        <div className="card-box">
-          <h5>Cardnumber</h5>
-          <h3>{card?.cardNumber}</h3>
-        </div>
+        <section className="cardBoxSection">
+          <div className="card-box">
+            <p className="cardDescriptionHeading">Cardholder</p>
+            <h4>Max Müller</h4>
+          </div>
+
+          <hr />
+
+          <div className="card-box">
+            <p className="cardDescriptionHeading">Cardtitle</p>
+            <h4>{card?.cardTitle}</h4>
+          </div>
+
+          <hr />
+
+          <div className="card-box">
+            <p className="cardDescriptionHeading">Cardnumber</p>
+            <h4>{card?.cardNumber}</h4>
+          </div>
+        </section>
+
         <div className="card-box">
           <div className="card-box-btn">
             <div>
-              <h5>Carddescription</h5>
+              <p className="cardDescriptionHeading">Carddescription</p>
               {!editBox ? (
-                <h3> {card?.cardDescription}</h3>
+                <h4> {card?.cardDescription}</h4>
               ) : (
-                <div>
+                <div className="cardDescriptionEditDiv">
                   <input
+                    className="cardDescriptionInput"
                     type="text"
                     placeholder="new description"
                     onChange={(e) => setNewDescription(e.target.value)}
                   />
-                  <button onClick={submitEdit}> edit</button>
+                  <button className="cardEditBtn" onClick={submitEdit}>
+                    Edit
+                  </button>
                 </div>
               )}
             </div>
-            <button onClick={handleEdit}>
+            <button className="cardEditBtnImg" onClick={handleEdit}>
               <img src={EditIcon} alt="edit icon" />
             </button>
           </div>
         </div>
       </div>
 
-      <button onClick={handleDelete}>Delete</button>
+      <button className="cardDeleteBtn" onClick={handleDelete}>
+        Delete Card
+      </button>
     </article>
   );
 };
