@@ -8,13 +8,8 @@ import { transactionRouter } from "./transaction/TransactionRouter.js";
 
 const PORT = process.env.PORT;
 const ReactAppDistPath = path.join(path.resolve(), "..", "client", "dist");
-const ReactAppIndex = path.join(
-  path.resolve(),
-  "..",
-  "client",
-  "dist",
-  "index.html"
-);
+// prettier-ignore
+const ReactAppIndex = path.join(path.resolve(),"..","client","dist","index.html");
 
 const app = express();
 app.use(express.json());
