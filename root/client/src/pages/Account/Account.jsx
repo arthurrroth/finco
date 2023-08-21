@@ -37,7 +37,7 @@ const Account = () => {
       </header>
 
       <main className="accountMain">
-        <NavLink to="/mywallet">
+        <NavLink className="myWalletLink" to="/mywallet">
           <div className="accountOptions">
             <div className="innerOptionDiv">
               <img

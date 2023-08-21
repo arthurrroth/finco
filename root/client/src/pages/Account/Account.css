@@ -13,6 +13,11 @@
   margin: var(--main-padding);
 }
 
+.myWalletLink{
+  text-decoration: none;
+  color: var(--text-color-black);
+}
+
 .accountOptions{
   display: flex;
   align-items: center;
@@ -28,6 +33,8 @@
   align-items: center;
   justify-content: space-between;
   padding: 2rem;
+  color: var(--text-color-black);
+  text-decoration: none;
 }
 
 .accountOptionsSection{

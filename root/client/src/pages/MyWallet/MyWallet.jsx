@@ -39,7 +39,7 @@ const MyWallet = () => {
           ))}
         </section>
 
-        <NavLink className="newCard-btn" to="/newcard">
+        <NavLink className="blueBtn" to="/newcard">
           + new card
         </NavLink>
       </main>

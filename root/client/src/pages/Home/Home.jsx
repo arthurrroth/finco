@@ -16,6 +16,7 @@ import {
 // import img
 import LogoIcon from "../../icon/Logo-icon.png";
 import GroupIcon from "../../icon/Group-Icon.png";
+import active from "../../icon/active-icon.png"
 
 const Home = () => {
   const { selectedCard } = useContext(SelectedCardContext);
@@ -55,6 +56,7 @@ const Home = () => {
 
       <div className="creditcard">
         <img className="cc-logo" src={LogoIcon} alt="" />
+        <img className="activeCardImg" src={active} alt="active" />
         <div className="inner-creditcard">
           <h5>Credit Card</h5>
           <p>**** 1289</p>

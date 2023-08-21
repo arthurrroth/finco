@@ -25,25 +25,50 @@
   }
 
   .creditcard{
-    width: 75vw;
-    height: 20vh;
+    width: 32.8rem;
+    height: 18.9rem;
     background-color: lightseagreen;
     margin: 0 auto;
+    margin-top: 15px;
     border-radius: 10px;
+    position: relative;
+    z-index: -2;
+  }
+
+  .ellipse1{
+    z-index: -1;
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
+  
+  .ellipse2{
+    z-index: -1;
+    position: absolute;
+    bottom: 0;
+    left: 0;
   }
 
   .cc-logo{
-    margin: 15px 0 15px 15px;
+    margin: 20px 0 30px 20px;
+  }
+
+  .activeCardImg{
+    position: absolute;
+    top: -27px;
+    right: -20px;
+    z-index: 20;
   }
 
   .inner-creditcard{
-    margin: 5px 15px;
+    margin: 5px 20px 20px 20px;
   }
 
   .bottom-creditcard{
     display: flex;
     justify-content: space-between;
-    margin: 10px 15px;
+    align-items: center;
+    margin: 0 20px;
   }
 
   .wallet{
