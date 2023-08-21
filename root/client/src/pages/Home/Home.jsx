@@ -1,47 +1,53 @@
 import "./Home.css";
 // import methods
-import { OpenBoxContext, PageContext } from "../../context/context";
 import { useContext, useEffect, useState } from "react";
 import axios from "axios";
 // import components
 import Nav from "../../components/Nav/Nav.jsx";
 import IncomeExpense from "../../components/IncomeExpense/IncomeExpense";
 import Header from "../../components/Header/Header";
+// import context
+import {
+  OpenBoxContext,
+  PageContext,
+  SelectedCardContext,
+} from "../../context/context";
+
 // import img
-import CircleIcon from "../../icon/grayCircle.png";
 import LogoIcon from "../../icon/Logo-icon.png";
 import GroupIcon from "../../icon/Group-Icon.png";
 
 const Home = () => {
+  const { selectedCard } = useContext(SelectedCardContext);
+  const { page, setPage } = useContext(PageContext);
+  const { setOpenBox } = useContext(OpenBoxContext);
+
   const [income, setIncome] = useState(0);
   const [expenses, setExpenses] = useState(0);
   const [transactions, setTransactions] = useState([]);
 
   useEffect(() => {
+    setPage("Home");
+    setOpenBox(false);
+
+    //! fetch data
     const fetchData = async () => {
       try {
-        const { data } = await axios.get("./api/wallet/transactions");
+        const { data } = await axios.get("./api/wallet/transactions", {
+          params: { selectedCard },
+        });
         setTransactions(data);
       } catch (error) {
         console.log({ fetchData: error });
       }
     };
+    fetchData();
     let incomeAmount = 0;
     let expenseAmount = 0;
 
     setIncome(incomeAmount);
     setExpenses(expenseAmount);
-  }, []);
-
-  const sortAmount = "income";
-
-  const { page, setPage } = useContext(PageContext);
-  const { setOpenBox } = useContext(OpenBoxContext);
-
-  useEffect(() => {
-    setPage("Home");
-    setOpenBox(false);
-  }, []);
+  }, [selectedCard]);
 
   return (
     <>

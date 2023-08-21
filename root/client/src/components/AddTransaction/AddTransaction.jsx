@@ -101,7 +101,7 @@ const AddTransaction = ({ page }) => {
               id="card"
               onChange={(e) => setSelectedCard(e.target.value)}>
               <option selected disabled value="">
-                Select your card
+                Select your card for transaction
               </option>
               {cards?.map((card) => (
                 <option key={card._id} value={card.cardNumber}>

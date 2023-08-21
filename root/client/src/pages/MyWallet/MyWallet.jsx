@@ -15,10 +15,10 @@ const MyWallet = () => {
   const [refresh, setRefresh] = useState(false);
   const { openBox, setOpenBox } = useContext(OpenBoxContext);
 
-  //! fetch cards
   useEffect(() => {
     setOpenBox(false);
 
+    //! fetch cards
     const fetchCards = async () => {
       const { data } = await axios.get("/api/wallet/cards");
       setCards(data);
@@ -33,7 +33,9 @@ const MyWallet = () => {
       <main className="myWallet-main">
         <section className="cardsList">
           {cards?.map((card) => (
-            <OneCard key={card._id} card={card} setRefresh={setRefresh} />
+            <div key={card._id} className="card-block">
+              <OneCard card={card} setRefresh={setRefresh} />
+            </div>
           ))}
         </section>
 
