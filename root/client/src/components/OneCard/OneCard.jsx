@@ -3,12 +3,7 @@ import "./OneCard.css";
 import { useState } from "react";
 import axios from "axios";
 // import img
-
 import EditIcon from "../../icon/pencil-icon.png";
-import GroupIcon from "../../icon/Group-Icon.png";
-import active from "../../icon/active-icon.png";
-import ellipse1 from "../../icon/Ellipse-1.png";
-import ellipse2 from "../../icon/Ellipse-2.png";
 import Creditcard from "../Creditcard/Creditcard";
 
 const OneCard = ({ card, setRefresh }) => {

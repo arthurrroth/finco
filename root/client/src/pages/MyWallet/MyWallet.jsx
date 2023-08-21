@@ -43,7 +43,6 @@ const MyWallet = () => {
           + new card
         </NavLink>
       </main>
-
       <Nav />
     </>
   );

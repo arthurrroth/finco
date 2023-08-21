@@ -1,6 +1,6 @@
-.myWallet-main{
+.myWallet-main {
   width: 100vw;
-  padding: 0 var( --main-padding);
+  padding: 0 var(--main-padding);
   margin-bottom: 12rem;
 }
 
@@ -9,4 +9,20 @@
   display: flex;
   gap: 2rem;
   -webkit-overflow-scrolling: touch;
+}
+
+.blueBtn {
+  width: 100%;
+  background: linear-gradient(0deg, #1e78fe, #44bbfe);
+  border: none;
+  border-radius: 20rem;
+  padding: 2rem 6rem;
+  color: var(--text-color-white);
+  font-weight: 500;
+  text-decoration: none;
+  text-align: center;
+  font-size: 1.8rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

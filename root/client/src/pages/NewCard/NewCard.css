@@ -11,14 +11,14 @@ label {
   margin-left: 1rem;
 }
 
-input {
+.newCard-form input {
   height: 4rem;
   padding: 10px;
   border-radius: 10px;
   margin: 1rem 0 3rem 0;
 }
 
-.newCardInput{
+.newCardInput {
   height: 4.8rem;
   width: 60vw;
   border-radius: 25px;
