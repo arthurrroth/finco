@@ -1,0 +1,23 @@
+.FAQ {
+  padding: var(--main-padding);
+  margin-bottom: 6rem;
+}
+
+.FAQ h1 {
+  font-size: 2.5rem;
+}
+
+.FAQ h2 {
+  font-size: 2rem;
+}
+
+.FAQ p {
+  font-size: 1.8rem;
+}
+
+.FAQ section {
+  margin: 1.5rem 0;
+  border: 1px solid black;
+  padding: 1rem;
+  border-radius: 20px;
+}
