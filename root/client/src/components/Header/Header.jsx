@@ -5,18 +5,22 @@ import axios from "axios";
 // import img
 import BackIcon from "../../icon/Back-icon.png";
 import logo from "../../icon/logo.png";
-import profile from "../../icon/grayCircle.png";
+import profile from "../../icon/default-profile.png";
 import creditCard from "../../icon/credit-card.png";
 import { useContext, useEffect, useState } from "react";
 // import context
 import { SelectedCardContext } from "../../context/context";
 
 const Header = ({ searchIsActive, setSearchIsActive, goBack, welcome }) => {
+  const { selectedCard, setSelectedCard } = useContext(SelectedCardContext);
+
   const [openCardBox, setOpenCardBox] = useState(false);
+
   const [cards, setCards] = useState([]);
   const [cardTitle, setCardTitle] = useState("");
 
-  const { selectedCard, setSelectedCard } = useContext(SelectedCardContext);
+  const [selectedProfile, setSelectedProfile] = useState(null);
+  const [selectedName, setSelectedName] = useState("Name");
 
   const Navigate = useNavigate();
 
@@ -62,7 +66,7 @@ const Header = ({ searchIsActive, setSearchIsActive, goBack, welcome }) => {
       ) : welcome ? (
         <div>
           <h5 className="heading">Welcome Back</h5>
-          <h2>Name</h2>
+          <h2>{selectedName}</h2>
         </div>
       ) : (
         <NavLink to={"/"}>
@@ -82,25 +86,44 @@ const Header = ({ searchIsActive, setSearchIsActive, goBack, welcome }) => {
               alt="credit card logo"
             />
             {openCardBox && (
-              <div className="cardBox">
-                {cards?.map((card) => (
-                  <p
-                    key={card._id}
-                    onClick={() =>
-                      handleSelectCard(card.cardNumber, card.cardTitle)
-                    }>
-                    {card.cardTitle}
-                  </p>
-                ))}
-              </div>
+              <>
+                <div className="header-overlay"></div>
+                <div className="cardBox">
+                  {cards?.map((card) => (
+                    <div className="navCard-list" key={card._id}>
+                      <div
+                        className="icon-creditCard"
+                        onClick={() =>
+                          handleSelectCard(card.cardNumber, card.cardTitle)
+                        }>
+                        <img
+                          className="creditCard-mini"
+                          src={creditCard}
+                          alt="credit-card"
+                        />
+                        <p>{card.cardTitle}</p>
+                      </div>
+                      <div className="navCard-separator"></div>
+                    </div>
+                  ))}
+                </div>
+              </>
             )}
           </button>
           <p>{cardTitle}</p>
         </div>
 
         {/* PROFILE */}
-        <NavLink to={"/account"}>
-          <img src={profile} alt="Profile" />
+        <NavLink className="profile-img" to={"/account"}>
+          {selectedProfile ? (
+            <img src="" alt="profile-img" className="selectedProfile-img" />
+          ) : (
+            <img
+              className="defaultProfile-img"
+              src={profile}
+              alt="default-profile-img"
+            />
+          )}
         </NavLink>
       </div>
     </header>

@@ -42,8 +42,7 @@ const Transaction = () => {
           params: { category: searchInput, date: selectedDate, selectedCard },
         });
         const sortedData = data.sort((a, b) => {
-          a.date - b.date;
-          return 1;
+          return new Date(b.date) - new Date(a.date);
         });
         setTransactions(sortedData);
       } catch (error) {
@@ -110,7 +109,7 @@ const Transaction = () => {
               <img src={search} alt="search symbol" />
             </button>
             {/* Calendar Btn */}
-            {searchIsActive ? null : (
+            {!searchIsActive && (
               <button className="calendar-btn">
                 <img src={calendar} alt="calendar symbol" />
                 <input
@@ -125,7 +124,7 @@ const Transaction = () => {
         </article>
 
         {/* Income & Expense */}
-        {searchIsActive ? null : (
+        {!searchIsActive && (
           <article className="income-expense">
             <IncomeExpense sortAmount={"income"} transaction={transactions} />
             <IncomeExpense sortAmount={"expense"} transaction={transactions} />
