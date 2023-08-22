@@ -8,6 +8,7 @@ import axios from "axios";
 import Nav from "../../components/Nav/Nav.jsx";
 import IncomeExpense from "../../components/IncomeExpense/IncomeExpense";
 import Header from "../../components/Header/Header";
+import Creditcard from "../../components/Creditcard/Creditcard";
 
 // import context
 import {
@@ -17,17 +18,15 @@ import {
 } from "../../context/context";
 
 // import img
-import active from "../../icon/active-icon.png";
-import LogoIcon from "../../icon/Logo-icon.png";
-import GroupIcon from "../../icon/Group-icon.png";
 import DangerIcon from "../../icon/icon-danger.svg";
 import ThreeDot from "../../icon/threedot-icon.svg";
 
 const Home = () => {
-  const { selectedCard } = useContext(SelectedCardContext);
+  const { selectedCard, setSelectedCard } = useContext(SelectedCardContext);
   const { page, setPage } = useContext(PageContext);
   const { setOpenBox } = useContext(OpenBoxContext);
 
+  const [yourCard, setYourCard] = useState();
   const [income, setIncome] = useState(0);
   const [expenses, setExpenses] = useState(0);
   const [transactions, setTransactions] = useState([]);
@@ -47,7 +46,7 @@ const Home = () => {
     setOpenBox(false);
 
     //! fetch transactions
-    const fetchData = async () => {
+    const fetchTransactions = async () => {
       try {
         const { data } = await axios.get("./api/wallet/transactions", {
           params: { selectedCard },
@@ -56,14 +55,8 @@ const Home = () => {
       } catch (error) {
         console.log("fetch transactions: ", error);
       }
-      try {
-        const { data } = await axios.get("/api/wallet/cards");
-        setCards(data);
-      } catch (error) {
-        console.log("fetch cards: ", error);
-      }
     };
-    fetchData();
+    fetchTransactions();
     let incomeAmount = 0;
     let expenseAmount = 0;
 
@@ -75,18 +68,8 @@ const Home = () => {
     <>
       <Header welcome={true} />
 
-      <div className="creditcard">
-        <img className="cc-logo" src={LogoIcon} alt="" />
-        <img className="activeCardImg" src={active} alt="active" />
-        <div className="inner-creditcard">
-          <h5>Credit Card</h5>
-          <p>**** 1289</p>
-        </div>
-        <div className="bottom-creditcard">
-          <img src={GroupIcon} alt="" />
-          <p>09/25</p>
-        </div>
-      </div>
+      {selectedCard && <Creditcard />}
+
       <div className="wallet">
         <h3>Total Wallet</h3>
       </div>

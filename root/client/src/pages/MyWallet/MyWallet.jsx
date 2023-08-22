@@ -34,7 +34,7 @@ const MyWallet = () => {
         <section className="cardsList">
           {cards?.map((card) => (
             <div key={card._id} className="card-block">
-              <OneCard card={card} setRefresh={setRefresh} />
+              <OneCard cards={cards} card={card} setRefresh={setRefresh} />
             </div>
           ))}
         </section>

@@ -6,18 +6,37 @@ import axios from "axios";
 import EditIcon from "../../icon/pencil-icon.png";
 import Creditcard from "../Creditcard/Creditcard";
 
-const OneCard = ({ card, setRefresh }) => {
+const OneCard = ({ cards, card, setRefresh }) => {
   const [editBox, setEditBox] = useState(false);
   const [newdescription, setNewDescription] = useState("");
+  const [alertText, setAlertText] = useState(false);
+  const [deleteSuccessful, setDeleteSuccessful] = useState(false);
+  const [sureDelete, setSureDelete] = useState(false);
+
+  //! open delete box
+  const handleQuestionDelete = () => {
+    setSureDelete(true);
+  };
 
   //! delete card
   const handleDelete = async () => {
-    try {
-      const res = await axios.delete(`/api/wallet/cards/${card._id}`);
-      setRefresh((prev) => !prev);
-    } catch (error) {
-      console.log("delete card failed ", error);
-    }
+    if (cards.length === 1) {
+      setAlertText(true);
+    } else
+      try {
+        const res = await axios.delete(`/api/wallet/cards/${card._id}`);
+        setDeleteSuccessful(true);
+      } catch (error) {
+        console.log("delete card failed ", error);
+      }
+  };
+
+  //! cancel delte
+  const handleCancel = () => {
+    setRefresh((prev) => !prev);
+    setAlertText(false);
+    setSureDelete(false);
+    setDeleteSuccessful(false);
   };
 
   //! open editBox
@@ -92,9 +111,34 @@ const OneCard = ({ card, setRefresh }) => {
         </div>
       </div>
 
-      <button className="cardDeleteBtn" onClick={handleDelete}>
+      {/* DELETE BTN & DELETE BOX */}
+
+      <button className="cardDeleteBtn" onClick={handleQuestionDelete}>
         Delete Card
       </button>
+
+      {sureDelete && (
+        <>
+          <div className="delete-overlay"></div>
+          <div className="questionDelete-box">
+            {alertText ? (
+              <p className="alert-text">You can not delete your only card!</p>
+            ) : deleteSuccessful ? (
+              <p>Your card was successfully deleted!</p>
+            ) : (
+              <p>Are you sure you want to delete this card?</p>
+            )}
+            <div className="deleteBox-btn">
+              {!alertText && !deleteSuccessful && (
+                <button onClick={handleDelete} className="delete-btn">
+                  Delete
+                </button>
+              )}
+              <button onClick={handleCancel}>Cancel</button>
+            </div>
+          </div>
+        </>
+      )}
     </article>
   );
 };

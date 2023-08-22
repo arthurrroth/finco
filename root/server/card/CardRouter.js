@@ -19,7 +19,7 @@ cardRouter.get("/", async (req, res) => {
 cardRouter.get("/:id", async (req, res) => {
   const cardId = req.params.id;
   try {
-    const card = await Card.findOne({ _id: cardId });
+    const card = await Card.findOne({ cardNumber: cardId });
     res.json(card);
   } catch (error) {
     res.status(400).send("error in finding this card");
@@ -28,12 +28,14 @@ cardRouter.get("/:id", async (req, res) => {
 
 //! create new card
 cardRouter.post("/newcard", async (req, res) => {
-  const { userId, cardNumber, cardTitle, cardDescription } = req.body;
+  const { userId, cardNumber, cardTitle, cardDescription, cardDesign } =
+    req.body;
   const newCard = await createCard(
     // userId,
     cardNumber,
     cardTitle,
-    cardDescription
+    cardDescription,
+    cardDesign
   );
   res.send(newCard);
 });
