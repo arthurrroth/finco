@@ -29,7 +29,13 @@ const Creditcard = ({ card }) => {
 
   return (
     <>
-      <div className="creditcard">
+      <div
+        className="creditcard"
+        style={
+          card
+            ? { backgroundColor: card.cardDesign }
+            : { backgroundColor: yourCard.cardDesign }
+        }>
         <img className="ellipse1" src={ellipse1} alt="background" />
         <img className="ellipse2" src={ellipse2} alt="background" />
         <img className="cc-logo" src={LogoIcon} alt="credit card" />

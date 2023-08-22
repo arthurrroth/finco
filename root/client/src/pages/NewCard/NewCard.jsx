@@ -102,7 +102,7 @@ const NewCard = () => {
         <label name="selectDesign-title">Select your card design</label>
         <div className="selectCard-design">
           {Array.from({ length: 3 }).map((_, i) => (
-            <div key={i}>
+            <div key={i} onClick={() => handleSetDesign(i)}>
               <div
                 className={`
                   new-creditcard ${
@@ -125,11 +125,6 @@ const NewCard = () => {
                   <p>09/25</p>
                 </div>
               </div>
-              <p
-                className="selectDesign-btn"
-                onClick={() => handleSetDesign(i)}>
-                select design
-              </p>
             </div>
           ))}
         </div>
