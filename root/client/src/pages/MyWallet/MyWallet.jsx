@@ -26,18 +26,65 @@ const MyWallet = () => {
     fetchCards();
   }, [refresh]);
 
+  const scrollList = (scrollAmount) => {
+    const cardsList = document.querySelector(".cardsList");
+    cardsList.scrollBy({ left: scrollAmount, behavior: "smooth" });
+  };
+
+  const checkScrollPosition = () => {
+    const cardsList = document.querySelector(".cardsList");
+    const leftPaddle = document.querySelector(".left-paddle");
+    const rightPaddle = document.querySelector(".right-paddle");
+
+    if (cardsList.scrollLeft > 0) {
+      leftPaddle.classList.remove("hidden");
+    } else {
+      leftPaddle.classList.add("hidden");
+    }
+
+    if (cardsList.scrollLeft < cardsList.scrollWidth - cardsList.clientWidth) {
+      rightPaddle.classList.remove("hidden");
+    } else {
+      rightPaddle.classList.add("hidden");
+    }
+  };
+
+  useEffect(() => {
+    checkScrollPosition();
+
+    const cardsList = document.querySelector(".cardsList");
+    cardsList.addEventListener("scroll", checkScrollPosition);
+
+    return () => {
+      cardsList.removeEventListener("scroll", checkScrollPosition);
+    };
+  }, []);
+
   return (
     <>
       <Header goBack={true} />
 
       <main className="myWallet-main">
-        <section className="cardsList">
+        <ul className="cardsList">
           {cards?.map((card) => (
-            <div key={card._id} className="card-block">
+            <li key={card._id} className="card-block">
               <OneCard cards={cards} card={card} setRefresh={setRefresh} />
-            </div>
+            </li>
           ))}
-        </section>
+        </ul>
+
+        <div className="paddles">
+          <button
+            className="left-paddle paddle hidden"
+            onClick={() => scrollList(-200)}>
+            ⇠
+          </button>
+          <button
+            className="right-paddle paddle"
+            onClick={() => scrollList(200)}>
+            ⇢
+          </button>
+        </div>
 
         <NavLink className="blueBtn" to="/newcard">
           + new card

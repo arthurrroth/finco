@@ -1,3 +1,12 @@
+.oneCard {
+  display: flex;
+  flex-direction: column;
+  flex: 0 0 100%;
+  padding: 0 3.5rem;
+  scroll-snap-align: start;
+  transition: all 0.2s;
+}
+
 .creditcardTitle {
   color: rgb(36, 36, 36);
 }
