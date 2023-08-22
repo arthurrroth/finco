@@ -1,21 +1,13 @@
 import "./AddTransaction.css";
 // import methods
 import { useState, useEffect } from "react";
-import { NavLink, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
+// import components
+import Header from "../Header/Header";
 // import img
-import BackIcon from "../../icon/Back-icon.png";
 import selectImg from "../../icon/open-add.png";
 import selectDownImg from "../../icon/down.png";
-
-// # delete and change to Profile Picture
-import grayCircle from "../../icon/grayCircle.png";
-import Header from "../Header/Header";
-
-// # Custom select
-
-// # Functions add income & expenses
-// # Connection DB
 
 const AddTransaction = ({ page }) => {
   const [transaction, setTransaction] = useState(null);

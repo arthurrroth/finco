@@ -20,6 +20,10 @@ const CardSchema = new Schema({
     type: String,
     required: true,
   },
+  cardDesign: {
+    type: String,
+    required: true,
+  },
   transactions: [{ type: Schema.Types.ObjectId, ref: "Transaction" }],
 });
 

@@ -11,8 +11,6 @@ transactionRouter.get("/", async (req, res) => {
   // find card
   if (selectedCard) {
     transactions = transactions.filter((transaction) => {
-      console.log("cardId ", transaction.cardId);
-      console.log("selectedCard ", selectedCard);
       return transaction.cardId === selectedCard;
     });
     // get search transactions
@@ -29,7 +27,6 @@ transactionRouter.get("/", async (req, res) => {
       });
     }
   }
-  // console.log(transactions);
   res.json(transactions);
 });
 

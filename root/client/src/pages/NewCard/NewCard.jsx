@@ -1,18 +1,34 @@
 import "./NewCard.css";
+
 // import methods
-import { NavLink, Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import axios from "axios";
 // import components
+
 import Nav from "../../components/Nav/Nav";
+import Header from "../../components/Header/Header";
+
 // import img
-import BackIcon from "../../icon/Back-icon.png";
-import grayCircle from "../../icon/grayCircle.png";
+import LogoIcon from "../../icon/Logo-icon.png";
+import GroupIcon from "../../icon/Group-icon.png";
+import ellipse1 from "../../icon/Ellipse-1.png";
+import ellipse2 from "../../icon/Ellipse-2.png";
 
 const NewCard = () => {
   const [cardTitle, setCardTitle] = useState("");
   const [cardNumber, setCardNumber] = useState("");
   const [cardDescription, setCardDescription] = useState("");
+  const [designColor, setDesignColor] = useState("lightseagreen");
+  const [designIndex, setDesignIndex] = useState(0);
+
+  const designs = [
+    {
+      color: "lightseagreen",
+    },
+    { color: "lightblue" },
+    { color: "lightgray" },
+  ];
 
   const Navigate = useNavigate();
 
@@ -23,6 +39,7 @@ const NewCard = () => {
       cardNumber,
       cardTitle,
       cardDescription,
+      cardDesign: designColor,
     };
     const res = await axios.post("/api/wallet/cards/newcard", newCard);
 
@@ -33,21 +50,25 @@ const NewCard = () => {
     Navigate("/mywallet");
   };
 
+  //! set card design
+  const handleSetDesign = (i) => {
+    if (i === 0) {
+      setDesignColor(designs[0].color);
+      setDesignIndex(0);
+    } else if (i === 1) {
+      setDesignColor(designs[1].color);
+      setDesignIndex(1);
+    } else {
+      setDesignColor(designs[2].color);
+      setDesignIndex(2);
+    }
+  };
   return (
     <>
-      <header className="addTransactionHeader">
-        <button className="goBackBtn">
-          <NavLink to="/mywallet">
-            <img src={BackIcon} alt="back" />
-          </NavLink>
-        </button>
-        <NavLink to="/account">
-          <img src={grayCircle} alt="Profile" />
-        </NavLink>
-      </header>
+      <Header goBack={true} />
 
       <form onSubmit={handleCreate} className="newCard-form">
-        <div>
+        <div className="form-box">
           <label name="cardtittle">Cardtitle</label>
           <input
             className="newCardInput"
@@ -77,7 +98,39 @@ const NewCard = () => {
           />
         </div>
 
+        {/* CARD DESIGN */}
+        <label name="selectDesign-title">Select your card design</label>
+        <div className="selectCard-design">
+          {Array.from({ length: 3 }).map((_, i) => (
+            <div key={i} onClick={() => handleSetDesign(i)}>
+              <div
+                className={`
+                  new-creditcard ${
+                    i === 0
+                      ? "firstDesign"
+                      : i === 1
+                      ? "secondDesign"
+                      : "thirdDesign"
+                  } ${i === designIndex && "selectedDesign-effect"}
+                `}>
+                <img className="new-ellipse1" src={ellipse1} alt="background" />
+                <img className="new-ellipse2" src={ellipse2} alt="background" />
+                <img className="cc-logo" src={LogoIcon} alt="credit card" />
+                <div className="inner-creditcard">
+                  <p className="creditcardTitle"></p>
+                  <h5 className="creditcardNumber"></h5>
+                </div>
+                <div className="bottom-creditcard">
+                  <img src={GroupIcon} alt="chip" />
+                  <p>09/25</p>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+
         <button className="blueBtn" type="submit">
+          {" "}
           Create Card
         </button>
       </form>

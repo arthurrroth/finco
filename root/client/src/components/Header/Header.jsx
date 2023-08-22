@@ -1,13 +1,16 @@
 import "./Header.css";
+
 // import methods
 import { NavLink, useNavigate } from "react-router-dom";
 import axios from "axios";
+
 // import img
 import BackIcon from "../../icon/Back-icon.png";
-import logo from "../../icon/logo.png";
+import logo from "../../icon/Logo.png";
 import profile from "../../icon/default-profile.png";
 import creditCard from "../../icon/credit-card.png";
 import { useContext, useEffect, useState } from "react";
+
 // import context
 import { SelectedCardContext } from "../../context/context";
 
@@ -28,24 +31,16 @@ const Header = ({ searchIsActive, setSearchIsActive, goBack, welcome }) => {
     Navigate(-1);
   };
 
-  //! set default card
+  //! fetch Cards & set default card
   useEffect(() => {
     const fetchData = async () => {
       const { data } = await axios.get("/api/wallet/cards");
+      setCards(data);
       setSelectedCard(data[0].cardNumber);
       setCardTitle(data[0].cardTitle);
     };
     fetchData();
   }, []);
-
-  //! fetch Cards
-  useEffect(() => {
-    const fetchData = async () => {
-      const { data } = await axios.get("/api/wallet/cards");
-      setCards(data);
-    };
-    fetchData();
-  }, [selectedCard]);
 
   const handleSelectCard = (id, title) => {
     setSelectedCard(id);
@@ -74,44 +69,46 @@ const Header = ({ searchIsActive, setSearchIsActive, goBack, welcome }) => {
         </NavLink>
       )}
 
+      {/* CARD */}
       <div className="card-profile">
-        {/* CARD */}
-        <div className="card-btn">
-          <button
-            onClick={() => setOpenCardBox((prev) => !prev)}
-            className="btn-hidden">
-            <img
-              className="creditCard-icon"
-              src={creditCard}
-              alt="credit card logo"
-            />
-            {openCardBox && (
-              <>
-                <div className="header-overlay"></div>
-                <div className="cardBox">
-                  {cards?.map((card) => (
-                    <div className="navCard-list" key={card._id}>
-                      <div
-                        className="icon-creditCard"
-                        onClick={() =>
-                          handleSelectCard(card.cardNumber, card.cardTitle)
-                        }>
-                        <img
-                          className="creditCard-mini"
-                          src={creditCard}
-                          alt="credit-card"
-                        />
-                        <p>{card.cardTitle}</p>
+        {selectedCard && (
+          <div className="card-btn">
+            <button
+              onClick={() => setOpenCardBox((prev) => !prev)}
+              className="btn-hidden">
+              <img
+                className="creditCard-icon"
+                src={creditCard}
+                alt="credit card logo"
+              />
+              {openCardBox && (
+                <>
+                  <div className="header-overlay"></div>
+                  <div className="cardBox">
+                    {cards?.map((card) => (
+                      <div className="navCard-list" key={card._id}>
+                        <div
+                          className="icon-creditCard"
+                          onClick={() =>
+                            handleSelectCard(card.cardNumber, card.cardTitle)
+                          }>
+                          <img
+                            className="creditCard-mini"
+                            src={creditCard}
+                            alt="credit-card"
+                          />
+                          <p>{card.cardTitle}</p>
+                        </div>
+                        <div className="navCard-separator"></div>
                       </div>
-                      <div className="navCard-separator"></div>
-                    </div>
-                  ))}
-                </div>
-              </>
-            )}
-          </button>
-          <p>{cardTitle}</p>
-        </div>
+                    ))}
+                  </div>
+                </>
+              )}
+            </button>
+            <p>{cardTitle}</p>
+          </div>
+        )}
 
         {/* PROFILE */}
         <NavLink className="profile-img" to={"/account"}>
