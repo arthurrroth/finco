@@ -1,0 +1,72 @@
+@font-face {
+  font-family: "Urbanist";
+  src: url(./assets/font/Urbanist/Urbanist-VariableFont_wght.ttf);
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 62.5%;
+  scroll-behavior: smooth;
+}
+
+:root {
+  font-family: "Urbanist", Inter, system-ui, Avenir, Helvetica, Arial,
+    sans-serif;
+  font-size: 62.5%;
+  line-height: 1.2;
+
+  --main-padding: 28px;
+
+  --text-color-white: white;
+  --text-color-black: black;
+  --text-color-darkgray: #0d1636;
+  --text-color-blue: #298bff;
+  --text-color-yellow: #ffaa1a;
+
+  --icon-color: #565c72;
+
+  --border-red: #f44545;
+
+  --background-lightgrey: #f7f7f7;
+
+  --graph-linear-darkred: #fb2467;
+
+  --linear-lightblue: #44bbfe;
+  --linear-darkblue: #1e78fe;
+
+  --linear-yellow: #ffcf53;
+  --linear-orange: #ff9900;
+}
+
+h1 {
+  font-size: 3.6rem;
+}
+
+h2 {
+  font-size: 2.8rem;
+}
+
+h3 {
+  font-size: 2rem;
+}
+
+h4 {
+  font-size: 1.8rem;
+}
+
+h5 {
+  font-size: 1.6rem;
+}
+
+p {
+  font-size: 1.4rem;
+}
+
+button {
+  font-size: 1.6rem;
+}

@@ -1,0 +1,32 @@
+.bottom-creditcard {
+  display: flex;
+  justify-content: space-between;
+  margin: 10px 15px;
+}
+
+.wallet {
+  margin: 25px;
+}
+
+.monthly-spending {
+  background-color: #f7f7f7;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin: 25px 40px;
+  padding: 15px 0;
+  border-radius: 40px;
+  text-align: center;
+}
+
+.save-button {
+  border: none;
+  border-radius: 15px;
+  width: 6rem;
+  color: #ffffff;
+  background: linear-gradient(
+    180deg,
+    rgba(68, 187, 254, 1) 35%,
+    rgba(30, 120, 254, 1) 100%
+  );
+}

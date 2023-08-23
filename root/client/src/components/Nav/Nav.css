@@ -1,0 +1,102 @@
+.nav-bottom {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background-color: #ffffff; /* Hintergrundfarbe anpassen */
+  border-top: 1px solid #ccc;
+  box-shadow: 0px -19px 20px #dedede;
+}
+
+.nav-site {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.nav-container {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 10px 0;
+  position: relative;
+}
+
+.nav-link {
+  text-decoration: none;
+  color: var(--text-color-darkgray);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-weight: 500;
+  background: none;
+  border: none;
+}
+
+nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 2rem 0;
+  z-index: 10;
+  height: 10.9%;
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 89.1%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 10;
+}
+
+.openbox-addtrans {
+  background: url(../../icon/Union.png) center no-repeat;
+  padding: 3rem 5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+  position: absolute;
+  bottom: 1rem;
+  right: 2rem;
+  height: 190px;
+  z-index: 10;
+  filter: drop-shadow(0 0 1rem rgb(94, 93, 93));
+}
+
+.links {
+  text-decoration: none;
+  font-size: 2.2rem;
+  margin: 0;
+  color: var(--text-color-black);
+}
+
+.incomeExpensesHR {
+  width: 130px;
+  border: 0px;
+  border-top: 1px solid #d4d0d0;
+}
+
+/* ! Add Btn */
+.nav-link:focus::after {
+  content: "";
+  position: absolute;
+  width: 12px;
+  height: 2px;
+  bottom: 8px;
+  border-radius: 1px;
+  background-color: var(--linear-lightblue);
+}
+
+.active:after {
+  content: "";
+  position: absolute;
+  width: 12px;
+  height: 2px;
+  bottom: 8px;
+  border-radius: 1px;
+  background-color: var(--linear-lightblue);
+}
