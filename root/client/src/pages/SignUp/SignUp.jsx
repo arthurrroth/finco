@@ -24,11 +24,19 @@ const SignUp = () => {
     };
 
     try {
+
       const response = await axios.post('/auth-api/users/create-user', reqBody);
-      const preViewURL = response.data;
-      console.log({ preViewURL });
-      console.log({ response });
-      navigate('/verify-email', { state: preViewURL });
+      console.log("Preview URL:", response.data.previewURL);
+      console.log("UserID:", response.data.userID);
+
+      navigate('/verify-email', {
+        state: {
+          previewURL: response.data.previewURL,
+          userID: response.data.userID,
+          email: email
+        }
+      });
+
     } catch (error) {
       // Handle error
     }

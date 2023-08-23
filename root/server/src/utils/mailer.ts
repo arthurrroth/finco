@@ -43,7 +43,6 @@ export const sendMailx = (payload: SendMailOptions) => new Promise((resolve, rej
     }
 
     const previewURL = nodemailer.getTestMessageUrl(info)
-    log.info(previewURL);
     resolve(previewURL)
   })
 });

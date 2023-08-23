@@ -11,6 +11,7 @@ export const userCreationHandler =
 
     const body = req.body;
     log.info('Started User Creation')
+
     try {
 
       const user = await createUser(body);
@@ -26,9 +27,10 @@ export const userCreationHandler =
 
       });
 
-      log.info(userVerification)
-
-      return res.send(userVerification);
+      return res.send({
+        previewURL: userVerification,
+        userID: user.id
+      });
 
     } catch (err: any) {
       // 11000 'unique' constraint has been violated

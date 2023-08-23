@@ -24,13 +24,20 @@ const NewCard = () => {
       cardTitle,
       cardDescription,
     };
-    const res = await axios.post("/api/wallet/cards/newcard", newCard);
 
     setCardTitle("");
     setCardNumber("");
     setCardDescription("");
 
-    Navigate("/mywallet");
+    try {
+      const response = await axios.post(`/finco/cards/create/${accId}`, newCard);
+      const { card } = response.data;
+      console.log('Card created successfully:', card);
+
+      Navigate("/mywallet");
+    } catch (error) {
+      console.error('Error creating card:', error);
+    }
   };
 
   return (
