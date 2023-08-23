@@ -109,43 +109,43 @@ const Header = ({ searchIsActive, setSearchIsActive, goBack, welcome }) => {
 
       {/* CARD */}
       <div className="card-profile">
-        {selectedCard && (
-          <div className="card-btn">
-            <button
-              onClick={() => setOpenCardBox((prev) => !prev)}
-              className="btn-hidden">
-              <img
-                className="creditCard-icon"
-                src={creditCard}
-                alt="credit card logo"
-              />
-              {/* OpenCard Box */}
-              {openCardBox && (
-                <>
-                  <div className="header-overlay"></div>
-                  <div className="cardBox">
-                    {cards?.map((card) => (
-                      <div className="navCard-list" key={card._id}>
-                        <div
-                          className="icon-creditCard"
-                          onClick={() => handleSelectCard(card.cardNumber)}>
-                          <img
-                            className="creditCard-mini"
-                            src={creditCard}
-                            alt="credit-card"
-                          />
-                          <p>{card.cardTitle}</p>
-                        </div>
-                        <div className="navCard-separator"></div>
+        {/* {selectedCard && ( */}
+        <div className="card-btn">
+          <button
+            onClick={() => setOpenCardBox((prev) => !prev)}
+            className="btn-hidden">
+            <img
+              className="creditCard-icon"
+              src={creditCard}
+              alt="credit card logo"
+            />
+            {/* OpenCard Box */}
+            {openCardBox && (
+              <>
+                <div className="header-overlay"></div>
+                <div className="cardBox">
+                  {cards?.map((card) => (
+                    <div className="navCard-list" key={card._id}>
+                      <div
+                        className="icon-creditCard"
+                        onClick={() => handleSelectCard(card.cardNumber)}>
+                        <img
+                          className="creditCard-mini"
+                          src={creditCard}
+                          alt="credit-card"
+                        />
+                        <p>{card.cardTitle}</p>
                       </div>
-                    ))}
-                  </div>
-                </>
-              )}
-            </button>
-            <p>{findedCard[0]?.cardTitle}</p>
-          </div>
-        )}
+                      <div className="navCard-separator"></div>
+                    </div>
+                  ))}
+                </div>
+              </>
+            )}
+          </button>
+          <p>{findedCard[0]?.cardTitle}</p>
+        </div>
+        {/* )} */}
 
         {/* PROFILE */}
         <NavLink className="profile-img" to={"/account"}>
