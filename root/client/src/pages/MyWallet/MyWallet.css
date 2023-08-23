@@ -29,16 +29,17 @@
 }
 
 .blueBtn {
-  width: 100%;
+  width: 60%;
+  margin: auto;
   background: linear-gradient(0deg, #1e78fe, #44bbfe);
   border: none;
   border-radius: 20rem;
-  padding: 2rem 6rem;
+  padding: 2rem 4rem;
   color: var(--text-color-white);
+  font-size: 1.8rem;
   font-weight: 500;
   text-decoration: none;
   text-align: center;
-  font-size: 1.8rem;
   display: flex;
   justify-content: center;
   align-items: center;

@@ -53,14 +53,27 @@ cardRouter.delete("/:id", async (req, res) => {
 
 //! edit existing card
 cardRouter.put("/:id", async (req, res) => {
-  const cardDescription = req.body;
+  const reqEdit = req.body;
   const cardId = req.params.id;
+
   try {
-    const dbRes = await Card.findByIdAndUpdate(cardId, cardDescription, {
+    const dbRes = await Card.findOneAndUpdate({ cardNumber: cardId }, reqEdit, {
       new: true,
     });
     res.json(dbRes);
   } catch (error) {
     res.status(400).send("error in editing card");
+  }
+});
+
+//! edit all cards
+cardRouter.put("/", async (req, res) => {
+  const reqEdit = req.body;
+
+  try {
+    const dbRes = await Card.updateMany({ selectedCard: true }, reqEdit);
+    res.json(dbRes);
+  } catch (error) {
+    console.log("edit all cards: ", error);
   }
 });

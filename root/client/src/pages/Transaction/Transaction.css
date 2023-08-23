@@ -4,7 +4,7 @@
 }
 
 .allTransactionsH2 {
-  font-size: 2.5rem;
+  font-size: 2.6rem;
 }
 
 .all-transaction {
@@ -69,12 +69,12 @@
   margin-bottom: 1rem;
 }
 
-.weekday{
+.weekday {
   font-size: 1.2rem;
   color: var(--text-color-darkgray);
-  margin-bottom: .5rem;
+  margin-bottom: 0.5rem;
 }
 
-.dateSectionTransaction{
+.dateSectionTransaction {
   margin-bottom: 3rem;
 }

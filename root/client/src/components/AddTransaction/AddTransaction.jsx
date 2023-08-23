@@ -1,24 +1,30 @@
 import "./AddTransaction.css";
 // import methods
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+
 // import components
 import Header from "../Header/Header";
+
+// import context
+import { SelectedCardContext } from "../../context/context";
+
 // import img
 import selectImg from "../../icon/open-add.png";
 import selectDownImg from "../../icon/down.png";
 
 const AddTransaction = ({ page }) => {
+  const { selectedCard, setSelectedCard } = useContext(SelectedCardContext);
+
   const [transaction, setTransaction] = useState(null);
   const [cards, setCards] = useState([]);
 
-  const [selectedCard, setSelectedCard] = useState("");
   const [category, setCategory] = useState("");
   const [currentDate, setCurrentDate] = useState("");
   const [currentTime, setCurrentTime] = useState("");
   const [transactionType, setTransactionType] = useState("");
-
+  const [spendingLimit, setSpendingLimit] = useState(null);
   const [refresh, setRefresh] = useState(false);
 
   const Navigate = useNavigate();
@@ -26,7 +32,14 @@ const AddTransaction = ({ page }) => {
   useEffect(() => {
     setTransactionType(page);
 
-    //! fetch cards
+    //! fetch spending limit
+    const fetchLimit = async () => {
+      const { data } = await axios.get(`/api/wallet/cards/${selectedCard}`);
+      setSpendingLimit(data.spendingLimit);
+    };
+    fetchLimit();
+
+    //! fetch cards & spending limit
     const fetchData = async () => {
       const { data } = await axios.get("/api/wallet/cards");
       setCards(data);
@@ -43,7 +56,7 @@ const AddTransaction = ({ page }) => {
     const hours = today.getHours().toString().padStart(2, "0");
     const minutes = today.getMinutes().toString().padStart(2, "0");
     setCurrentTime(`${hours}:${minutes}`);
-  }, [page]);
+  }, [page, spendingLimit]);
 
   //! onSubmit function
   const addTransaction = async (e) => {
@@ -92,9 +105,6 @@ const AddTransaction = ({ page }) => {
               name="card"
               id="card"
               onChange={(e) => setSelectedCard(e.target.value)}>
-              <option selected disabled value="">
-                Select your card for transaction
-              </option>
               {cards?.map((card) => (
                 <option key={card._id} value={card.cardNumber}>
                   {card.cardTitle}
@@ -103,18 +113,32 @@ const AddTransaction = ({ page }) => {
             </select>
             <img src={selectImg} alt="select" />
           </div>
+
           {/* SET AMOUNT */}
           <label className="addLabel" htmlFor="amount">
             Amount
           </label>
-          <input
-            required
-            className="addInput"
-            type="number"
-            id="amount"
-            placeholder="set your amount €"
-            onChange={(e) => setTransaction(e.target.value)}
-          />
+          {page === "expense" ? (
+            <input
+              max={spendingLimit > 0 ? spendingLimit : null}
+              required
+              className="addInput"
+              type="number"
+              id="amount"
+              placeholder="set your amount €"
+              onChange={(e) => setTransaction(e.target.value)}
+            />
+          ) : (
+            <input
+              required
+              className="addInput"
+              type="number"
+              id="amount"
+              placeholder="set your amount €"
+              onChange={(e) => setTransaction(e.target.value)}
+            />
+          )}
+
           {/* SET CATEGORY */}
           <label className="addLabel" htmlFor="category">
             Category
