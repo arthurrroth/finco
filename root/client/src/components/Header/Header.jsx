@@ -20,7 +20,7 @@ const Header = ({ searchIsActive, setSearchIsActive, goBack, welcome }) => {
   const [openCardBox, setOpenCardBox] = useState(false);
 
   const [cards, setCards] = useState([]);
-  const [cardTitle, setCardTitle] = useState("");
+  const [findedCard, setFindedCard] = useState({});
 
   const [selectedProfile, setSelectedProfile] = useState(null);
   const [selectedName, setSelectedName] = useState("Name");
@@ -31,20 +31,58 @@ const Header = ({ searchIsActive, setSearchIsActive, goBack, welcome }) => {
     Navigate(-1);
   };
 
-  //! fetch Cards & set default card
+  //! set first selectedCard
   useEffect(() => {
     const fetchData = async () => {
       const { data } = await axios.get("/api/wallet/cards");
       setCards(data);
-      setSelectedCard(data[0].cardNumber);
-      setCardTitle(data[0].cardTitle);
+
+      data.map((card) => {
+        if (card.selectedCard === true) {
+          setSelectedCard(card.cardNumber);
+        }
+      });
     };
     fetchData();
   }, []);
 
-  const handleSelectCard = (id, title) => {
+  //! set new selectedCard
+  useEffect(() => {
+    const fetchData = async () => {
+      const { data } = await axios.get("/api/wallet/cards");
+
+      const findedCard = data.filter(
+        (card) => card.cardNumber === selectedCard
+      );
+      setFindedCard(findedCard);
+    };
+
+    fetchData();
+  }, [selectedCard]);
+
+  //! handle select card
+  const handleSelectCard = async (id) => {
     setSelectedCard(id);
-    setCardTitle(title);
+
+    //! set selectedCard to false
+    try {
+      const setFalse = {
+        selectedCard: false,
+      };
+      const allToFalse = await axios.put("/api/wallet/cards", setFalse);
+    } catch (error) {
+      console.log("set all cards to selectedCard: false ", error);
+    }
+
+    //! set selectedCard to true
+    try {
+      const setTrue = {
+        selectedCard: true,
+      };
+      const setSelectTrue = await axios.put(`/api/wallet/cards/${id}`, setTrue);
+    } catch (error) {
+      console.log("set selectedCard: true ", error);
+    }
   };
 
   return (
@@ -81,6 +119,7 @@ const Header = ({ searchIsActive, setSearchIsActive, goBack, welcome }) => {
                 src={creditCard}
                 alt="credit card logo"
               />
+              {/* OpenCard Box */}
               {openCardBox && (
                 <>
                   <div className="header-overlay"></div>
@@ -89,9 +128,7 @@ const Header = ({ searchIsActive, setSearchIsActive, goBack, welcome }) => {
                       <div className="navCard-list" key={card._id}>
                         <div
                           className="icon-creditCard"
-                          onClick={() =>
-                            handleSelectCard(card.cardNumber, card.cardTitle)
-                          }>
+                          onClick={() => handleSelectCard(card.cardNumber)}>
                           <img
                             className="creditCard-mini"
                             src={creditCard}
@@ -106,7 +143,7 @@ const Header = ({ searchIsActive, setSearchIsActive, goBack, welcome }) => {
                 </>
               )}
             </button>
-            <p>{cardTitle}</p>
+            <p>{findedCard[0]?.cardTitle}</p>
           </div>
         )}
 

@@ -7,7 +7,9 @@ export const createCard = async (
   cardNumber,
   cardTitle,
   cardDescription,
-  cardDesign
+  cardDesign,
+  spendingLimit,
+  selectedCard
 ) => {
   // const user = await User.findOne({ userId: userId });
   // if (!user) throw new Error("No User with this Id");
@@ -19,6 +21,8 @@ export const createCard = async (
     cardTitle,
     cardDescription,
     cardDesign,
+    spendingLimit,
+    selectedCard,
   });
 
   // push card to user

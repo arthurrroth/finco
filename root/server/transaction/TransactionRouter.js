@@ -7,6 +7,7 @@ export const transactionRouter = Router();
 //! get all transactions
 transactionRouter.get("/", async (req, res) => {
   const { category, date, selectedCard } = req.query;
+
   let transactions = await Transaction.find();
   // find card
   if (selectedCard) {
@@ -33,8 +34,9 @@ transactionRouter.get("/", async (req, res) => {
 //! get one transaction by id
 transactionRouter.get("/:id", async (req, res) => {
   const transId = req.params.id;
+
   try {
-    const transaction = await Transaction.findOne({ _id: transId });
+    const transaction = await Transaction.findOne({ cardId: transId });
     res.json(transaction);
   } catch (error) {
     res.status(400).send("error in finding this transaction");

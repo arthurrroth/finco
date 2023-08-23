@@ -31,6 +31,7 @@
 
 .innerOptionDiv {
   display: flex;
+  align-items: center;
 }
 
 .accountOptionImg {
@@ -108,4 +109,13 @@ input:checked + .slider:before {
 .text-link {
   text-decoration: none;
   color: black;
+}
+
+.arrow-down {
+  width: 2rem;
+}
+
+.darkMode-icon {
+  width: 2.5rem;
+  margin-right: 1rem;
 }
