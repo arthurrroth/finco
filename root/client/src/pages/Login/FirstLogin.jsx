@@ -3,12 +3,13 @@ import "./Login.css";
 import { useEffect, useState } from "react";
 import axios from "axios";
 
-const Login = () => {
-  const nav = useNavigate();
+const FirstLogin = () => {
   const status = useOutletContext();
   const location = useLocation();
-  const [email, setEmail] = useState("nux@mail.su");
-  const [password, setPassword] = useState('12345678');
+  const [email, setEmail] = useState();
+  const [password, setPassword] = useState('');
+
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -22,13 +23,23 @@ const Login = () => {
       console.log({ login });
       localStorage.setItem('accessToken', login.data.accessToken);
       localStorage.setItem('refreshToken', login.data.refreshToken);
-      nav("/");
+      navigate('/');
+
     } catch (error) {
       console.log(error);
     }
 
   };
 
+  useEffect(() => {
+
+    try {
+      setEmail(location.state.email);
+    } catch (error) {
+      console.log(error);
+    };
+
+  }, []);
 
   return (
     <div>
@@ -41,15 +52,10 @@ const Login = () => {
           onChange={(e) => setPassword(e.target.value)}
           placeholder="password"
         />
-        <input
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          placeholder="email"
-        />
         <button type="submit">Login</button>
       </form>
 
     </div>);
 };
 
-export default Login;
+export default FirstLogin;

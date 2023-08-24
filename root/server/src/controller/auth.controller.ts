@@ -42,8 +42,10 @@ export const createSessionHandler = async (req: Request<{}, {}, CreateSessionInp
 export const refreshAccessTokenHandler = async (req: Request, res: Response) => {
 
   const refreshToken = get(req, 'headers.x-refresh')
-
-  const decoded = verifyJWT<{ session: string }>(refreshToken, "refreshTokenPublicKey")
+  if (!refreshToken) {
+    return res.send('No refreshToken')
+  }
+  const decoded = verifyJWT<{ session: string }>(refreshToken.toString(), "refreshTokenPublicKey")
 
   if (!decoded) {
     return res.status(401).send("Could not refresh access token");

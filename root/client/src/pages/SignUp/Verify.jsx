@@ -38,7 +38,7 @@ const VerifyEmailPage = () => {
       console.log("VerifyUserID: ", userID);
       const userVerify = await axios.get(`/auth-api/users/verify-user/${userID}/${verifyCode}`);
       if (userVerify.status === 200) {
-        navigate('/login', {
+        navigate('/first-login', {
           state: {
             email: email
           }
