@@ -26,7 +26,7 @@ const NewCard = () => {
     {
       color: "lightseagreen",
     },
-    { color: "lightblue" },
+    { color: "#7637f5" },
     { color: "lightgray" },
   ];
 

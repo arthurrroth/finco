@@ -62,7 +62,7 @@ const MyWallet = () => {
 
   return (
     <>
-      <Header goBack={true} />
+      <Header goBack={true} refresh={refresh} />
 
       <main className="myWallet-main">
         <ul className="cardsList">
