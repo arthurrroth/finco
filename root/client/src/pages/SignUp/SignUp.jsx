@@ -4,12 +4,10 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 const SignUp = () => {
-
-  const [username, setUsername] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [passwordConfirmation, setPasswordConfirmation] = useState('');
-
+  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [passwordConfirmation, setPasswordConfirmation] = useState("");
 
   const navigate = useNavigate();
 
@@ -24,19 +22,17 @@ const SignUp = () => {
     };
 
     try {
-
-      const response = await axios.post('/auth-api/users/create-user', reqBody);
+      const response = await axios.post("/auth-api/users/create-user", reqBody);
       console.log("Preview URL:", response.data.previewURL);
       console.log("UserID:", response.data.userID);
 
-      navigate('/verify-email', {
+      navigate("/verify-email", {
         state: {
           previewURL: response.data.previewURL,
           userID: response.data.userID,
-          email: email
-        }
+          email: email,
+        },
       });
-
     } catch (error) {
       // Handle error
     }
@@ -45,7 +41,9 @@ const SignUp = () => {
   return (
     <div className="signup-wrapper">
       <article className="signup-heading">
-        <h1>SignUp to <span>Finco</span></h1>
+        <h1>
+          SignUp to <span>Finco</span>
+        </h1>
         <h2>Income & Expense Tracking</h2>
       </article>
       <form className="signup-form" onSubmit={handleSubmit}>
@@ -72,9 +70,8 @@ const SignUp = () => {
         />
         <button type="submit">Submit</button>
       </form>
-
     </div>
-  )
+  );
 };
 
 export default SignUp;

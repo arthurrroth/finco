@@ -1,6 +1,6 @@
 import "./Account.css";
 // import methods
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 // import components
 import Nav from "../../components/Nav/Nav.jsx";
@@ -13,13 +13,16 @@ import settingIcon from "../../icon/settings-icon.png";
 import faqIcon from "../../icon/help-circle-icon.png";
 import logoutIcon from "../../icon/log-out-icon.png";
 import openIcon from "../../icon/open.png";
+import arrowDown from "../../icon/down-arrow.png";
+import darkModeIcon from "../../icon/dark-mode.png";
 
 // # delete and change to Profile Picture
-import grayCircle from "../../icon/grayCircle.png";
 import Header from "../../components/Header/Header";
 
 const Account = () => {
   const { openBox, setOpenBox } = useContext(OpenBoxContext);
+
+  const [settingBox, setSettingBox] = useState(false);
 
   useEffect(() => {
     setOpenBox(false);
@@ -54,7 +57,10 @@ const Account = () => {
                 src={notificationIcon}
                 alt="Notification"
               />
-              <h5>Notification</h5>
+              <div>
+                <h5>Notification </h5>
+                <p>(coming soon)</p>
+              </div>
             </div>
             <label className="switch">
               <input type="checkbox" />
@@ -65,7 +71,9 @@ const Account = () => {
           <hr />
 
           {/* Settings */}
-          <div className="accountOptions2">
+          <div
+            onClick={() => setSettingBox((prev) => !prev)}
+            className="accountOptions2">
             <div className="innerOptionDiv">
               <img
                 className="accountOptionImg"
@@ -74,8 +82,32 @@ const Account = () => {
               />
               <h5>Settings</h5>
             </div>
-            <img src={openIcon} alt="open" />
+            {settingBox ? (
+              <img className="arrow-down" src={arrowDown} alt="arrow-down" />
+            ) : (
+              <img src={openIcon} alt="arrow-open" />
+            )}
           </div>
+          {/* Setting Box */}
+          {settingBox && (
+            <div className="accountOptions2">
+              <div className="innerOptionDiv">
+                <img
+                  className="darkMode-icon"
+                  src={darkModeIcon}
+                  alt="Notification"
+                />
+                <div>
+                  <h5>DarkMode</h5>
+                  <p>(coming soon)</p>
+                </div>
+              </div>
+              <label className="switch">
+                <input type="checkbox" />
+                <span className="slider round"></span>
+              </label>
+            </div>
+          )}
 
           <hr />
 

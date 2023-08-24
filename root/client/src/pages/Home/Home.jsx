@@ -8,6 +8,7 @@ import axios from "axios";
 import Nav from "../../components/Nav/Nav.jsx";
 import IncomeExpense from "../../components/IncomeExpense/IncomeExpense";
 import Header from "../../components/Header/Header";
+import Creditcard from "../../components/Creditcard/Creditcard";
 
 // import context
 import {
@@ -17,28 +18,27 @@ import {
 } from "../../context/context";
 
 // import img
-import active from "../../icon/active-icon.png";
-import LogoIcon from "../../icon/Logo-icon.png";
-import GroupIcon from "../../icon/Group-icon.png";
 import DangerIcon from "../../icon/icon-danger.svg";
 import ThreeDot from "../../icon/threedot-icon.svg";
 
 const Home = () => {
-  const { selectedCard } = useContext(SelectedCardContext);
+  const { selectedCard, setSelectedCard } = useContext(SelectedCardContext);
   const { page, setPage } = useContext(PageContext);
   const { setOpenBox } = useContext(OpenBoxContext);
 
   const [income, setIncome] = useState(0);
   const [expenses, setExpenses] = useState(0);
   const [transactions, setTransactions] = useState([]);
-  const [limit, setLimit] = useState(0);
+  const [limit, setLimit] = useState(null);
   const [editLimit, setEditLimit] = useState(false);
 
-  const handleEditLimit = () => {
-    setEditLimit(true);
-  };
+  //! set spendingLimit on card
+  const handleSaveLimit = async () => {
+    const newLimit = {
+      spendingLimit: limit,
+    };
+    const res = await axios.put(`/api/wallet/cards/${selectedCard}`, newLimit);
 
-  const handleSaveLimit = () => {
     setEditLimit(false);
   };
 
@@ -46,24 +46,31 @@ const Home = () => {
     setPage("Home");
     setOpenBox(false);
 
-    //! fetch transactions
-    const fetchData = async () => {
+    //! fetch spendingLimit
+    const fetchLimit = async () => {
       try {
-        const { data } = await axios.get("./api/wallet/transactions", {
+        const { data } = await axios.get(`/api/wallet/cards/${selectedCard}`, {
+          params: { selectedCard },
+        });
+        setLimit(data.spendingLimit);
+      } catch (error) {
+        console.log("fetch limit: ", error);
+      }
+    };
+    fetchLimit();
+
+    //! fetch transactions
+    const fetchTransactions = async () => {
+      try {
+        const { data } = await axios.get("/api/wallet/transactions", {
           params: { selectedCard },
         });
         setTransactions(data);
       } catch (error) {
         console.log("fetch transactions: ", error);
       }
-      try {
-        const { data } = await axios.get("/api/wallet/cards");
-        setCards(data);
-      } catch (error) {
-        console.log("fetch cards: ", error);
-      }
     };
-    fetchData();
+    fetchTransactions();
     let incomeAmount = 0;
     let expenseAmount = 0;
 
@@ -75,54 +82,55 @@ const Home = () => {
     <>
       <Header welcome={true} />
 
-      <div className="creditcard">
-        <img className="cc-logo" src={LogoIcon} alt="" />
-        <img className="activeCardImg" src={active} alt="active" />
-        <div className="inner-creditcard">
-          <h5>Credit Card</h5>
-          <p>**** 1289</p>
+      <main className="home-main">
+        {selectedCard && <Creditcard />}
+
+        <div className="wallet">
+          <h3>Total Wallet</h3>
         </div>
-        <div className="bottom-creditcard">
-          <img src={GroupIcon} alt="" />
-          <p>09/25</p>
-        </div>
-      </div>
-      <div className="wallet">
-        <h3>Total Wallet</h3>
-      </div>
-      <article className="income-expense">
-        <IncomeExpense sortAmount={"income"} transaction={transactions} />
-        <IncomeExpense sortAmount={"expense"} transaction={transactions} />
-      </article>
-      <article className="monthly-spending">
-        <div className="danger-icon">
-          <img src={DangerIcon} alt="" />
-        </div>
-        <div className="limit">
-          <p>Monthly spending limit</p>
+        <article className="income-expense">
+          <IncomeExpense sortAmount={"income"} transaction={transactions} />
+          <IncomeExpense sortAmount={"expense"} transaction={transactions} />
+        </article>
+        <article className="monthly-spending">
+          <div className="danger-icon">
+            <img src={DangerIcon} alt="" />
+          </div>
+          <div className="limit">
+            <p>Spending limit</p>
+            {editLimit ? (
+              <input
+                className="setLimit-input"
+                type="number"
+                value={limit}
+                onChange={(e) => setLimit(e.target.value)}
+                placeholder="€"
+              />
+            ) : (
+              <h3>{limit} €</h3>
+            )}
+          </div>
           {editLimit ? (
-            <input
-              type="number"
-              value={limit}
-              onChange={(e) => setLimit(e.target.value)}
-            />
+            <div className="editLimit-btn">
+              <button className="save-button" onClick={handleSaveLimit}>
+                Save
+              </button>
+              <button
+                className="limitReset-btn"
+                onClick={() => setEditLimit(false)}>
+                X
+              </button>
+            </div>
           ) : (
-            <h3>${limit}</h3>
+            <img
+              src={ThreeDot}
+              alt=""
+              onClick={() => setEditLimit(true)}
+              className="edit-icon"
+            />
           )}
-        </div>
-        {editLimit ? (
-          <button className="save-button" onClick={handleSaveLimit}>
-            Save
-          </button>
-        ) : (
-          <img
-            src={ThreeDot}
-            alt=""
-            onClick={handleEditLimit}
-            className="edit-icon"
-          />
-        )}
-      </article>
+        </article>
+      </main>
       <Nav page={page} />
     </>
   );

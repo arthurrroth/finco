@@ -6,27 +6,25 @@ import axios from "axios";
 const Login = () => {
   const nav = useNavigate();
   const [email, setEmail] = useState("nux@mail.su");
-  const [password, setPassword] = useState('12345678');
+  const [password, setPassword] = useState("12345678");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     const reqBody = {
       email: email,
-      password: password
+      password: password,
     };
 
     try {
-      const login = await axios.post('/auth-api/sessions', reqBody)
+      const login = await axios.post("/auth-api/sessions", reqBody);
       console.log({ login });
-      localStorage.setItem('accessToken', login.data.accessToken);
-      localStorage.setItem('refreshToken', login.data.refreshToken);
+      localStorage.setItem("accessToken", login.data.accessToken);
+      localStorage.setItem("refreshToken", login.data.refreshToken);
       nav("/");
     } catch (error) {
       console.log(error);
     }
-
   };
-
 
   return (
     <div>
@@ -46,8 +44,8 @@ const Login = () => {
         />
         <button type="submit">Login</button>
       </form>
-
-    </div>);
+    </div>
+  );
 };
 
 export default Login;
