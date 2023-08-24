@@ -26,18 +26,23 @@ const Home = () => {
   const { page, setPage } = useContext(PageContext);
   const { setOpenBox } = useContext(OpenBoxContext);
 
-  const [yourCard, setYourCard] = useState();
   const [income, setIncome] = useState(0);
   const [expenses, setExpenses] = useState(0);
   const [transactions, setTransactions] = useState([]);
-  const [limit, setLimit] = useState(0);
+  const [limit, setLimit] = useState(null);
   const [editLimit, setEditLimit] = useState(false);
 
   const handleEditLimit = () => {
     setEditLimit(true);
   };
 
-  const handleSaveLimit = () => {
+  //! set spendingLimit on card
+  const handleSaveLimit = async () => {
+    const newLimit = {
+      spendingLimit: limit,
+    };
+    const res = await axios.put(`/api/wallet/cards/${selectedCard}`, newLimit);
+
     setEditLimit(false);
   };
 
@@ -45,10 +50,23 @@ const Home = () => {
     setPage("Home");
     setOpenBox(false);
 
+    //! fetch spendingLimit
+    const fetchLimit = async () => {
+      try {
+        const { data } = await axios.get(`/api/wallet/cards/${selectedCard}`, {
+          params: { selectedCard },
+        });
+        setLimit(data.spendingLimit);
+      } catch (error) {
+        console.log("fetch limit: ", error);
+      }
+    };
+    fetchLimit();
+
     //! fetch transactions
     const fetchTransactions = async () => {
       try {
-        const { data } = await axios.get("./api/wallet/transactions", {
+        const { data } = await axios.get("/api/wallet/transactions", {
           params: { selectedCard },
         });
         setTransactions(data);
@@ -82,21 +100,30 @@ const Home = () => {
           <img src={DangerIcon} alt="" />
         </div>
         <div className="limit">
-          <p>Monthly spending limit</p>
+          <p>Spending limit</p>
           {editLimit ? (
             <input
+              className="setLimit-input"
               type="number"
               value={limit}
               onChange={(e) => setLimit(e.target.value)}
+              placeholder="€"
             />
           ) : (
-            <h3>${limit}</h3>
+            <h3>{limit} €</h3>
           )}
         </div>
         {editLimit ? (
-          <button className="save-button" onClick={handleSaveLimit}>
-            Save
-          </button>
+          <div className="editLimit-btn">
+            <button className="save-button" onClick={handleSaveLimit}>
+              Save
+            </button>
+            <button
+              className="limitReset-btn"
+              onClick={() => setEditLimit(false)}>
+              X
+            </button>
+          </div>
         ) : (
           <img
             src={ThreeDot}

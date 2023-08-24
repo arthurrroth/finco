@@ -15,7 +15,9 @@ import ellipse2 from "../../icon/Ellipse-2.png";
 
 const Creditcard = ({ card }) => {
   const { selectedCard } = useContext(SelectedCardContext);
+
   const [yourCard, setYourCard] = useState({});
+  const [isActive, setIsActive] = useState();
 
   useEffect(() => {
     if (selectedCard) {
@@ -25,6 +27,12 @@ const Creditcard = ({ card }) => {
       };
       fetchData();
     }
+
+    if (card?.cardNumber === selectedCard) {
+      setIsActive(true);
+    } else {
+      setIsActive(false);
+    }
   }, [selectedCard]);
 
   return (
@@ -33,13 +41,16 @@ const Creditcard = ({ card }) => {
         className="creditcard"
         style={
           card
-            ? { backgroundColor: card.cardDesign }
+            ? { backgroundColor: card?.cardDesign }
             : { backgroundColor: yourCard.cardDesign }
         }>
         <img className="ellipse1" src={ellipse1} alt="background" />
         <img className="ellipse2" src={ellipse2} alt="background" />
         <img className="cc-logo" src={LogoIcon} alt="credit card" />
-        <img className="activeCardImg" src={active} alt="active" />
+        {isActive && (
+          <img className="activeCardImg" src={active} alt="active" />
+        )}
+
         <div className="inner-creditcard">
           {card ? (
             <>
@@ -52,7 +63,7 @@ const Creditcard = ({ card }) => {
             <>
               {yourCard && yourCard.cardNumber && (
                 <>
-                  <p className="creditcardTitle">{yourCard?.cardTitle}</p>
+                  <p className="creditcardTitle">{yourCard.cardTitle}</p>
                   <h5 className="creditcardNumber">
                     ****{yourCard?.cardNumber.slice(-3)}
                   </h5>

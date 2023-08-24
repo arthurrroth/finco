@@ -20,7 +20,7 @@ const OneCard = ({ cards, card, setRefresh }) => {
 
   //! delete card
   const handleDelete = async () => {
-    if (cards.length === 1) {
+    if (card.selectedCard) {
       setAlertText(true);
     } else
       try {
@@ -112,7 +112,6 @@ const OneCard = ({ cards, card, setRefresh }) => {
       </div>
 
       {/* DELETE BTN & DELETE BOX */}
-
       <button className="cardDeleteBtn" onClick={handleQuestionDelete}>
         Delete Card
       </button>
@@ -122,7 +121,9 @@ const OneCard = ({ cards, card, setRefresh }) => {
           <div className="delete-overlay"></div>
           <div className="questionDelete-box">
             {alertText ? (
-              <p className="alert-text">You can not delete your only card!</p>
+              <p className="alert-text">
+                You can not delete your selected card!
+              </p>
             ) : deleteSuccessful ? (
               <p>Your card was successfully deleted!</p>
             ) : (

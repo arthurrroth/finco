@@ -24,6 +24,14 @@ const CardSchema = new Schema({
     type: String,
     required: true,
   },
+  spendingLimit: {
+    type: Number,
+    default: 0,
+  },
+  selectedCard: {
+    type: Boolean,
+    default: false,
+  },
   transactions: [{ type: Schema.Types.ObjectId, ref: "Transaction" }],
 });
 
