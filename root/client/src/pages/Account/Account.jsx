@@ -57,7 +57,10 @@ const Account = () => {
                 src={notificationIcon}
                 alt="Notification"
               />
-              <h5>Notification</h5>
+              <div>
+                <h5>Notification </h5>
+                <p>(coming soon)</p>
+              </div>
             </div>
             <label className="switch">
               <input type="checkbox" />
@@ -94,7 +97,10 @@ const Account = () => {
                   src={darkModeIcon}
                   alt="Notification"
                 />
-                <h5>DarkMode</h5>
+                <div>
+                  <h5>DarkMode</h5>
+                  <p>(coming soon)</p>
+                </div>
               </div>
               <label className="switch">
                 <input type="checkbox" />

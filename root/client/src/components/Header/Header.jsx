@@ -14,7 +14,13 @@ import { useContext, useEffect, useState } from "react";
 // import context
 import { SelectedCardContext } from "../../context/context";
 
-const Header = ({ searchIsActive, setSearchIsActive, goBack, welcome }) => {
+const Header = ({
+  searchIsActive,
+  setSearchIsActive,
+  goBack,
+  welcome,
+  refresh,
+}) => {
   const { selectedCard, setSelectedCard } = useContext(SelectedCardContext);
 
   const [openCardBox, setOpenCardBox] = useState(false);
@@ -44,7 +50,7 @@ const Header = ({ searchIsActive, setSearchIsActive, goBack, welcome }) => {
       });
     };
     fetchData();
-  }, []);
+  }, [refresh]);
 
   //! set new selectedCard
   useEffect(() => {
