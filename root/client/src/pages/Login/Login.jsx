@@ -5,8 +5,6 @@ import axios from "axios";
 
 const Login = () => {
   const nav = useNavigate();
-  const status = useOutletContext();
-  const location = useLocation();
   const [email, setEmail] = useState("nux@mail.su");
   const [password, setPassword] = useState('12345678');
 
