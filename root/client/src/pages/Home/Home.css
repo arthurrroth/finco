@@ -1,3 +1,7 @@
+.home-main {
+  height: 100%;
+}
+
 .bottom-creditcard {
   display: flex;
   justify-content: space-between;

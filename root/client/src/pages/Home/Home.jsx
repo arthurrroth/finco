@@ -32,10 +32,6 @@ const Home = () => {
   const [limit, setLimit] = useState(null);
   const [editLimit, setEditLimit] = useState(false);
 
-  const handleEditLimit = () => {
-    setEditLimit(true);
-  };
-
   //! set spendingLimit on card
   const handleSaveLimit = async () => {
     const newLimit = {
@@ -86,53 +82,55 @@ const Home = () => {
     <>
       <Header welcome={true} />
 
-      {selectedCard && <Creditcard />}
+      <main className="home-main">
+        {selectedCard && <Creditcard />}
 
-      <div className="wallet">
-        <h3>Total Wallet</h3>
-      </div>
-      <article className="income-expense">
-        <IncomeExpense sortAmount={"income"} transaction={transactions} />
-        <IncomeExpense sortAmount={"expense"} transaction={transactions} />
-      </article>
-      <article className="monthly-spending">
-        <div className="danger-icon">
-          <img src={DangerIcon} alt="" />
+        <div className="wallet">
+          <h3>Total Wallet</h3>
         </div>
-        <div className="limit">
-          <p>Spending limit</p>
-          {editLimit ? (
-            <input
-              className="setLimit-input"
-              type="number"
-              value={limit}
-              onChange={(e) => setLimit(e.target.value)}
-              placeholder="€"
-            />
-          ) : (
-            <h3>{limit} €</h3>
-          )}
-        </div>
-        {editLimit ? (
-          <div className="editLimit-btn">
-            <button className="save-button" onClick={handleSaveLimit}>
-              Save
-            </button>
-            <button
-              className="limitReset-btn"
-              onClick={() => setEditLimit(false)}>
-              X
-            </button>
+        <article className="income-expense">
+          <IncomeExpense sortAmount={"income"} transaction={transactions} />
+          <IncomeExpense sortAmount={"expense"} transaction={transactions} />
+        </article>
+        <article className="monthly-spending">
+          <div className="danger-icon">
+            <img src={DangerIcon} alt="" />
           </div>
-        ) : (
-          <img
-            src={ThreeDot}
-            alt=""
-            onClick={handleEditLimit}
-            className="edit-icon"
-          />
-        )}
-      </article>
+          <div className="limit">
+            <p>Spending limit</p>
+            {editLimit ? (
+              <input
+                className="setLimit-input"
+                type="number"
+                value={limit}
+                onChange={(e) => setLimit(e.target.value)}
+                placeholder="€"
+              />
+            ) : (
+              <h3>{limit} €</h3>
+            )}
+          </div>
+          {editLimit ? (
+            <div className="editLimit-btn">
+              <button className="save-button" onClick={handleSaveLimit}>
+                Save
+              </button>
+              <button
+                className="limitReset-btn"
+                onClick={() => setEditLimit(false)}>
+                X
+              </button>
+            </div>
+          ) : (
+            <img
+              src={ThreeDot}
+              alt=""
+              onClick={() => setEditLimit(true)}
+              className="edit-icon"
+            />
+          )}
+        </article>
+      </main>
       <Nav page={page} />
     </>
   );
