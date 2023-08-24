@@ -6,6 +6,7 @@ import axios from "axios";
 
 // import components
 import Header from "../Header/Header";
+import CreditCard from "../Creditcard/Creditcard";
 
 // import context
 import { SelectedCardContext } from "../../context/context";
@@ -93,27 +94,10 @@ const AddTransaction = ({ page }) => {
           </span>
         </h2>
 
+        <CreditCard />
+
         {/* ADD TRANSACTION */}
         <form className="addForm" onSubmit={addTransaction}>
-          {/* SET CARD */}
-          <label className="addLabel" htmlFor="card">
-            Card
-          </label>
-          <div className="addCustomSelect">
-            <select
-              required
-              name="card"
-              id="card"
-              onChange={(e) => setSelectedCard(e.target.value)}>
-              {cards?.map((card) => (
-                <option key={card._id} value={card.cardNumber}>
-                  {card.cardTitle}
-                </option>
-              ))}
-            </select>
-            <img src={selectImg} alt="select" />
-          </div>
-
           {/* SET AMOUNT */}
           <label className="addLabel" htmlFor="amount">
             Amount
