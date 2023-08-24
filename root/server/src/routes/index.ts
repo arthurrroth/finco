@@ -6,8 +6,8 @@ import fincoRouter from "./finco.routes.ts";
 
 const router = express.Router();
 
-router.get('/healthcheck', (_, res: Response) => {
-  log.info('Router is running! 🧭')
+router.get("/auth-api/healthcheck", (_, res: Response) => {
+  log.info("Router is running! 🧭");
   res.sendStatus(200);
 });
 
