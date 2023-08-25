@@ -41,7 +41,7 @@ const Onboard1 = () => {
             Track your spend <br /> and income
           </h2>
           <p className="onboardText">
-          Always keep an eye on your expenses and income.
+           Always keep an eye on your expenses and income, so you can react on problems instantly.
           </p>
           <div className="onboardBtnDiv">
             <NavLink to={"/signUp"} className="skip">
