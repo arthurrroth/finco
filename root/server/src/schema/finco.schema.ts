@@ -14,6 +14,11 @@ export const cardCreationSchema = z.object({
     }),
     cardTitle: z.union([z.string(), z.undefined()]),
     cardDescription: z.union([z.string(), z.undefined()]),
+    cardDesign: z.string({
+      required_error: 'A Card Design is required'
+    }),
+    spendingLimit: z.union([z.number(), z.undefined()])
+
   }),
 
 });

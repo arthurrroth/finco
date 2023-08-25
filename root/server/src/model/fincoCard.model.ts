@@ -21,16 +21,28 @@ export class Card {
   @prop({ required: true, unique: true })
   cardNumber: string;
 
-  @prop({ required: true, default: 'Default Account' })
+  @prop({ required: true })
   cardTitle: string;
 
-  @prop({ required: false, default: 'Track your income and expenses!' })
+  @prop({ required: false })
   cardDescription: string;
+
+  @prop({ required: true })
+  cardDesign: string;
+
+  @prop({ required: false })
+  spendingLimit: number;
 
   @prop({ required: true, default: [] })
   transactions: Transaction[];
 
-  constructor(user: DocumentType<UserAcc>, number: string, title: string | undefined, desc: string | undefined) {
+  constructor(
+    user: DocumentType<UserAcc>,
+    number: string,
+    title: string | undefined,
+    desc: string | undefined,
+    cardDesign: string,
+    spendingLimit: number | undefined) {
 
     if (!desc) {
       this.cardDescription = 'Track your income and expenses!';
@@ -42,10 +54,17 @@ export class Card {
       this.cardTitle = `${user.displayName}'s Account`;
     } else {
       this.cardTitle = title;
+    };
+
+    if (!spendingLimit) {
+      this.spendingLimit = 0;
+    } else {
+      this.spendingLimit = spendingLimit;
     }
 
     this.refUserAcc = user._id;
     this.cardNumber = number;
+    this.cardDesign = cardDesign;
   }
 };
 
