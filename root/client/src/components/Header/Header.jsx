@@ -20,6 +20,7 @@ const Header = ({
   goBack,
   welcome,
   refresh,
+  setup,
 }) => {
   const { selectedCard, setSelectedCard } = useContext(SelectedCardContext);
 
@@ -107,6 +108,8 @@ const Header = ({
           <h5 className="heading">Welcome Back</h5>
           <h2>{selectedName}</h2>
         </div>
+      ) : setup ? (
+        <img className="headerLogo" src={logo} alt="logo" />
       ) : (
         <NavLink to={"/"}>
           <img className="headerLogo" src={logo} alt="logo" />
@@ -114,58 +117,60 @@ const Header = ({
       )}
 
       {/* CARD */}
-      <div className="card-profile">
-        {/* {selectedCard && ( */}
-        <div className="card-btn">
-          <button
-            onClick={() => setOpenCardBox((prev) => !prev)}
-            className="btn-hidden">
-            <img
-              className="creditCard-icon"
-              src={creditCard}
-              alt="credit card logo"
-            />
-            {/* OpenCard Box */}
-            {openCardBox && (
-              <>
-                <div className="header-overlay"></div>
-                <div className="cardBox">
-                  {cards?.map((card) => (
-                    <div className="navCard-list" key={card._id}>
-                      <div
-                        className="icon-creditCard"
-                        onClick={() => handleSelectCard(card.cardNumber)}>
-                        <img
-                          className="creditCard-mini"
-                          src={creditCard}
-                          alt="credit-card"
-                        />
-                        <p>{card.cardTitle}</p>
-                      </div>
-                      <div className="navCard-separator"></div>
+      {setup ? null : (
+        <>
+          <div className="card-profile">
+            <div className="card-btn">
+              <button
+                onClick={() => setOpenCardBox((prev) => !prev)}
+                className="btn-hidden">
+                <img
+                  className="creditCard-icon"
+                  src={creditCard}
+                  alt="credit card logo"
+                />
+                {/* OpenCard Box */}
+                {openCardBox && (
+                  <>
+                    <div className="header-overlay"></div>
+                    <div className="cardBox">
+                      {cards?.map((card) => (
+                        <div className="navCard-list" key={card._id}>
+                          <div
+                            className="icon-creditCard"
+                            onClick={() => handleSelectCard(card.cardNumber)}>
+                            <img
+                              className="creditCard-mini"
+                              src={creditCard}
+                              alt="credit-card"
+                            />
+                            <p>{card.cardTitle}</p>
+                          </div>
+                          <div className="navCard-separator"></div>
+                        </div>
+                      ))}
                     </div>
-                  ))}
-                </div>
-              </>
-            )}
-          </button>
-          <p>{findedCard[0]?.cardTitle}</p>
-        </div>
-        {/* )} */}
+                  </>
+                )}
+              </button>
+              <p>{findedCard[0]?.cardTitle}</p>
+            </div>
 
-        {/* PROFILE */}
-        <NavLink className="profile-img" to={"/account"}>
-          {selectedProfile ? (
-            <img src="" alt="profile-img" className="selectedProfile-img" />
-          ) : (
-            <img
-              className="defaultProfile-img"
-              src={profile}
-              alt="default-profile-img"
-            />
-          )}
-        </NavLink>
-      </div>
+            {/* PROFILE */}
+            <NavLink className="profile-img" to={"/account"}>
+              {selectedProfile ? (
+                <img src="" alt="profile-img" className="selectedProfile-img" />
+              ) : (
+                <img
+                  className="defaultProfile-img"
+                  src={profile}
+                  alt="default-profile-img"
+                />
+              )}
+            </NavLink>
+          </div>
+        </>
+      )}
     </header>
   );
 };

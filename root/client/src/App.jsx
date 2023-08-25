@@ -1,7 +1,9 @@
 import "./App.css";
+
 // import methods
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { useState } from "react";
+
 // import pages
 import Onboard1 from "./pages/Onboard1/Onboard1.jsx";
 import Onboard2 from "./pages/Onboard2/Onboard2.jsx";
@@ -16,6 +18,8 @@ import Account from "./pages/Account/Account.jsx";
 import FAQ from "./pages/FAQ/FAQ";
 import MyWallet from "./pages/MyWallet/MyWallet";
 import NewCard from "./pages/NewCard/NewCard";
+import AccountSetup from "./pages/AccountSetup/AccountSetup";
+
 // import context
 import {
   OpenBoxContext,
@@ -45,6 +49,7 @@ function App() {
                 <Route path="/account" element={<Account />} />
                 <Route path="/onboard1" element={<Onboard1 />} />
                 <Route path="/onboard2" element={<Onboard2 />} />
+                <Route path="/account-setup" element={<AccountSetup />} />
                 <Route path="/faq" element={<FAQ />} />
                 <Route path="/mywallet" element={<MyWallet />} />
                 <Route path="/newcard" element={<NewCard />} />
