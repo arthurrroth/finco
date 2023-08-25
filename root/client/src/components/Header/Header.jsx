@@ -38,7 +38,7 @@ const Header = ({
     Navigate(-1);
   };
 
-  //! set first selectedCard
+  //! set selectedCard
   useEffect(() => {
     const fetchData = async () => {
       const { data } = await axios.get("/api/wallet/cards");

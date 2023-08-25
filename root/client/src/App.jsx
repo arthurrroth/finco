@@ -19,6 +19,8 @@ import FAQ from "./pages/FAQ/FAQ";
 import MyWallet from "./pages/MyWallet/MyWallet";
 import NewCard from "./pages/NewCard/NewCard";
 import AccountSetup from "./pages/AccountSetup/AccountSetup";
+import ForgotPassword from "./pages/ForgotPassword/ForgotPassword";
+import VerifyEmailPage from "./pages/VerifyEmailPage/VerifyEmailPage";
 
 // import context
 import {
@@ -41,7 +43,9 @@ function App() {
               <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="/signUp" element={<SignUp />} />
+                <Route path="/verify-email" element={<VerifyEmailPage />} />
                 <Route path="/login" element={<Login />} />
+                <Route path="/forgot-password" element={<ForgotPassword />} />
                 <Route path="/transaction" element={<Transaction />} />
                 <Route path="/addincome" element={<AddIncome />} />
                 <Route path="/addexpenses" element={<AddExpenses />} />

@@ -13,6 +13,10 @@
   gap: 1rem;
 }
 
+.login-main h1 {
+  text-align: center;
+}
+
 .login-main p {
   text-align: center;
   width: 90%;
