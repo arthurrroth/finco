@@ -3,6 +3,7 @@ import "./App.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { useState } from "react";
 // import pages
+import VerifyEmailPage from "./pages/SignUp/Verify";
 import Onboard1 from "./pages/Onboard1/Onboard1.jsx";
 import Onboard2 from "./pages/Onboard2/Onboard2.jsx";
 import SignUp from "./pages/SignUp/SignUp.jsx";
@@ -22,6 +23,8 @@ import {
   PageContext,
   SelectedCardContext,
 } from "../src/context/context.jsx";
+import PrivateRoute from "./components/utils/PrivateRoute";
+import FirstLogin from "./pages/Login/FirstLogin";
 
 function App() {
   const [page, setPage] = useState("");
@@ -35,7 +38,11 @@ function App() {
           <PageContext.Provider value={{ page, setPage }}>
             <BrowserRouter>
               <Routes>
-                <Route path="/" element={<Home />} />
+                <Route path="/" element={<PrivateRoute />}>
+                  <Route path="/" element={<Home />} />
+                </Route>
+                <Route path="/first-login" element={<FirstLogin />} />
+                <Route path="/verify-email" element={<VerifyEmailPage />} />
                 <Route path="/signUp" element={<SignUp />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/transaction" element={<Transaction />} />

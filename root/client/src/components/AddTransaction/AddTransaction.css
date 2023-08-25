@@ -13,11 +13,11 @@
   margin-bottom: 2rem;
 }
 
-.incomePage .addIncomeExpenseH2 {
+.incomeHeadline {
   color: var(--text-color-blue);
 }
 
-.expensesPage .addIncomeExpenseH2 {
+.expenseHeadline {
   color: var(--text-color-yellow);
 }
 

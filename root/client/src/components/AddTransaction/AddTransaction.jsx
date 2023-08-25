@@ -88,7 +88,8 @@ const AddTransaction = ({ page }) => {
       <Header goBack={true} />
 
       <main className="addTransactionMain">
-        <h2 className="addTransactionH2">
+        <h2
+          className={page === "income" ? "incomeHeadline" : "expenseHeadline"}>
           <span className="addIncomeExpenseH2">
             Add {page === "income" ? "Income" : "Expense"}
           </span>

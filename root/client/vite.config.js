@@ -7,7 +7,8 @@ export default defineConfig({
   server: {
     port: 6001,
     proxy: {
-      "/api": { target: "http://localhost:3000" },
+      "/auth-api": { target: "http://localhost:3002" },
+      "/finco": { target: "http://localhost:3002" }
     },
   },
 });

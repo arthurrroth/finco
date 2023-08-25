@@ -42,7 +42,10 @@ const Reports = () => {
         const { data } = await axios.get("./api/wallet/transactions", {
           params: { selectedCard },
         });
-        setTransactions(data);
+        const sortedData = data.sort((a, b) => {
+          return new Date(b.date) - new Date(a.date);
+        });
+        setTransactions(sortedData);
         handleDataforGraph(data);
       } catch (error) {
         console.log({ fetchData: error });
@@ -75,7 +78,10 @@ const Reports = () => {
       }
       return newArray;
     }, []);
-    setDataForGraph(formatData);
+    const sortedFormData = formatData.sort((a, b) => {
+      return new Date(a.date) - new Date(b.date);
+    });
+    setDataForGraph(sortedFormData);
   };
 
   return (
@@ -98,7 +104,6 @@ const Reports = () => {
             <XAxis dataKey="date"></XAxis>
             <YAxis></YAxis>
             <Tooltip></Tooltip>
-            {/* <Legend></Legend> */}
             <Area
               type="monotone"
               dataKey="income"
