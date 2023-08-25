@@ -1,0 +1,25 @@
+.accountSetup-main {
+  display: flex;
+  flex-direction: column;
+  padding: 0 var(--main-padding);
+  gap: 2rem;
+}
+
+.accountSetup-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.accountSetup-section {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+.accountSetup-section input {
+  width: 100%;
+  padding: 2rem;
+}
