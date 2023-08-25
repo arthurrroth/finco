@@ -12,9 +12,10 @@ export const createCardHandler = async (
   res: Response
 ) => {
   const { accId } = req.params;
-  const { cardTitle, cardNumber, cardDescription } = req.body;
+  const { cardTitle, cardNumber, cardDescription, cardDesign, spendingLimit } = req.body;
 
   try {
+
     const acc = await findAccById(accId);
 
     log.info(acc)
@@ -23,7 +24,7 @@ export const createCardHandler = async (
       return res.status(404).json({ error: "User account not found" });
     }
 
-    const card = new Card(acc, cardNumber, cardTitle, cardDescription);
+    const card = new Card(acc, cardNumber, cardTitle, cardDescription, cardDesign, spendingLimit);
     await CardModel.create(card);
 
     acc.Wallet.push(card);

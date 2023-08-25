@@ -89,13 +89,13 @@ export const forgotPasswordHandler = async (req: Request<{}, {}, ForgotPasswordI
 
   await user.save();
 
-  await sendMailx({
+  const resetPassMail = await sendMailx({
     to: user.email,
     from: 'test@example.com',
     subject: 'Reset your password',
     text: `Password reset code: ${passwordResetCode} for Account with id ${user.id}`,
   });
-
+  log.info(resetPassMail);
   log.debug(`Password Reset Code sent to ${user.email}`)
   return res.send(message);
 };

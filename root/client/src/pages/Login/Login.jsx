@@ -1,6 +1,6 @@
-import { useLocation, useNavigate, useOutletContext } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import "./Login.css";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import axios from "axios";
 
 const Login = () => {
@@ -16,11 +16,13 @@ const Login = () => {
     };
 
     try {
+
       const login = await axios.post('/auth-api/sessions', reqBody)
       console.log({ login });
       localStorage.setItem('accessToken', login.data.accessToken);
       localStorage.setItem('refreshToken', login.data.refreshToken);
       nav("/");
+
     } catch (error) {
       console.log(error);
     }
