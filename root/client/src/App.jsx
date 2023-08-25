@@ -28,6 +28,7 @@ import {
   PageContext,
   SelectedCardContext,
 } from "../src/context/context.jsx";
+import FirstLogin from "./pages/FirstLogin/FirstLogin";
 
 function App() {
   const [page, setPage] = useState("");
@@ -57,6 +58,7 @@ function App() {
                 <Route path="/faq" element={<FAQ />} />
                 <Route path="/mywallet" element={<MyWallet />} />
                 <Route path="/newcard" element={<NewCard />} />
+                <Route path="/first-login" element={<FirstLogin />} />
               </Routes>
             </BrowserRouter>
           </PageContext.Provider>
