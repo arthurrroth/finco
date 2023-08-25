@@ -1,0 +1,59 @@
+.reportsHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 5rem var(--main-padding);
+}
+
+.reportMain {
+  margin: var(--main-padding);
+  margin-bottom: 8rem;
+}
+
+.loadMoreBtn {
+  width: 100%;
+  color: var(--text-color-black);
+  text-align: center;
+  font-size: 1.8rem;
+  font-weight: 600;
+  background: none;
+  border: none;
+  margin: 2rem 0;
+}
+
+.areaChart {
+  width: 90%;
+  display: flex;
+  justify-content: center;
+  padding: 2rem 0;
+}
+
+.beginningCurrentSection {
+  display: flex;
+}
+
+.beginningCurrentDiv {
+  display: flex;
+  padding: 2rem;
+  background-color: var(--background-lightgrey);
+  border-radius: 36px;
+  margin-bottom: 2rem;
+}
+
+.reportP {
+  font-size: 1.2rem;
+}
+
+.reportBeginningCurrentP {
+  font-weight: 600;
+}
+
+.reportHeading {
+  margin-bottom: 2rem;
+  padding-left: 1rem;
+}
+
+.reportH4 {
+  padding-left: 2.2rem;
+  font-size: 2.4rem;
+}

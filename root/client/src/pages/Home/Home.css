@@ -1,0 +1,52 @@
+.bottom-creditcard {
+  display: flex;
+  justify-content: space-between;
+  margin: 10px 15px;
+}
+
+.wallet {
+  margin: 25px;
+}
+
+.monthly-spending {
+  background-color: #f7f7f7;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 80%;
+  margin: 3rem auto;
+  padding: 1rem 1rem;
+  border-radius: 40px;
+  text-align: center;
+}
+
+.save-button {
+  border: none;
+  border-radius: 15px;
+  padding: 0.5rem 1rem;
+  color: #ffffff;
+  background: linear-gradient(
+    180deg,
+    rgba(68, 187, 254, 1) 35%,
+    rgba(30, 120, 254, 1) 100%
+  );
+}
+
+.setLimit-input {
+  border-radius: 15px;
+  height: 3rem;
+  padding: 1rem;
+  width: 80%;
+  text-align: center;
+  font-size: 1.8rem;
+}
+
+.editLimit-btn {
+  display: flex;
+  gap: 2rem;
+}
+
+.limitReset-btn {
+  padding: 0.7rem 1rem;
+  border-radius: 100%;
+}

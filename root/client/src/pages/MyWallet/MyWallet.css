@@ -1,0 +1,46 @@
+.myWallet-main {
+  width: 100vw;
+  margin-bottom: 12rem;
+}
+
+.cardsList {
+  display: flex;
+  overflow-x: scroll;
+  scroll-snap-type: x mandatory;
+  list-style: none;
+}
+
+.paddle {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 3.5rem;
+  background: none;
+  border: none;
+}
+.left-paddle {
+  left: 0;
+}
+.right-paddle {
+  right: 0;
+}
+.hidden {
+  display: none;
+}
+
+.blueBtn {
+  width: 60%;
+  margin: auto;
+  background: linear-gradient(0deg, #1e78fe, #44bbfe);
+  border: none;
+  border-radius: 20rem;
+  padding: 2rem 4rem;
+  color: var(--text-color-white);
+  font-size: 1.8rem;
+  font-weight: 500;
+  text-decoration: none;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

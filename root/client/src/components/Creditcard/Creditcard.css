@@ -1,0 +1,38 @@
+.cc-logo {
+  margin: 15px 0 15px 15px;
+}
+
+.creditcard {
+  width: 32.8rem;
+  height: 18.9rem;
+  margin: 0 auto;
+  margin-top: 15px;
+  border-radius: 10px;
+  position: relative;
+  z-index: -2;
+}
+
+.activeCardImg {
+  position: absolute;
+  top: -27px;
+  right: -20px;
+  z-index: 20;
+}
+
+.inner-creditcard {
+  margin: 5px 20px 20px 20px;
+}
+
+.ellipse1 {
+  z-index: -1;
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+.ellipse2 {
+  z-index: -1;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+}

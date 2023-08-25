@@ -1,0 +1,112 @@
+.addTransactionHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 5rem var(--main-padding);
+}
+
+.addTransactionMain {
+  margin: var(--main-padding);
+}
+
+.addTransactionH2 {
+  margin-bottom: 2rem;
+}
+
+.incomeHeadline {
+  color: var(--text-color-blue);
+}
+
+.expenseHeadline {
+  color: var(--text-color-yellow);
+}
+
+.addForm {
+  display: flex;
+  flex-direction: column;
+  margin-top: 2rem;
+}
+
+.addLabel {
+  color: var(--text-color-black);
+  margin-bottom: 1rem;
+  margin-left: 1.5rem;
+  font-size: 1.6rem;
+  font-weight: 500;
+}
+
+.addInput {
+  padding: 2rem;
+  border: none;
+  background-color: var(--background-lightgrey);
+  border-radius: 36px;
+  font-size: 1.4rem;
+  font-family: "Urbanist", Inter, system-ui, Avenir, Helvetica, Arial,
+    sans-serif;
+  margin-bottom: 2rem;
+}
+
+.addCustomSelect {
+  padding: 2rem;
+  border: none;
+  background-color: var(--background-lightgrey);
+  border-radius: 36px;
+  margin-bottom: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.addCustomSelect select {
+  font-family: "Urbanist", Inter, system-ui, Avenir, Helvetica, Arial,
+    sans-serif;
+  font-size: 1.4rem;
+  border: none;
+  width: 100%;
+  background: transparent;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.dateTimeSection {
+  display: flex;
+  justify-content: space-between;
+}
+
+.dateTimeDiv {
+  width: 48%;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.customDateTimeInput {
+  padding: 2rem;
+  border: none;
+  background-color: var(--background-lightgrey);
+  border-radius: 36px;
+  margin-bottom: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+#dateInput::-webkit-calendar-picker-indicator {
+  opacity: 0;
+}
+
+#timeInput::-webkit-calendar-picker-indicator {
+  opacity: 0;
+}
+
+.customDateTimeInput input {
+  font-family: "Urbanist", Inter, system-ui, Avenir, Helvetica, Arial,
+    sans-serif;
+  font-size: 1.4rem;
+  border: none;
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  -webkit-appearance: none;
+  appearance: none;
+}

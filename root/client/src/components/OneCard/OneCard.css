@@ -1,0 +1,140 @@
+.oneCard {
+  display: flex;
+  flex-direction: column;
+  flex: 0 0 100%;
+  padding: 0 3.5rem;
+  scroll-snap-align: start;
+  transition: all 0.2s;
+}
+
+.creditcardTitle {
+  color: rgb(36, 36, 36);
+}
+
+.creditcardNumber {
+  margin-bottom: 2rem;
+}
+
+.card-box {
+  width: 100%;
+  background-color: var(--background-lightgrey);
+  padding: 2rem;
+  border-radius: 15px;
+}
+
+.card-box-btn {
+  display: flex;
+  justify-content: space-between;
+}
+
+.cardBoxSection {
+  background-color: var(--background-lightgrey);
+  margin: 3rem 0;
+  border-radius: 15px;
+  padding: 1rem 0;
+}
+
+.cardDescriptionHeading {
+  margin-bottom: 0.5rem;
+}
+
+.cardDescriptionEditDiv {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 4rem 0 1rem 0;
+  height: 4rem;
+  border: 1px solid var(--icon-color);
+  border-radius: 11px;
+}
+
+.cardDescriptionInput {
+  border: none;
+  background: none;
+}
+
+.cardEditBtn {
+  height: 3.8rem;
+  padding: 0 2rem;
+  border: none;
+  border-radius: 0 11px 11px 0;
+}
+
+.cardEditBtnImg {
+  width: 4rem;
+  height: 4rem;
+  padding: 1rem;
+  background-color: var(--background-lightgrey);
+  border: none;
+  border-radius: 40rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.cardDeleteBtn {
+  color: var(--border-red);
+  font-size: 1.2rem;
+  padding: 1rem;
+  background: none;
+  border: none;
+  margin: 1rem 0 3rem 0;
+  cursor: pointer;
+}
+
+.alert-text {
+  color: red;
+  font-size: 1.8rem;
+}
+
+.questionDelete-box {
+  width: 70%;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  background-color: white;
+  border-radius: 20px;
+  text-align: center;
+  padding: 3rem;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 20;
+}
+
+.questionDelete-box p {
+  font-size: 2rem;
+}
+
+.delete-overlay {
+  width: 100%;
+  height: 155%;
+  background-color: black;
+  z-index: 10;
+  position: absolute;
+  top: 0%;
+  left: 0;
+  opacity: 0.6;
+}
+
+.deleteBox-btn {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.deleteBox-btn button {
+  font-size: 1.8rem;
+  padding: 2rem;
+  border: none;
+  border-radius: 20rem;
+}
+
+.delete-btn {
+  color: white;
+  background-color: var(--border-red);
+}
+
+.deleteBox-btn button:last-child {
+  background-color: var(--background-lightgrey);
+}

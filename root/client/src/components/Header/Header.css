@@ -1,0 +1,133 @@
+.transactionHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 4rem var(--main-padding);
+}
+
+.headerLogo {
+  height: 5.3rem;
+}
+
+.goBackBtn {
+  background: none;
+  border: none;
+}
+
+.creditCard-icon {
+  width: 3.5rem;
+}
+
+.card-profile {
+  display: flex;
+  align-items: flex-start;
+  gap: 3rem;
+}
+
+.card-btn {
+  width: 10rem;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.card-btn p {
+  font-size: 1.2rem;
+}
+
+.btn-hidden {
+  border: none;
+  background-color: transparent;
+  position: relative;
+}
+
+.cardBox {
+  position: absolute;
+  right: -200%;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  background-color: white;
+  padding: 2rem 3rem;
+  z-index: 10;
+  border-radius: 20px;
+}
+
+.cardBox p {
+  font-size: 1.8rem;
+}
+
+.cardBox button {
+  border: none;
+  background-color: transparent;
+  margin-bottom: 1rem;
+}
+
+.cardBox button:active {
+  transform: scale(1.3);
+}
+
+.heading {
+  font-weight: lighter;
+}
+
+.navCard-separator {
+  height: 1px;
+  background-color: grey;
+  width: 30vw;
+}
+
+.navCard-list {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.navCard-list:last-child .navCard-separator {
+  display: none;
+}
+
+.profile-img {
+  background-color: var(--text-color-blue);
+  height: 4.5rem;
+  width: 4.5rem;
+  border-radius: 100%;
+  display: flex;
+  align-items: center;
+  justify-self: center;
+}
+
+.selectedProfile-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+  margin: auto;
+}
+
+.defaultProfile-img {
+  width: 90%;
+  height: 90%;
+  object-fit: contain;
+  display: block;
+  margin: auto;
+}
+
+.header-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 10;
+}
+
+.icon-creditCard {
+  display: flex;
+  gap: 1rem;
+}
+
+.creditCard-mini {
+  height: 2rem;
+}

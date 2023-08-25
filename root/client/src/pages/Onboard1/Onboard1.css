@@ -1,0 +1,172 @@
+.onboardMain {
+  margin: var(--main-padding);
+  height: 93vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.onboardIllustration {
+  margin-bottom: 5rem;
+}
+
+.illustrationContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 180px;
+  height: 265px;
+  position: relative;
+  margin-bottom: 5rem;
+}
+
+@keyframes yellow-money-anim {
+  from {
+    top: 90px;
+  }
+  50% {
+    top: 83px;
+  }
+  100% {
+    top: 90px;
+  }
+}
+
+@keyframes money-blue-anim {
+  from {
+    top: 10px;
+  }
+  50% {
+    top: 0px;
+  }
+  100% {
+    top: 10px;
+  }
+}
+@keyframes dollar-blue-anim {
+  from {
+    top: 45px;
+  }
+  50% {
+    top: 25px;
+  }
+  100% {
+    top: 45px;
+  }
+}
+@keyframes coin-big-anim {
+  from {
+    top: 55px;
+  }
+  50% {
+    top: 60px;
+  }
+  100% {
+    top: 55px;
+  }
+}
+@keyframes coin-small-anim {
+  from {
+    top: 110px;
+  }
+  50% {
+    top: 115px;
+  }
+  100% {
+    top: 110px;
+  }
+}
+
+.moneyYellow {
+  position: absolute;
+  top: 90px;
+  right: 35px;
+  animation-duration: 4s;
+  animation-name: yellow-money-anim;
+  animation-iteration-count: infinite;
+}
+.moneyBlue {
+  position: absolute;
+  top: 10px;
+  right: 70px;
+  animation-duration: 5.5s;
+  animation-name: money-blue-anim;
+  animation-iteration-count: infinite;
+}
+.dollarBlue {
+  position: absolute;
+  top: 40px;
+  left: 40px;
+  animation-duration: 5s;
+  animation-name: dollar-blue-anim;
+  animation-iteration-count: infinite;
+}
+.coinBig {
+  position: absolute;
+  top: 55px;
+  right: 65px;
+  animation-duration: 3s;
+  animation-name: coin-big-anim;
+  animation-iteration-count: infinite;
+}
+.coinSmall {
+  position: absolute;
+  top: 110px;
+  left: 70px;
+  animation-duration: 4.5s;
+  animation-name: coin-small-anim;
+  animation-iteration-count: infinite;
+}
+
+.bankcard {
+  position: absolute;
+  bottom: 0;
+}
+
+.onboardH2 {
+  margin-bottom: 2rem;
+}
+
+.onboardText {
+  margin-bottom: 12rem;
+}
+
+.onboardBtnDiv {
+  width: 90%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.skip {
+  color: var(--text-color-black);
+  text-decoration: none;
+  font-size: 1.8rem;
+  font-weight: 600;
+}
+
+.skip :hover {
+  color: var(--text-color-blue);
+}
+
+.onboardArrow {
+  padding-left: 2rem;
+}
+
+.blueBtnShort {
+  background: linear-gradient(0deg, #1e78fe, #44bbfe);
+  border: none;
+  border-radius: 20rem;
+  padding: 2rem 6rem;
+  color: var(--text-color-white);
+  font-weight: 500;
+  text-decoration: none;
+  text-align: center;
+  font-size: 1.8rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

@@ -1,0 +1,57 @@
+.single-transaction {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 2rem;
+}
+
+.symbol-category {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+}
+
+.transactionCategoryName {
+  font-weight: 600;
+  font-size: 1.8rem;
+}
+
+.oneTransDateDiv {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.transactionDate {
+  font-size: 1.4rem;
+}
+
+.amount {
+  font-size: 1.6rem;
+  font-weight: 600;
+  background: -webkit-linear-gradient(#44bbfe, #1e78fe);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.amountExpense {
+  font-size: 1.6rem;
+  font-weight: 600;
+  background: -webkit-linear-gradient(#ffcf53, #ff9900);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.date-time {
+  display: flex;
+  gap: 1rem;
+}
+
+.transactionIcon {
+  height: 5rem;
+  width: 5rem;
+  object-fit: contain;
+  background-color: var(--background-lightgrey);
+  border-radius: 60%;
+  padding: 0.5rem;
+}
