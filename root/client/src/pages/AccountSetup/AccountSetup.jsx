@@ -63,18 +63,21 @@ const AccountSetup = () => {
               type="text"
               placeholder="Card number"
               onChange={(e) => setCardNumber(e.target.value)}
+              required
             />
             <input
               className="newCardInput"
               type="text"
               placeholder="Card title"
               onChange={(e) => setCardTitle(e.target.value)}
+              required
             />
             <input
               className="newCardInput"
               type="text"
               placeholder="Card description"
               onChange={(e) => setCardDescription(e.target.value)}
+              required
             />
           </section>
           <CardDesign
