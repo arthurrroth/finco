@@ -33,6 +33,9 @@ export class Card {
   @prop({ required: false })
   spendingLimit: number;
 
+  @prop({ required: true })
+  selected: boolean;
+
   @prop({ required: true, default: [] })
   transactions: Transaction[];
 
@@ -42,7 +45,9 @@ export class Card {
     title: string | undefined,
     desc: string | undefined,
     cardDesign: string,
-    spendingLimit: number | undefined) {
+    spendingLimit: number | undefined,
+    selected: boolean | undefined,
+  ) {
 
     if (!desc) {
       this.cardDescription = 'Track your income and expenses!';
@@ -60,11 +65,18 @@ export class Card {
       this.spendingLimit = 0;
     } else {
       this.spendingLimit = spendingLimit;
-    }
+    };
+
+    if (!selected) {
+      this.selected = false;
+    } else {
+      this.selected = selected;
+    };
 
     this.refUserAcc = user._id;
     this.cardNumber = number;
     this.cardDesign = cardDesign;
+
   }
 };
 

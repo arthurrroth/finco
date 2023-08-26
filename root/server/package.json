@@ -1,7 +1,7 @@
 {
   "name": "auth-api-x",
   "version": "0.0.1",
-  "description": "Authentication API built with node Node.js, TypeScript, Typegoose, ExpressJS & Zod",
+  "description": "Authentication built with node Node.js, TypeScript, Typegoose, ExpressJS & Zod",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -19,7 +19,7 @@
     "ExpressJS",
     "Zod"
   ],
-  "author": "Arthur Roth",
+  "author": "Arthu Roth, Roman Parfentev",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/arthurrroth/auth-api/issues"

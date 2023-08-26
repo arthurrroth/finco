@@ -3,13 +3,15 @@ import "./AccountSetup.css";
 // import methods
 import axios from "axios";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 // import components
 import Header from "../../components/Header/Header";
 import CardDesign from "../../components/CardDesign/CardDesign";
 
 const AccountSetup = () => {
+  const location = useLocation();
+  const userID = location.state.userID;
   const [cardTitle, setCardTitle] = useState("");
   const [cardNumber, setCardNumber] = useState("");
   const [cardDescription, setCardDescription] = useState("");
@@ -20,30 +22,31 @@ const AccountSetup = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    console.log(`User ID on Account Setup: ${userID}`)
+
+    const reqBody = {
+      id: userID
+    };
+
+    console.log({ reqBody });
+    const response = await axios.post('/auth-api/users/acc', reqBody);
+    const userAcc = response.data;
 
     try {
-      const newCard = {
-        cardNumber,
-        cardTitle,
-        cardDescription,
+
+      const reqBody = {
+        cardNumber: cardNumber,
+        cardTitle: cardTitle,
+        cardDescription: cardDescription,
         cardDesign: designColor,
-        selectedCard: true,
+        selected: true,
       };
-      const res = await axios.post("/api/wallet/cards/newcard", newCard);
+
+      const cardRes = await axios.post(`/finco/cards/create/${userAcc._id}`, reqBody);
+      console.log({ cardRes });
+
     } catch (error) {
       console.log("create the first card", error);
-    }
-
-    try {
-      const setTrue = {
-        selectedCard: true,
-      };
-      const setSelectTrue = await axios.put(
-        `/api/wallet/cards/${cardNumber}`,
-        setTrue
-      );
-    } catch (error) {
-      console.log("set selected card to true", error);
     }
 
     Navigate("/");
@@ -51,7 +54,6 @@ const AccountSetup = () => {
 
   return (
     <>
-      <Header setup={true} />
 
       <main className="accountSetup-main">
         <h1>Create your first Card</h1>
@@ -95,3 +97,6 @@ const AccountSetup = () => {
 };
 
 export default AccountSetup;
+
+// <Header setup={true} />
+

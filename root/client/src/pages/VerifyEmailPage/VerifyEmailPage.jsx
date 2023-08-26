@@ -40,6 +40,7 @@ const VerifyEmailPage = () => {
         navigate("/first-login", {
           state: {
             email: email,
+            userAcc: state.userAcc
           },
         });
       }

@@ -43,6 +43,7 @@ const SignUp = () => {
             previewURL: response.data.previewURL,
             userID: response.data.userID,
             email: email,
+            userAcc: response.data.userAcc
           },
         });
       } catch (error) {
@@ -55,7 +56,6 @@ const SignUp = () => {
 
   return (
     <>
-      <Header setup={true} />
       <main className="signup-wrapper">
         <article className="signup-heading">
           <h1>

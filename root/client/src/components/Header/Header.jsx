@@ -34,6 +34,7 @@ const Header = ({
 
   const Navigate = useNavigate();
 
+
   const navigateBack = () => {
     Navigate(-1);
   };
@@ -41,16 +42,42 @@ const Header = ({
   //! set selectedCard
   useEffect(() => {
     const fetchData = async () => {
-      const { data } = await axios.get("/api/wallet/cards");
-      setCards(data);
 
-      data.map((card) => {
-        if (card.selectedCard === true) {
+      const userRes = await axios.get('/auth-api/users/me', {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('accessToken')}`
+        }
+      });
+
+      const user = userRes.data;
+
+      const reqBody = {
+        id: user._id
+      };
+
+      const response = await axios.post('/auth-api/users/acc', reqBody);
+      const userAcc = response.data;
+
+      console.log({ userAcc });
+      setCards(userAcc.Wallet);
+      console.log(userAcc.Wallet[0])
+
+
+      cards.map((card) => {
+        if (card.selected === true) {
           setSelectedCard(card.cardNumber);
         }
       });
+
+      console.log({ selectedCard });
     };
-    fetchData();
+
+    const getData = async () => {
+      await fetchData();
+
+    };
+
+    getData();
   }, [refresh]);
 
   //! set new selectedCard
