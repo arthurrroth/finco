@@ -1,10 +1,12 @@
 import "./OneCard.css";
 // import methods
-import { useState } from "react";
+import { useState, useEffect  } from "react";
 import axios from "axios";
 // import img
 import EditIcon from "../../icon/pencil-icon.png";
 import Creditcard from "../Creditcard/Creditcard";
+
+import { checkAuthentication } from "../../utils/authUtils";
 
 const OneCard = ({ cards, card, setRefresh }) => {
   const [editBox, setEditBox] = useState(false);
@@ -12,6 +14,21 @@ const OneCard = ({ cards, card, setRefresh }) => {
   const [alertText, setAlertText] = useState(false);
   const [deleteSuccessful, setDeleteSuccessful] = useState(false);
   const [sureDelete, setSureDelete] = useState(false);
+  const [selectedName, setSelectedName] = useState("Name");
+
+  
+  useEffect(() => {
+    const getUser = async () => {
+      try {
+        const userRes = await checkAuthentication();
+        const user = userRes.user.data;
+        setSelectedName(user.username);
+      } catch (error) {
+        console.error("Failed to fetch user data:", error);
+      }
+    };
+    getUser();
+  }, []); 
 
   //! open delete box
   const handleQuestionDelete = () => {
@@ -66,7 +83,7 @@ const OneCard = ({ cards, card, setRefresh }) => {
         <section className="cardBoxSection">
           <div className="card-box">
             <p className="cardDescriptionHeading">Cardholder</p>
-            <h4>Max Müller</h4>
+            <h4>{selectedName}</h4>
           </div>
 
           <hr />
