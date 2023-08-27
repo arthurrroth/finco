@@ -9,6 +9,7 @@ import axios from "axios";
 import Nav from "../../components/Nav/Nav";
 import Header from "../../components/Header/Header";
 import CardDesign from "../../components/CardDesign/CardDesign";
+import { checkAuthentication } from "../../utils/authUtils";
 
 const NewCard = () => {
   const [cardTitle, setCardTitle] = useState("");
@@ -22,13 +23,29 @@ const NewCard = () => {
   //! create new card
   const handleCreate = async (e) => {
     e.preventDefault();
+    const userRes = await checkAuthentication();
+    const user = userRes.user.data;
+
+    const reqBody = {
+      id: user._id
+    };
+    if (!reqBody.id) {
+      return null
+    };
+    console.log({ reqBody })
+    const response = await axios.post('/auth-api/users/acc', reqBody);
+    const userAcc = response.data;
+
     const newCard = {
       cardNumber,
       cardTitle,
       cardDescription,
       cardDesign: designColor,
+      spendingLimit: 0,
+      selected: false
     };
-    const res = await axios.post("/api/wallet/cards/newcard", newCard);
+
+    await axios.post(`/finco/cards/create/${userAcc._id}`, newCard);
 
     setCardTitle("");
     setCardNumber("");

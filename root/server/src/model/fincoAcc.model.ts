@@ -29,7 +29,7 @@ export class UserAcc {
   profilePicture: string;
 
   constructor(user: DocumentType<User>) {
-    this.linkedUser = user;
+    this.linkedUser = user._id;
     this.displayName = user.username;
   };
 

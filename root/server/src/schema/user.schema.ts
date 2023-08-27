@@ -64,6 +64,12 @@ export const resetPasswordSchema = z.object({
 
 });
 
+export const getUserAccSchema = z.object({
+  body: z.object({
+    id: z.string()
+  })
+})
+
 export type ForgotPasswordInput = TypeOf<typeof forgotPasswordSchema>['body'];
 export type UserCreationInput = TypeOf<typeof userCreationSchema>['body'];
 export type UserVerificationInput = TypeOf<typeof userVerificationSchema>['params'];

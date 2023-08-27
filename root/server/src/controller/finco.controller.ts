@@ -1,6 +1,6 @@
 
 import { Request, Response } from "express";
-import { CardCreationInput } from "../schema/finco.schema";
+import { CardCreationInput, CardUpdateInput } from "../schema/finco.schema";
 import { findAccById } from "../service/user.service";
 import CardModel, { Card } from "../model/fincoCard.model";
 import log from "../utils/logger";
@@ -11,20 +11,22 @@ export const createCardHandler = async (
   req: Request<CardCreationInput['params'], {}, CardCreationInput['body']>,
   res: Response
 ) => {
-  const { accId } = req.params;
-  const { cardTitle, cardNumber, cardDescription, cardDesign, spendingLimit } = req.body;
+  const { accID } = req.params;
+  const { cardTitle, cardNumber, cardDescription, cardDesign, spendingLimit, selected } = req.body;
+
+  log.info(accID)
 
   try {
 
-    const acc = await findAccById(accId);
+    const acc = await findAccById(accID);
 
-    log.info(acc)
+    log.info("User Account: ", acc)
 
     if (!acc) {
       return res.status(404).json({ error: "User account not found" });
     }
 
-    const card = new Card(acc, cardNumber, cardTitle, cardDescription, cardDesign, spendingLimit);
+    const card = new Card(acc, cardNumber, cardTitle, cardDescription, cardDesign, spendingLimit, selected);
     await CardModel.create(card);
 
     acc.Wallet.push(card);
@@ -82,3 +84,47 @@ export const createTransactionHandler = async (req: Request, res: Response) => {
   };
 };
 
+
+export const updateCardHandler = async (req: Request<CardUpdateInput['params'], {}, CardUpdateInput['body']>, res: Response) => {
+  const { cardNumber, field } = req.params;
+  const { value } = req.body;
+
+  try {
+
+    const card = await CardModel.findOne({ cardNumber: cardNumber });
+
+    if (card && field == "title") {
+      card.cardTitle = <string>value;
+    } else if (card && field == "description") {
+      card.cardDescription = <string>value;
+    } else if (card && field == "design") {
+      card.cardDesign = <string>value;
+    } else if (card && field == "spendingLimit") {
+      card.spendingLimit = <number>value;
+    } else if (card && field == "selected") {
+      card.selected = <boolean>value
+    };
+
+    card?.save();
+
+    res.send('Upadted Card')
+
+  } catch (error: any) {
+    log.error(error.message)
+    res.status(500).send('Failed to updated card')
+  };
+};
+
+export const getCardHandler = async (req: Request, res: Response) => {
+  const { cardNumber } = req.params;
+
+  try {
+    const card = await CardModel.findOne({ cardNumber: cardNumber });
+    res.send(card);
+
+  } catch (error: any) {
+    log.error(`getCardHandler: ${error.message}`);
+    res.status(500).send('getCardHandler failed');
+    return false;
+  }
+}
