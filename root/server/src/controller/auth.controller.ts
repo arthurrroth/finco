@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { CreateSessionInput } from "../schema/auth.schema";
-import { findUserByEmail, findUserById } from "../service/user.service";
+import { findAccByUser, findUserByEmail, findUserById } from "../service/user.service";
 import { findSessionById, signAccessToken, signRefreshToken } from "../service/auth.service";
 import log from "../utils/logger";
 import { get } from "lodash";
@@ -33,9 +33,11 @@ export const createSessionHandler = async (req: Request<{}, {}, CreateSessionInp
 
   const refreshToken = await signRefreshToken({ userId: user._id.toString() });
 
+  const acc = await findAccByUser(user);
   return res.send({
     accessToken,
-    refreshToken
+    refreshToken,
+    acc
   })
 };
 

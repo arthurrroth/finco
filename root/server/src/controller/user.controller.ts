@@ -133,11 +133,15 @@ export const getCurrentUserHandler = async (_: Request, res: Response) => {
 
 export const getCurrentAccHandler = async (req: Request, res: Response) => {
   const { id } = req.body;
-  const user = await UserModel.findById(id);
-  if (!user) {
-    return res.status(404).send('No user found on Account Search');
-  };
-  const acc = await findAccByUser(user);
-  log.info(`Found Account: ${acc}`);
-  return res.send(acc)
+  try {
+    const user = await UserModel.findById(id);
+    if (!user) {
+      return res.status(404).send('No user found on Account Search');
+    };
+    const acc = await findAccByUser(user);
+    log.info(`Found Account: ${acc}`);
+    return res.send(JSON.stringify(acc));
+  } catch (error: any) {
+    log.info('Failed to retrieve User Account');
+  }
 }

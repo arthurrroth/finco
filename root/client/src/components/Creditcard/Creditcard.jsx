@@ -22,8 +22,8 @@ const Creditcard = ({ card }) => {
   useEffect(() => {
     if (selectedCard) {
       const fetchData = async () => {
-        const { data } = await axios.get(`/api/wallet/cards/${selectedCard}`);
-        setYourCard(data);
+        const card = await axios.get(`/finco/cards/${selectedCard}`);
+        setYourCard(card);
       };
       fetchData();
     }

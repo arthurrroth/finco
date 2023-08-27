@@ -13,6 +13,7 @@ import { useContext, useEffect, useState } from "react";
 
 // import context
 import { SelectedCardContext } from "../../context/context";
+import { checkAuthentication } from "../../utils/authUtils";
 
 const Header = ({
   searchIsActive,
@@ -39,81 +40,89 @@ const Header = ({
     Navigate(-1);
   };
 
+  const getCards = async () => {
+
+    const userRes = await checkAuthentication()
+    const user = userRes.user.data;
+    setSelectedName(user.username);
+
+    const reqBody = {
+      id: user._id
+    };
+    if (!reqBody.id) {
+      return null
+    };
+    console.log({ reqBody })
+    const response = await axios.post('/auth-api/users/acc', reqBody);
+    const userAcc = response.data;
+
+    console.log({ userAcc });
+    console.log({ cards });
+    setCards(userAcc.Wallet);
+    console.log(userAcc.Wallet[0])
+
+
+    cards.map((card) => {
+      if (card.selected === true) {
+        setSelectedCard(card.cardNumber);
+
+      }
+    });
+
+    console.log({ selectedCard });
+  };
+
   //! set selectedCard
   useEffect(() => {
+
     const fetchData = async () => {
-
-      const userRes = await axios.get('/auth-api/users/me', {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem('accessToken')}`
-        }
-      });
-
-      const user = userRes.data;
-
-      const reqBody = {
-        id: user._id
-      };
-
-      const response = await axios.post('/auth-api/users/acc', reqBody);
-      const userAcc = response.data;
-
-      console.log({ userAcc });
-      setCards(userAcc.Wallet);
-      console.log(userAcc.Wallet[0])
-
-
-      cards.map((card) => {
-        if (card.selected === true) {
-          setSelectedCard(card.cardNumber);
-        }
-      });
-
-      console.log({ selectedCard });
+      await checkAuthentication();
+      await getCards();
     };
 
-    const getData = async () => {
-      await fetchData();
-
-    };
-
-    getData();
+    fetchData();
   }, [refresh]);
 
-  //! set new selectedCard
+  // For Card Title below card selector icon
   useEffect(() => {
     const fetchData = async () => {
-      const { data } = await axios.get("/api/wallet/cards");
-
-      const findedCard = data.filter(
-        (card) => card.cardNumber === selectedCard
-      );
-      setFindedCard(findedCard);
+      await getCards();
+      if (selectedCard) {
+        const response = await axios.get(`/finco/cards/${selectedCard}`);
+        const card = response.data;
+        setFindedCard(card);
+      }
     };
 
     fetchData();
   }, [selectedCard]);
 
+  useEffect(() => {
+    console.log({ findedCard })
+  }, [findedCard])
+
   //! handle select card
   const handleSelectCard = async (id) => {
+    console.log("Handle Select:", { id });
+    const setFalse = { value: false };
+    const setTrue = { value: true };
+
     setSelectedCard(id);
 
-    //! set selectedCard to false
     try {
-      const setFalse = {
-        selectedCard: false,
-      };
-      const allToFalse = await axios.put("/api/wallet/cards", setFalse);
+      cards.map(async (card) => {
+        console.log(card.cardTitle);
+        if (card.selected == true) {
+          await axios.put(`/finco/cards/${card.cardNumber}/update/selected`, setFalse);
+        };
+      });
+
     } catch (error) {
       console.log("set all cards to selectedCard: false ", error);
     }
 
-    //! set selectedCard to true
     try {
-      const setTrue = {
-        selectedCard: true,
-      };
-      const setSelectTrue = await axios.put(`/api/wallet/cards/${id}`, setTrue);
+      await axios.put(`/finco/cards/${id}/update/selected/`, setTrue);
     } catch (error) {
       console.log("set selectedCard: true ", error);
     }
@@ -162,7 +171,7 @@ const Header = ({
                     <div className="header-overlay"></div>
                     <div className="cardBox">
                       {cards?.map((card) => (
-                        <div className="navCard-list" key={card._id}>
+                        <div className="navCard-list" key={card.cardNumber}>
                           <div
                             className="icon-creditCard"
                             onClick={() => handleSelectCard(card.cardNumber)}>
@@ -180,7 +189,7 @@ const Header = ({
                   </>
                 )}
               </button>
-              <p>{findedCard[0]?.cardTitle}</p>
+              <p>{findedCard.cardTitle}</p>
             </div>
 
             {/* PROFILE */}

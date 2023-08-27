@@ -20,8 +20,11 @@ import {
 // import img
 import DangerIcon from "../../icon/icon-danger.svg";
 import ThreeDot from "../../icon/threedot-icon.svg";
+import { useLocation } from "react-router-dom";
 
 const Home = () => {
+  const location = useLocation();
+  const [userAcc, setUserAcc] = useState()
   const { selectedCard, setSelectedCard } = useContext(SelectedCardContext);
   const { page, setPage } = useContext(PageContext);
   const { setOpenBox } = useContext(OpenBoxContext);
@@ -31,6 +34,35 @@ const Home = () => {
   const [transactions, setTransactions] = useState([]);
   const [limit, setLimit] = useState(null);
   const [editLimit, setEditLimit] = useState(false);
+  const [cards, setCards] = useState([]);
+
+
+  const getCards = async () => {
+
+    const userRes = await axios.get('/auth-api/users/me', {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('accessToken')}`
+      }
+    });
+
+    const user = userRes.data;
+
+    const reqBody = {
+      id: user._id
+    };
+
+    const response = await axios.post('/auth-api/users/acc', reqBody);
+    const userAcc = response.data;
+
+    console.log({ userAcc });
+    setUserAcc(userAcc);
+    setCards(userAcc.Wallet);
+    const cardNum = userAcc.Wallet[0].cardNumber;
+    setSelectedCard(cardNum);
+    console.log("Selected Card: ", userAcc.Wallet[0].cardNumber)
+
+  };
+
 
   const handleEditLimit = () => {
     setEditLimit(true);
@@ -38,11 +70,8 @@ const Home = () => {
 
   //! set spendingLimit on card
   const handleSaveLimit = async () => {
-    const newLimit = {
-      spendingLimit: limit,
-    };
-    const res = await axios.put(`/api/wallet/cards/${selectedCard}`, newLimit);
-
+    const newLimit = { spendingLimit: limit };
+    await axios.put(`/finco/cards/${selectedCard}/update/spendingLimit`, newLimit);
     setEditLimit(false);
   };
 
@@ -50,13 +79,13 @@ const Home = () => {
     setPage("Home");
     setOpenBox(false);
 
+    console.log(`Home Selected Card: ${selectedCard}`)
+
     //! fetch spendingLimit
     const fetchLimit = async () => {
       try {
-        const { data } = await axios.get(`/api/wallet/cards/${selectedCard}`, {
-          params: { selectedCard },
-        });
-        setLimit(data.spendingLimit);
+        const card = await axios.get(`/finco/cards/${selectedCard}`)
+        setLimit(card.spendingLimit);
       } catch (error) {
         console.log("fetch limit: ", error);
       }
@@ -65,11 +94,15 @@ const Home = () => {
 
     //! fetch transactions
     const fetchTransactions = async () => {
+      console.log({ selectedCard });
       try {
-        const { data } = await axios.get("/api/wallet/transactions", {
-          params: { selectedCard },
-        });
-        setTransactions(data);
+        await getCards()
+        cards.map((card) => {
+          console.log("getCards called from home:", card.title)
+          if (card.cardNumber == selectedCard) {
+            setTransactions(card.transactions);
+          };
+        })
       } catch (error) {
         console.log("fetch transactions: ", error);
       }

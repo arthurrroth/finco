@@ -21,10 +21,11 @@ const Login = () => {
       console.log({ login });
       localStorage.setItem('accessToken', login.data.accessToken);
       localStorage.setItem('refreshToken', login.data.refreshToken);
+      localStorage.setItem('userAccount', login.data.acc);
       nav("/");
 
     } catch (error) {
-      console.log(error);
+      console.log("Error at Login Page", error);
     }
 
   };

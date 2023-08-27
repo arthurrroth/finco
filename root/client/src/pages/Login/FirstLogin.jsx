@@ -18,6 +18,7 @@ const FirstLogin = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     const reqBody = {
       email: email,
       password: password
@@ -37,7 +38,8 @@ const FirstLogin = () => {
       });
 
       const userID = currentUser.data._id;
-      console.log({ userID })
+      console.log({ userID });
+
       navigate('/account-setup', {
         state: {
           userID: userID,
@@ -45,7 +47,7 @@ const FirstLogin = () => {
       });
 
     } catch (error) {
-      console.log(error);
+      console.log("Error on first login:", error);
     }
 
   };
@@ -61,7 +63,6 @@ const FirstLogin = () => {
 
   return (
     <>
-      <Header setup={true} />
       <main className="firstLogin-main">
         <h1>Login</h1>
         <h3>Put your password for your first login</h3>

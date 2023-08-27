@@ -113,7 +113,18 @@ export const updateCardHandler = async (req: Request<CardUpdateInput['params'], 
     log.error(error.message)
     res.status(500).send('Failed to updated card')
   };
+};
 
+export const getCardHandler = async (req: Request, res: Response) => {
+  const { cardNumber } = req.params;
 
+  try {
+    const card = await CardModel.findOne({ cardNumber: cardNumber });
+    res.send(card);
 
+  } catch (error: any) {
+    log.error(`getCardHandler: ${error.message}`);
+    res.status(500).send('getCardHandler failed');
+    return false;
+  }
 }

@@ -49,7 +49,11 @@ const AccountSetup = () => {
       console.log("create the first card", error);
     }
 
-    Navigate("/");
+    Navigate("/", {
+      state: {
+        userAcc: userAcc,
+      }
+    });
   };
 
   return (

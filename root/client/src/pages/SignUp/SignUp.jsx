@@ -47,7 +47,7 @@ const SignUp = () => {
           },
         });
       } catch (error) {
-        // Handle error
+        console.log("Failed SignUP: ", error)
       }
     } else {
       setErrorMessage(true);
