@@ -40,9 +40,9 @@ function App() {
     setTimeout(() => {
       setLoading(false);
     }, 1500);
-  },[]);
+  }, []);
 
-  if(loading){
+  if (loading) {
     return <LoadingAnimation />
   }
 
@@ -53,7 +53,7 @@ function App() {
           <PageContext.Provider value={{ page, setPage }}>
             <BrowserRouter>
               <Routes>
-                <Route path="/" element={<Onboard1 />}>
+                <Route path="/" element={<PrivateRoute />}>
                   <Route path="/" element={<Home />} />
                 </Route>
                 <Route path="/account-setup" element={<AccountSetup />} />
