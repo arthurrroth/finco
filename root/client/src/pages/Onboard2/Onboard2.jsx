@@ -21,8 +21,7 @@ const Onboard2 = () => {
         Analyze your <br /> spending
       </h2>
       <p className="onboardText">
-        Lorem ipsum dolor sit amet, consectetur elit, sed do eiusmod tempor
-        incididunt et.
+       Perfect your finances to see even better where more money can be saved in the future.
       </p>
       <NavLink to={"/signUp"} className="blueBtn">
         Get Started <img className="onboardArrow" src={arrow} alt="arrow" />

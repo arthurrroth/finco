@@ -1,8 +1,9 @@
 import "./App.css";
 // import methods
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 // import pages
+import LoadingAnimation from "./components/LoadingAnimation/LoadingAnimation";
 import Onboard1 from "./pages/Onboard1/Onboard1.jsx";
 import Onboard2 from "./pages/Onboard2/Onboard2.jsx";
 import SignUp from "./pages/SignUp/SignUp.jsx";
@@ -33,6 +34,17 @@ function App() {
   const [page, setPage] = useState("");
   const [openBox, setOpenBox] = useState(false);
   const [selectedCard, setSelectedCard] = useState("");
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setLoading(false);
+    }, 1500);
+  },[]);
+
+  if(loading){
+    return <LoadingAnimation />
+  }
 
   return (
     <>
@@ -41,7 +53,7 @@ function App() {
           <PageContext.Provider value={{ page, setPage }}>
             <BrowserRouter>
               <Routes>
-                <Route path="/" element={<PrivateRoute />}>
+                <Route path="/" element={<Onboard1 />}>
                   <Route path="/" element={<Home />} />
                 </Route>
                 <Route path="/account-setup" element={<AccountSetup />} />
@@ -56,7 +68,6 @@ function App() {
                 <Route path="/addexpenses" element={<AddExpenses />} />
                 <Route path="/reports" element={<Reports />} />
                 <Route path="/account" element={<Account />} />
-                <Route path="/onboard1" element={<Onboard1 />} />
                 <Route path="/onboard2" element={<Onboard2 />} />
                 <Route path="/faq" element={<FAQ />} />
                 <Route path="/mywallet" element={<MyWallet />} />
