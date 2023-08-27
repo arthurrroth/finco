@@ -1,12 +1,12 @@
-import { useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import "./Login.css";
 import { useState } from "react";
 import axios from "axios";
 
 const Login = () => {
   const nav = useNavigate();
-  const [email, setEmail] = useState("nux@mail.su");
-  const [password, setPassword] = useState('12345678');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -30,27 +30,54 @@ const Login = () => {
 
   };
 
+  const handleForgotPasswort = async () => {
+
+  };
 
   return (
-    <div>
-      <h1>Login Page</h1>
-      <h3>{email}</h3>
+    <>
+      <main className="login-main">
+        <div className="login-header">
+          <h1>Welcome back</h1>
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam
+            impedit vel nobis recusandae voluptatum.
+          </p>
+        </div>
 
-      <form onSubmit={handleSubmit}>
-        <input
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          placeholder="password"
-        />
-        <input
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          placeholder="email"
-        />
-        <button type="submit">Login</button>
-      </form>
-
-    </div>);
+        <form onSubmit={handleSubmit} className="login-form">
+          <section>
+            <input
+              value={email}
+              type="email"
+              className="login-input"
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="email"
+            />
+            <input
+              value={password}
+              type="password"
+              className="login-input"
+              onChange={(e) => setPassword(e.target.value)}
+              placeholder="password"
+            />
+            <div onClick={handleForgotPasswort} className="forgotPassword-link">
+              Forgot your password?
+            </div>
+          </section>
+          <button type="submit" className="blueBtn">
+            Login
+          </button>
+        </form>
+        <div className="dontHaveAccount-link">
+          <p>Don´t have any account?</p>
+          <NavLink to="/signup" className="signUp-link">
+            SignUp
+          </NavLink>
+        </div>
+      </main>
+    </>
+  )
 };
 
 export default Login;

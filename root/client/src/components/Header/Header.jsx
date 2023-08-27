@@ -102,7 +102,8 @@ const Header = ({
   }, [findedCard])
 
   //! handle select card
-  const handleSelectCard = async (id) => {
+  const handleSelectCard = async (event, id) => {
+    event.preventDefault();
     console.log("Handle Select:", { id });
     const setFalse = { value: false };
     const setTrue = { value: true };
@@ -111,8 +112,9 @@ const Header = ({
 
     try {
       cards.map(async (card) => {
-        console.log(card.cardTitle);
         if (card.selected == true) {
+          console.log("Currently Selected card: ", card.cardTitle);
+
           await axios.put(`/finco/cards/${card.cardNumber}/update/selected`, setFalse);
         };
       });
@@ -174,7 +176,7 @@ const Header = ({
                         <div className="navCard-list" key={card.cardNumber}>
                           <div
                             className="icon-creditCard"
-                            onClick={() => handleSelectCard(card.cardNumber)}>
+                            onClick={(e) => handleSelectCard(e, card.cardNumber)}>
                             <img
                               className="creditCard-mini"
                               src={creditCard}

@@ -88,7 +88,7 @@ const MyWallet = () => {
       <main className="myWallet-main">
         <ul className="cardsList">
           {cards?.map((card) => (
-            <li key={card._id} className="card-block">
+            <li key={card.cardNumber} className="card-block">
               <OneCard cards={cards} card={card} setRefresh={setRefresh} />
             </li>
           ))}

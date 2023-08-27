@@ -32,7 +32,7 @@ const Home = () => {
   const [income, setIncome] = useState(0);
   const [expenses, setExpenses] = useState(0);
   const [transactions, setTransactions] = useState([]);
-  const [limit, setLimit] = useState(null);
+  const [limit, setLimit] = useState(0);
   const [editLimit, setEditLimit] = useState(false);
   const [cards, setCards] = useState([]);
 
@@ -69,7 +69,9 @@ const Home = () => {
   };
 
   //! set spendingLimit on card
-  const handleSaveLimit = async () => {
+  const handleSaveLimit = async (e) => {
+    e.preventDefault();
+    console.log({ limit })
     const newLimit = { spendingLimit: limit };
     await axios.put(`/finco/cards/${selectedCard}/update/spendingLimit`, newLimit);
     setEditLimit(false);
@@ -140,7 +142,6 @@ const Home = () => {
               type="number"
               value={limit}
               onChange={(e) => setLimit(e.target.value)}
-              placeholder="€"
             />
           ) : (
             <h3>{limit} €</h3>

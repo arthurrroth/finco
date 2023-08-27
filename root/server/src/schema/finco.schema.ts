@@ -53,7 +53,7 @@ export const cardUpdateSchema = z.object({
   }),
 
   body: z.object({
-    value: z.union([z.string(), z.number(), z.boolean()])
+    value: z.union([z.string(), z.number(), z.boolean(), z.undefined()]),
   })
 })
 
