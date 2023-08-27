@@ -64,6 +64,7 @@ const Header = ({
 
     cards.map((card) => {
       if (card.selected === true) {
+        console.log("On GetCards: ", card.cardTitle);
         setSelectedCard(card.cardNumber);
 
       }
@@ -114,8 +115,8 @@ const Header = ({
       cards.map(async (card) => {
         if (card.selected == true) {
           console.log("Currently Selected card: ", card.cardTitle);
-
           await axios.put(`/finco/cards/${card.cardNumber}/update/selected`, setFalse);
+          await getCards();
         };
       });
 
@@ -124,10 +125,13 @@ const Header = ({
     }
 
     try {
+      console.log("Set New Selected Card")
       await axios.put(`/finco/cards/${id}/update/selected/`, setTrue);
     } catch (error) {
       console.log("set selectedCard: true ", error);
     }
+
+    await getCards();
   };
 
   return (

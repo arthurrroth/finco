@@ -14,6 +14,7 @@ import { SelectedCardContext } from "../../context/context";
 // import img
 import selectImg from "../../icon/open-add.png";
 import selectDownImg from "../../icon/down.png";
+import { checkAuthentication } from "../../utils/authUtils";
 
 const AddTransaction = ({ page }) => {
   const { selectedCard, setSelectedCard } = useContext(SelectedCardContext);
@@ -30,21 +31,36 @@ const AddTransaction = ({ page }) => {
 
   const Navigate = useNavigate();
 
+  const fetchLimit = async () => {
+    const { data } = await axios.get(`/finco/cards/${selectedCard}`);
+    setSpendingLimit(data.spendingLimit);
+  };
+
+  const fetchData = async () => {
+    const userRes = await checkAuthentication();
+    const user = userRes.user.data;
+
+    const reqBody = {
+      id: user._id
+    };
+    if (!reqBody.id) {
+      return null
+    };
+
+    const response = await axios.post('/auth-api/users/acc', reqBody);
+    const userAcc = response.data;
+    setCards(userAcc.Wallet);
+
+  };
+
+
   useEffect(() => {
     setTransactionType(page);
 
-    //! fetch spending limit
-    const fetchLimit = async () => {
-      const { data } = await axios.get(`/api/wallet/cards/${selectedCard}`);
-      setSpendingLimit(data.spendingLimit);
-    };
+
     fetchLimit();
 
-    //! fetch cards & spending limit
-    const fetchData = async () => {
-      const { data } = await axios.get("/api/wallet/cards");
-      setCards(data);
-    };
+
     fetchData();
 
     // ! defaultValue: date and time
@@ -63,7 +79,6 @@ const AddTransaction = ({ page }) => {
   const addTransaction = async (e) => {
     e.preventDefault();
     const newTransaction = {
-      cardId: selectedCard,
       amount: transaction,
       category,
       transactionType,
@@ -71,7 +86,7 @@ const AddTransaction = ({ page }) => {
       time: currentTime,
     };
     const response = await axios.post(
-      "/api/wallet/transactions/newtransaction",
+      `/finco/transactions/add/${selectedCard}`,
       newTransaction
     );
 

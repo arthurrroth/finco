@@ -57,9 +57,6 @@ const Home = () => {
     console.log({ userAcc });
     setUserAcc(userAcc);
     setCards(userAcc.Wallet);
-    const cardNum = userAcc.Wallet[0].cardNumber;
-    setSelectedCard(cardNum);
-    console.log("Selected Card: ", userAcc.Wallet[0].cardNumber)
 
   };
 
@@ -72,7 +69,7 @@ const Home = () => {
   const handleSaveLimit = async (e) => {
     e.preventDefault();
     console.log({ limit })
-    const newLimit = { spendingLimit: limit };
+    const newLimit = { value: limit };
     await axios.put(`/finco/cards/${selectedCard}/update/spendingLimit`, newLimit);
     setEditLimit(false);
   };
@@ -87,7 +84,7 @@ const Home = () => {
     const fetchLimit = async () => {
       try {
         const card = await axios.get(`/finco/cards/${selectedCard}`)
-        setLimit(card.spendingLimit);
+        setLimit(card.data.spendingLimit);
       } catch (error) {
         console.log("fetch limit: ", error);
       }
@@ -99,7 +96,7 @@ const Home = () => {
       console.log({ selectedCard });
       try {
         await getCards()
-        cards.map((card) => {
+        cards?.map((card) => {
           console.log("getCards called from home:", card.title)
           if (card.cardNumber == selectedCard) {
             setTransactions(card.transactions);
@@ -115,7 +112,7 @@ const Home = () => {
 
     setIncome(incomeAmount);
     setExpenses(expenseAmount);
-  }, [selectedCard]);
+  }, []);
 
   return (
     <>
@@ -141,7 +138,7 @@ const Home = () => {
               className="setLimit-input"
               type="number"
               value={limit}
-              onChange={(e) => setLimit(e.target.value)}
+              onChange={(e) => setLimit(Number(e.target.value))}
             />
           ) : (
             <h3>{limit} €</h3>

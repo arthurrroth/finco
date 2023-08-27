@@ -23,7 +23,7 @@ const Creditcard = ({ card }) => {
     if (selectedCard) {
       const fetchData = async () => {
         const card = await axios.get(`/finco/cards/${selectedCard}`);
-        setYourCard(card);
+        setYourCard(card.data);
       };
       fetchData();
     }
