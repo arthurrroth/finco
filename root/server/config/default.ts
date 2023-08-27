@@ -1,18 +1,19 @@
-import { readFileSync } from "fs";
+import dotenv from "dotenv";
+import path from "path";
 
-const accessKey = readFileSync("config/access_private_key.pem");
-const refreshKey = readFileSync("config/refresh_private_key.pem");
-const pubAccess = readFileSync("config/access_public_key.pem");
-const pubRefresh = readFileSync("config/refresh_public_key.pem");
+dotenv.config({
+  path: path.join(path.resolve(), "..", ".env"),
+});
+
 
 export default {
-  port: 3002,
-  dbURI: "mongodb+srv://dbAdmin:SmNbaV1qYWZ1@finco.atlizpm.mongodb.net/finco",
+  port: process.env.PORT,
+  dbURI: process.env.DBURI,
   loglevel: "info",
-  accessTokenPrivateKey: accessKey,
-  refreshTokenPrivateKey: refreshKey,
-  accessTokenPublicKey: pubAccess,
-  refreshTokenPublicKey: pubRefresh,
+  accessTokenPrivateKey: process.env.ACCESS_PRIVATE_KEY,
+  refreshTokenPrivateKey: process.env.REFRESH_PRIVATE_KEY,
+  accessTokenPublicKey: process.env.ACCESS_PUBLIC_KEY,
+  refreshTokenPublicKey: process.env.REFRESH_PUBLIC_KEY,
   smtp: {
 
     user: 'nfeu7glouvrdaupn@ethereal.email',

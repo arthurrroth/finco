@@ -97,7 +97,7 @@ const Transaction = () => {
               onChange={(e) => setSearchInput(e.target.value)}
               className="searchbar-transaction"
               type="text"
-              placeholder="Search for category"
+              placeholder="Search for Transactions"
             />
           ) : (
             <h2 className="allTransactionsH2">All transaction</h2>

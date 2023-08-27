@@ -1,7 +1,7 @@
 import express from "express";
 import validateResource from "../middleware/validateResource";
-import { forgotPasswordSchema, resetPasswordSchema, userCreationSchema, userVerificationSchema } from "../schema/user.schema";
-import { forgotPasswordHandler, getCurrentUserHandler, resetPasswordHandler, userCreationHandler, userVerificationHandler } from "../controller/user.controller";
+import { forgotPasswordSchema, getUserAccSchema, resetPasswordSchema, userCreationSchema, userVerificationSchema } from "../schema/user.schema";
+import { forgotPasswordHandler, getCurrentAccHandler, getCurrentUserHandler, resetPasswordHandler, userCreationHandler, userVerificationHandler } from "../controller/user.controller";
 import requireUser from "../middleware/requireUser";
 
 const userRouter = express.Router();
@@ -34,6 +34,12 @@ userRouter.get(
   '/auth-api/users/me',
   requireUser,
   getCurrentUserHandler
+);
+
+userRouter.post(
+  '/auth-api/users/acc',
+  validateResource(getUserAccSchema),
+  getCurrentAccHandler
 );
 
 export default userRouter;

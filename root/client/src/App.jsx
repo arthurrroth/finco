@@ -3,7 +3,6 @@ import "./App.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { useState } from "react";
 // import pages
-import VerifyEmailPage from "./pages/SignUp/Verify";
 import Onboard1 from "./pages/Onboard1/Onboard1.jsx";
 import Onboard2 from "./pages/Onboard2/Onboard2.jsx";
 import SignUp from "./pages/SignUp/SignUp.jsx";
@@ -17,6 +16,9 @@ import Account from "./pages/Account/Account.jsx";
 import FAQ from "./pages/FAQ/FAQ";
 import MyWallet from "./pages/MyWallet/MyWallet";
 import NewCard from "./pages/NewCard/NewCard";
+import VerifyEmailPage from "./pages/VerifyEmailPage/VerifyEmailPage";
+import ForgotPassword from "./pages/ForgotPassword/ForgotPassword";
+import AccountSetup from "./pages/AccountSetup/AccountSetup";
 // import context
 import {
   OpenBoxContext,
@@ -25,6 +27,7 @@ import {
 } from "../src/context/context.jsx";
 import PrivateRoute from "./components/utils/PrivateRoute";
 import FirstLogin from "./pages/Login/FirstLogin";
+import TestCard from "./pages/Login/TestCard";
 
 function App() {
   const [page, setPage] = useState("");
@@ -41,6 +44,9 @@ function App() {
                 <Route path="/" element={<PrivateRoute />}>
                   <Route path="/" element={<Home />} />
                 </Route>
+                <Route path="/account-setup" element={<AccountSetup />} />
+                <Route path="/test-card" element={<TestCard />} />
+                <Route path="/forgot-password" element={<ForgotPassword />} />
                 <Route path="/first-login" element={<FirstLogin />} />
                 <Route path="/verify-email" element={<VerifyEmailPage />} />
                 <Route path="/signUp" element={<SignUp />} />

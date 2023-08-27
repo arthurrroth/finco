@@ -13,6 +13,7 @@ import { useContext, useEffect, useState } from "react";
 
 // import context
 import { SelectedCardContext } from "../../context/context";
+import { checkAuthentication } from "../../utils/authUtils";
 
 const Header = ({
   searchIsActive,
@@ -20,6 +21,7 @@ const Header = ({
   goBack,
   welcome,
   refresh,
+  setup,
 }) => {
   const { selectedCard, setSelectedCard } = useContext(SelectedCardContext);
 
@@ -33,59 +35,96 @@ const Header = ({
 
   const Navigate = useNavigate();
 
+
   const navigateBack = () => {
     Navigate(-1);
   };
 
-  //! set first selectedCard
-  useEffect(() => {
-    const fetchData = async () => {
-      const { data } = await axios.get("/api/wallet/cards");
-      setCards(data);
+  const getCards = async () => {
 
-      data.map((card) => {
-        if (card.selectedCard === true) {
-          setSelectedCard(card.cardNumber);
-        }
-      });
+    const userRes = await checkAuthentication()
+    const user = userRes.user.data;
+    setSelectedName(user.username);
+
+    const reqBody = {
+      id: user._id
     };
+    if (!reqBody.id) {
+      return null
+    };
+    console.log({ reqBody })
+    const response = await axios.post('/auth-api/users/acc', reqBody);
+    const userAcc = response.data;
+
+    console.log({ userAcc });
+    console.log({ cards });
+    setCards(userAcc.Wallet);
+    console.log(userAcc.Wallet[0])
+
+
+    cards.map((card) => {
+      if (card.selected === true) {
+        setSelectedCard(card.cardNumber);
+
+      }
+    });
+
+    console.log({ selectedCard });
+  };
+
+  //! set selectedCard
+  useEffect(() => {
+
+    const fetchData = async () => {
+      await checkAuthentication();
+      await getCards();
+    };
+
     fetchData();
   }, [refresh]);
 
-  //! set new selectedCard
+  // For Card Title below card selector icon
   useEffect(() => {
     const fetchData = async () => {
-      const { data } = await axios.get("/api/wallet/cards");
-
-      const findedCard = data.filter(
-        (card) => card.cardNumber === selectedCard
-      );
-      setFindedCard(findedCard);
+      await getCards();
+      if (selectedCard) {
+        const response = await axios.get(`/finco/cards/${selectedCard}`);
+        const card = response.data;
+        setFindedCard(card);
+      }
     };
 
     fetchData();
   }, [selectedCard]);
 
+  useEffect(() => {
+    console.log({ findedCard })
+  }, [findedCard])
+
   //! handle select card
-  const handleSelectCard = async (id) => {
+  const handleSelectCard = async (event, id) => {
+    event.preventDefault();
+    console.log("Handle Select:", { id });
+    const setFalse = { value: false };
+    const setTrue = { value: true };
+
     setSelectedCard(id);
 
-    //! set selectedCard to false
     try {
-      const setFalse = {
-        selectedCard: false,
-      };
-      const allToFalse = await axios.put("/api/wallet/cards", setFalse);
+      cards.map(async (card) => {
+        if (card.selected == true) {
+          console.log("Currently Selected card: ", card.cardTitle);
+
+          await axios.put(`/finco/cards/${card.cardNumber}/update/selected`, setFalse);
+        };
+      });
+
     } catch (error) {
       console.log("set all cards to selectedCard: false ", error);
     }
 
-    //! set selectedCard to true
     try {
-      const setTrue = {
-        selectedCard: true,
-      };
-      const setSelectTrue = await axios.put(`/api/wallet/cards/${id}`, setTrue);
+      await axios.put(`/finco/cards/${id}/update/selected/`, setTrue);
     } catch (error) {
       console.log("set selectedCard: true ", error);
     }
@@ -107,6 +146,8 @@ const Header = ({
           <h5 className="heading">Welcome Back</h5>
           <h2>{selectedName}</h2>
         </div>
+      ) : setup ? (
+        <img className="headerLogo" src={logo} alt="logo" />
       ) : (
         <NavLink to={"/"}>
           <img className="headerLogo" src={logo} alt="logo" />
@@ -114,58 +155,60 @@ const Header = ({
       )}
 
       {/* CARD */}
-      <div className="card-profile">
-        {/* {selectedCard && ( */}
-        <div className="card-btn">
-          <button
-            onClick={() => setOpenCardBox((prev) => !prev)}
-            className="btn-hidden">
-            <img
-              className="creditCard-icon"
-              src={creditCard}
-              alt="credit card logo"
-            />
-            {/* OpenCard Box */}
-            {openCardBox && (
-              <>
-                <div className="header-overlay"></div>
-                <div className="cardBox">
-                  {cards?.map((card) => (
-                    <div className="navCard-list" key={card._id}>
-                      <div
-                        className="icon-creditCard"
-                        onClick={() => handleSelectCard(card.cardNumber)}>
-                        <img
-                          className="creditCard-mini"
-                          src={creditCard}
-                          alt="credit-card"
-                        />
-                        <p>{card.cardTitle}</p>
-                      </div>
-                      <div className="navCard-separator"></div>
+      {setup ? null : (
+        <>
+          <div className="card-profile">
+            <div className="card-btn">
+              <button
+                onClick={() => setOpenCardBox((prev) => !prev)}
+                className="btn-hidden">
+                <img
+                  className="creditCard-icon"
+                  src={creditCard}
+                  alt="credit card logo"
+                />
+                {/* OpenCard Box */}
+                {openCardBox && (
+                  <>
+                    <div className="header-overlay"></div>
+                    <div className="cardBox">
+                      {cards?.map((card) => (
+                        <div className="navCard-list" key={card.cardNumber}>
+                          <div
+                            className="icon-creditCard"
+                            onClick={(e) => handleSelectCard(e, card.cardNumber)}>
+                            <img
+                              className="creditCard-mini"
+                              src={creditCard}
+                              alt="credit-card"
+                            />
+                            <p>{card.cardTitle}</p>
+                          </div>
+                          <div className="navCard-separator"></div>
+                        </div>
+                      ))}
                     </div>
-                  ))}
-                </div>
-              </>
-            )}
-          </button>
-          <p>{findedCard[0]?.cardTitle}</p>
-        </div>
-        {/* )} */}
+                  </>
+                )}
+              </button>
+              <p>{findedCard.cardTitle}</p>
+            </div>
 
-        {/* PROFILE */}
-        <NavLink className="profile-img" to={"/account"}>
-          {selectedProfile ? (
-            <img src="" alt="profile-img" className="selectedProfile-img" />
-          ) : (
-            <img
-              className="defaultProfile-img"
-              src={profile}
-              alt="default-profile-img"
-            />
-          )}
-        </NavLink>
-      </div>
+            {/* PROFILE */}
+            <NavLink className="profile-img" to={"/account"}>
+              {selectedProfile ? (
+                <img src="" alt="profile-img" className="selectedProfile-img" />
+              ) : (
+                <img
+                  className="defaultProfile-img"
+                  src={profile}
+                  alt="default-profile-img"
+                />
+              )}
+            </NavLink>
+          </div>
+        </>
+      )}
     </header>
   );
 };

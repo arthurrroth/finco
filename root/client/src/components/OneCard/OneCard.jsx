@@ -13,6 +13,11 @@ const OneCard = ({ cards, card, setRefresh }) => {
   const [deleteSuccessful, setDeleteSuccessful] = useState(false);
   const [sureDelete, setSureDelete] = useState(false);
 
+  //! open delete box
+  const handleQuestionDelete = () => {
+    setSureDelete(true);
+  };
+
   //! delete card
   const handleDelete = async () => {
     if (card.selectedCard) {
@@ -37,7 +42,6 @@ const OneCard = ({ cards, card, setRefresh }) => {
   //! open editBox
   const handleEdit = () => {
     setEditBox((prev) => !prev);
-    setNewDescription("hello");
   };
 
   //! edit description
@@ -46,11 +50,7 @@ const OneCard = ({ cards, card, setRefresh }) => {
       const newEdit = {
         cardDescription: newdescription,
       };
-      const res = await axios.put(
-        `/api/wallet/cards/${card.cardNumber}`,
-        newEdit
-      );
-      console.log(newEdit);
+      const res = await axios.put(`/api/wallet/cards/${card._id}`, newEdit);
       setRefresh((prev) => !prev);
       setEditBox(false);
     } catch (error) {
@@ -84,11 +84,10 @@ const OneCard = ({ cards, card, setRefresh }) => {
           </div>
         </section>
 
-        {/* Description */}
         <div className="card-box">
           <div className="card-box-btn">
             <div>
-              <p className="cardDescriptionHeading">Description</p>
+              <p className="cardDescriptionHeading">Carddescription</p>
               {!editBox ? (
                 <h4> {card?.cardDescription}</h4>
               ) : (
@@ -105,23 +104,15 @@ const OneCard = ({ cards, card, setRefresh }) => {
                 </div>
               )}
             </div>
-            {editBox ? (
-              <button
-                onClick={() => setEditBox(false)}
-                className="closeEdit-btn">
-                X
-              </button>
-            ) : (
-              <button className="cardEditBtnImg" onClick={handleEdit}>
-                <img src={EditIcon} alt="edit icon" />
-              </button>
-            )}
+            <button className="cardEditBtnImg" onClick={handleEdit}>
+              <img src={EditIcon} alt="edit icon" />
+            </button>
           </div>
         </div>
       </div>
 
       {/* DELETE BTN & DELETE BOX */}
-      <button className="cardDeleteBtn" onClick={() => setSureDelete(true)}>
+      <button className="cardDeleteBtn" onClick={handleQuestionDelete}>
         Delete Card
       </button>
 

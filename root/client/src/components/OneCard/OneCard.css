@@ -25,7 +25,6 @@
 .card-box-btn {
   display: flex;
   justify-content: space-between;
-  align-items: center;
 }
 
 .cardBoxSection {
@@ -43,20 +42,15 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  margin: 4rem 0 1rem 0;
   height: 4rem;
   border: 1px solid var(--icon-color);
   border-radius: 11px;
-  padding-left: 1rem;
-}
-
-.cardDescriptionEditDiv button {
-  border-left: 1px solid black;
 }
 
 .cardDescriptionInput {
   border: none;
   background: none;
-  font-size: 1.6rem;
 }
 
 .cardEditBtn {
@@ -67,18 +61,15 @@
 }
 
 .cardEditBtnImg {
+  width: 4rem;
+  height: 4rem;
   padding: 1rem;
   background-color: var(--background-lightgrey);
   border: none;
+  border-radius: 40rem;
   display: flex;
   justify-content: center;
   align-items: center;
-}
-
-.closeEdit-btn {
-  border-radius: 20px;
-  height: 2.5rem;
-  width: 2.5rem;
 }
 
 .cardDeleteBtn {
