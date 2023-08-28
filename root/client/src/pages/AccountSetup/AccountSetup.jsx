@@ -12,7 +12,7 @@ import HeaderSetup from "../../components/Header/HeaderSetup";
 import { PageContext } from "../../context/context";
 
 const AccountSetup = () => {
-  const { page, setPage } = useContext(PageContext)
+  const { page, setPage } = useContext(PageContext);
   const location = useLocation();
   const userID = location.state.userID;
   const [cardTitle, setCardTitle] = useState("");
@@ -25,18 +25,17 @@ const AccountSetup = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(`User ID on Account Setup: ${userID}`)
+    console.log(`User ID on Account Setup: ${userID}`);
 
     const reqBody = {
-      id: userID
+      id: userID,
     };
 
     console.log({ reqBody });
-    const response = await axios.post('/auth-api/users/acc', reqBody);
+    const response = await axios.post("/auth-api/users/acc", reqBody);
     const userAcc = response.data;
 
     try {
-
       const reqBody = {
         cardNumber: cardNumber,
         cardTitle: cardTitle,
@@ -45,15 +44,17 @@ const AccountSetup = () => {
         selected: true,
       };
 
-      const cardRes = await axios.post(`/finco/cards/create/${userAcc._id}`, reqBody);
+      const cardRes = await axios.post(
+        `/finco/cards/create/${userAcc._id}`,
+        reqBody
+      );
       console.log({ cardRes });
-
     } catch (error) {
       console.log("create the first card", error);
     }
 
-    setPage('account-setup');
-    Navigate("/");
+    setPage("account-setup");
+    Navigate("/home");
   };
 
   return (
@@ -104,4 +105,3 @@ const AccountSetup = () => {
 export default AccountSetup;
 
 // <Header setup={true} />
-

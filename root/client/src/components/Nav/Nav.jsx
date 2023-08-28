@@ -7,7 +7,6 @@ import TimeIcon from "../../icon/pie-chart-icon.png";
 import { useContext } from "react";
 import { OpenBoxContext } from "../../context/context";
 
-
 const Nav = ({ page }) => {
   const { openBox, setOpenBox } = useContext(OpenBoxContext);
 
@@ -19,9 +18,13 @@ const Nav = ({ page }) => {
     <>
       <nav className="nav-bottom">
         <div className="nav-container">
-          <NavLink to="/" className="nav-link">
+          <NavLink to="/home" className="nav-link">
             <div className="nav-site">
-              {page === "Home" ? <p>Home</p> : <img src={HomeIcon} alt="home" />}
+              {page === "Home" ? (
+                <p>Home</p>
+              ) : (
+                <img src={HomeIcon} alt="home" />
+              )}
             </div>
           </NavLink>
 
@@ -55,7 +58,11 @@ const Nav = ({ page }) => {
 
           <NavLink to="/reports" className="nav-link">
             <div className="nav-site">
-              {page === "Reports" ? <p>Reports</p> : <img src={TimeIcon} alt="reports" />}
+              {page === "Reports" ? (
+                <p>Reports</p>
+              ) : (
+                <img src={TimeIcon} alt="reports" />
+              )}
             </div>
           </NavLink>
         </div>

@@ -13,27 +13,22 @@ const Login = () => {
     e.preventDefault();
     const reqBody = {
       email: email,
-      password: password
+      password: password,
     };
 
     try {
-
-      const login = await axios.post('/auth-api/sessions', reqBody)
+      const login = await axios.post("/auth-api/sessions", reqBody);
       console.log({ login });
-      localStorage.setItem('accessToken', login.data.accessToken);
-      localStorage.setItem('refreshToken', login.data.refreshToken);
-      localStorage.setItem('userAccount', login.data.acc);
-      nav("/");
-
+      localStorage.setItem("accessToken", login.data.accessToken);
+      localStorage.setItem("refreshToken", login.data.refreshToken);
+      localStorage.setItem("userAccount", login.data.acc);
+      nav("/home");
     } catch (error) {
       console.log("Error at Login Page", error);
     }
-
   };
 
-  const handleForgotPasswort = async () => {
-
-  };
+  const handleForgotPasswort = async () => {};
 
   return (
     <>
@@ -75,7 +70,7 @@ const Login = () => {
         </div>
       </main>
     </>
-  )
+  );
 };
 
 export default Login;

@@ -17,6 +17,7 @@ const OneCard = ({ cards, card, setRefresh }) => {
   const handleQuestionDelete = () => {
     setSureDelete(true);
   };
+  console.log(card);
 
   //! delete card
   const handleDelete = async () => {
@@ -24,7 +25,7 @@ const OneCard = ({ cards, card, setRefresh }) => {
       setAlertText(true);
     } else
       try {
-        const res = await axios.delete(`/api/wallet/cards/${card._id}`);
+        const res = await axios.delete(`/finco/cards/${card.cardNumber}`);
         setDeleteSuccessful(true);
       } catch (error) {
         console.log("delete card failed ", error);

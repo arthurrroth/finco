@@ -1,4 +1,3 @@
-
 import "./App.css";
 // import methods
 import { BrowserRouter, Routes, Route } from "react-router-dom";
@@ -38,14 +37,14 @@ function App() {
   const [selectedCard, setSelectedCard] = useState("");
   const [userCheck, setUserCheck] = useState(true);
 
-  useEffect(() => {
-    const checkUser = async () => {
-      const user = await checkAuthentication();
-      console.log(user.isAuthenticated);
-      setUserCheck(user.isAuthenticated);
-    };
-    checkUser();
-  }, [page]);
+  // useEffect(() => {
+  //   const checkUser = async () => {
+  //     const user = await checkAuthentication();
+  //     console.log(user.isAuthenticated);
+  //     setUserCheck(user.isAuthenticated);
+  //   };
+  //   checkUser();
+  // }, [page]);
 
   return (
     <>
@@ -54,11 +53,9 @@ function App() {
           <PageContext.Provider value={{ page, setPage }}>
             <BrowserRouter>
               <Routes>
-                {userCheck ? (
-                  <Route path="/" element={<Home />} />
-                ) : (
-                  <Route path="/" element={<PrivateRoute />} />
-                )}
+                <Route path="/home" element={<Home />} />
+
+                <Route path="/" element={<PrivateRoute />} />
 
                 <Route path="/account-setup" element={<AccountSetup />} />
                 <Route path="/test-card" element={<TestCard />} />
@@ -87,4 +84,3 @@ function App() {
 }
 
 export default App;
-
