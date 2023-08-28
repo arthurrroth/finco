@@ -1,7 +1,7 @@
 import express from "express";
 import validateResource from "../middleware/validateResource";
-import { forgotPasswordSchema, getUserAccSchema, resetPasswordSchema, userCreationSchema, userVerificationSchema } from "../schema/user.schema";
-import { forgotPasswordHandler, getCurrentAccHandler, getCurrentUserHandler, resetPasswordHandler, userCreationHandler, userVerificationHandler } from "../controller/user.controller";
+import { forgotPasswordSchema, getUserAccSchema, resetPasswordSchema, userCreationSchema, userUpdateSchema, userVerificationSchema } from "../schema/user.schema";
+import { forgotPasswordHandler, getCurrentAccHandler, getCurrentUserHandler, resetPasswordHandler, updateUserHandler, userCreationHandler, userVerificationHandler } from "../controller/user.controller";
 import requireUser from "../middleware/requireUser";
 
 const userRouter = express.Router();
@@ -40,6 +40,11 @@ userRouter.post(
   '/auth-api/users/acc',
   validateResource(getUserAccSchema),
   getCurrentAccHandler
+);
+
+userRouter.put( // update wallet in userAcc
+  '/auth-api/users/acc/:accID/:field/',
+  updateUserHandler
 );
 
 export default userRouter;

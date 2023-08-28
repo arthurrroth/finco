@@ -1,7 +1,7 @@
 import express from "express";
 import validateResource from "../middleware/validateResource";
 import { cardCreationSchema, cardUpdateSchema, txCreationSchema } from "../schema/finco.schema";
-import { createCardHandler, createTransactionHandler, getCardHandler, updateCardHandler } from "../controller/finco.controller";
+import { createCardHandler, createTransactionHandler, findTxHandler, getCardHandler, updateCardHandler } from "../controller/finco.controller";
 
 const fincoRouter = express.Router();
 
@@ -26,6 +26,12 @@ fincoRouter.post(
   '/finco/transactions/add/:cardNumber',
   validateResource(txCreationSchema),
   createTransactionHandler
+);
+
+fincoRouter.post(
+  '/finco/transactions',
+  findTxHandler
+
 )
 
 export default fincoRouter;

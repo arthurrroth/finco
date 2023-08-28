@@ -1,4 +1,5 @@
 import z, { TypeOf } from "zod";
+import { Card } from "../model/fincoCard.model";
 
 
 export const userCreationSchema = z.object({
@@ -23,6 +24,22 @@ export const userCreationSchema = z.object({
     message: 'Passwords do not match',
     path: ['passwordConfirmation']
   })
+
+});
+
+export const userUpdateSchema = z.object({
+  params: z.object({
+    accID: z.string({
+      required_error: 'UserAcc ID is required for user update!'
+    }),
+    field: z.string({
+      required_error: 'Specify a Field to update'
+    })
+  }),
+
+  body: z.object({
+    value: z.union([z.string(), z.array(z.any())])
+  }),
 
 });
 
@@ -74,4 +91,5 @@ export type ForgotPasswordInput = TypeOf<typeof forgotPasswordSchema>['body'];
 export type UserCreationInput = TypeOf<typeof userCreationSchema>['body'];
 export type UserVerificationInput = TypeOf<typeof userVerificationSchema>['params'];
 export type ResetPasswordInput = TypeOf<typeof resetPasswordSchema>;
+export type UserUpdateInput = TypeOf<typeof userUpdateSchema>;
 

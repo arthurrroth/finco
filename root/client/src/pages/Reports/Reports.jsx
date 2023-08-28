@@ -32,27 +32,39 @@ const Reports = () => {
   const [transactions, setTransactions] = useState([]);
   const [dataForGraph, setDataForGraph] = useState([]);
 
+  const fetchData = async () => {
+    try {
+      const reqBody = {
+        selectedCard: selectedCard
+      };
+
+      const { data } = await axios.post(`/finco/transactions`, reqBody);
+      console.log({ data })
+
+      const sortedData = data.sort((a, b) => {
+        return new Date(b.date) - new Date(a.date);
+      });
+      setTransactions(sortedData);
+      handleDataforGraph(data);
+    } catch (error) {
+      console.log({ fetchData: error });
+    }
+  };
+
+  useEffect(() => {
+    fetchData()
+    console.log({ transactions })
+  }, [])
+
   //! fetch data
   useEffect(() => {
     setPage("Reports");
     setOpenBox(false);
 
-    const fetchData = async () => {
-      try {
-        const { data } = await axios.get("./api/wallet/transactions", {
-          params: { selectedCard },
-        });
-        const sortedData = data.sort((a, b) => {
-          return new Date(b.date) - new Date(a.date);
-        });
-        setTransactions(sortedData);
-        handleDataforGraph(data);
-      } catch (error) {
-        console.log({ fetchData: error });
-      }
-    };
+
     fetchData();
   }, [selectedCard]);
+
 
   //! function for dataForGraph
   const handleDataforGraph = (data) => {

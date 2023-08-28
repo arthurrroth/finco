@@ -5,6 +5,7 @@ import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom"; // Import the useLocation hook
 import axios from "axios";
 import Header from "../../components/Header/Header";
+import HeaderSetup from "../../components/Header/HeaderSetup";
 
 const VerifyEmailPage = () => {
   const location = useLocation(); // Get the location object from React Router
@@ -53,7 +54,7 @@ const VerifyEmailPage = () => {
 
   return (
     <>
-
+      <HeaderSetup />
       <div className="verify-box">
         <h1>Verify your Email</h1>
         {previewURL && (

@@ -5,7 +5,7 @@ import { findAccById } from "../service/user.service";
 import CardModel, { Card } from "../model/fincoCard.model";
 import log from "../utils/logger";
 import { createTx, findCardByNumber } from "../service/finco.service";
-import { Transaction } from "../model/fincoTx.model";
+import TransactionModel, { Transaction } from "../model/fincoTx.model";
 
 export const createCardHandler = async (
   req: Request<CardCreationInput['params'], {}, CardCreationInput['body']>,
@@ -107,7 +107,7 @@ export const updateCardHandler = async (req: Request<CardUpdateInput['params'], 
 
     card?.save();
 
-    res.send('Upadted Card')
+    res.send(card);
 
   } catch (error: any) {
     log.error(error.message)
@@ -127,4 +127,43 @@ export const getCardHandler = async (req: Request, res: Response) => {
     res.status(500).send('getCardHandler failed');
     return false;
   }
+};
+
+export const findTxHandler = async (req: Request, res: Response) => {
+
+  const { category, date, selectedCard } = req.body;
+
+  log.info(`${category}, ${date}, ${selectedCard}`)
+
+  const card = await CardModel.findOne({ cardNumber: selectedCard });
+  let transactions = await TransactionModel.find();
+  log.info(card)
+  if (card) {
+    transactions.filter((transaction) => {
+      return card.transactions.map((cardTx) => {
+        cardTx.refCard == transaction.refCard
+      })
+    });
+  }
+  log.info(transactions)
+  if (category) {
+    transactions = transactions.filter((transaction) => {
+      return transaction.category
+        .toLowerCase()
+        .includes(category.toLowerCase());
+    });
+  };
+
+  if (date) {
+    transactions = transactions.filter((transaction) => {
+      return transaction.date === date;
+    });
+  }
+  res.json(transactions);
+
+};
+
+export const findOneTxHandler = async (req: Request, res: Response) => {
+
+
 }

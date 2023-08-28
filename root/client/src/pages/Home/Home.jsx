@@ -23,7 +23,6 @@ import ThreeDot from "../../icon/threedot-icon.svg";
 import { useLocation } from "react-router-dom";
 
 const Home = () => {
-  const location = useLocation();
   const [userAcc, setUserAcc] = useState()
   const { selectedCard, setSelectedCard } = useContext(SelectedCardContext);
   const { page, setPage } = useContext(PageContext);
@@ -73,6 +72,31 @@ const Home = () => {
     await axios.put(`/finco/cards/${selectedCard}/update/spendingLimit`, newLimit);
     setEditLimit(false);
   };
+
+  const fetchData = async () => {
+    try {
+      const reqBody = {
+        selectedCard: selectedCard
+      };
+
+      const { data } = await axios.post(`/finco/transactions`, reqBody);
+      console.log({ data })
+
+      const sortedData = data.sort((a, b) => {
+        return new Date(b.date) - new Date(a.date);
+      });
+      setTransactions(sortedData);
+      handleDataforGraph(data);
+    } catch (error) {
+      console.log({ fetchData: error });
+    }
+  };
+
+  useEffect(() => {
+    fetchData()
+    console.log({ transactions })
+  }, [])
+
 
   useEffect(() => {
     setPage("Home");

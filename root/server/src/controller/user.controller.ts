@@ -1,10 +1,11 @@
 import { Request, Response } from "express";
 import crypto from "crypto";
-import { ForgotPasswordInput, ResetPasswordInput, UserCreationInput, UserVerificationInput } from "../schema/user.schema";
+import { ForgotPasswordInput, ResetPasswordInput, UserCreationInput, UserUpdateInput, UserVerificationInput } from "../schema/user.schema";
 import { createAcc, createUser, findAccByUser, findUserByEmail, findUserById } from "../service/user.service";
 import { sendMailx } from "../utils/mailer";
 import log from "../utils/logger";
 import UserModel from "../model/user.model";
+import UserAccModel from "../model/fincoAcc.model";
 
 export const userCreationHandler =
   //     Request<noReqParams, noReqQuery, reqBody> because our Schema only defines body:
@@ -25,7 +26,47 @@ export const userCreationHandler =
         from: 'test@example.com',
         to: user.email,
         subject: 'Please verify your account',
-        text: `<html><h2>verification code ${user.verificationCode} // id: ${user.id}</h2></html>`,
+        html: `   <html>
+        <main>
+          <h3>Dear ${user.username},</h3>
+          <p>
+            We have received a request to reset the password for your account. To
+            proceed with this request, please follow the instructions below to set
+            a new password:
+          </p>
+          <br />
+    
+          <p>1. This is your Code: <h4>${user.verificationCode}</h4></p>
+          <p>
+            2. You will be directed to a page where you can enter your new
+            password.
+          </p>
+          <p>
+            3. Choose a strong and secure password that includes a combination of
+            uppercase and lowercase letters, numbers, and special characters.
+          </p>
+          <p>4. Confirm the new password by entering it again.</p>
+          <p>
+            5. Once your new password is confirmed, you will be able to log in to
+            your account using the updated credentials.
+          </p>
+    
+          <br />
+          <p>
+            If you did not initiate this password reset request, please disregard
+            this email. Your account security is important to us, and no changes
+            will be made unless you take action through the provided link.
+          </p>
+          <br />
+          <p>
+            Thank you for using our services. If you have any questions or
+            concerns, please feel free to contact our support team
+          </p>
+          <br />
+          <p>Best regards,</p>
+          <p>Your Finco Team</p>
+        </main>
+        </html>`,
 
       });
 
@@ -144,4 +185,47 @@ export const getCurrentAccHandler = async (req: Request, res: Response) => {
   } catch (error: any) {
     log.info('Failed to retrieve User Account');
   }
-}
+};
+
+export const updateUserHandler = async (req: Request, res: Response) => {
+
+  const { accID, field } = req.params;
+  const { value } = req.body;
+
+  log.info(`Update User Handler: ${field}, ${value}`)
+
+  try {
+
+    const account = UserAccModel.findById(accID);
+
+    if (!account) {
+      return res.status(404).send('Could not find User Account while trying to update user!');
+    };
+
+    switch (field) {
+      case "wallet":
+        log.info(`Updating the wallet with: ${value}`)
+        account.Wallet = value;
+        await account.save();
+        break;
+
+      case "displayName":
+        account.displayName = value;
+        await account.save();
+        break;
+
+      case "profilePicture":
+        account.profilePicture = value;
+        await account.save();
+        break;
+
+      default:
+        return res.status(400).send('Passed not a valid field to the updateUserHandler!');
+    }
+
+    return res.send(account)
+
+  } catch (err: any) {
+    return res.status(err.code).send('Could not update user!')
+  };
+};

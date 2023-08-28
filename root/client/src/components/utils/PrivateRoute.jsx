@@ -1,11 +1,13 @@
 
-import React, { useState, useEffect } from 'react';
-import { Outlet, Navigate } from 'react-router-dom';
+import React, { useState, useEffect, useContext } from 'react';
+import { Outlet, Navigate, useNavigate } from 'react-router-dom';
 import { checkAuthentication } from '../../utils/authUtils';
+import { PageContext } from '../../context/context';
 
 const PrivateRoute = () => {
+  const { page, setPage } = useContext(PageContext);
   const [isAuthenticated, setIsAuthenticated] = useState(undefined);
-
+  const navigate = useNavigate();
   const checkAuth = async () => {
 
     try {
@@ -27,11 +29,11 @@ const PrivateRoute = () => {
     };
 
     getAuth();
-
+    setPage('private-route')
   }, []);
 
   if (isAuthenticated === undefined) {
-    return <div>Loading...</div>;
+    return <Navigate to="/onboard1" />
   }
 
   return isAuthenticated ? <Outlet /> : <Navigate to="/login" />;

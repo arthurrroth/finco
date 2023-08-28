@@ -5,6 +5,7 @@ import { useCallback, useContext, useEffect, useState } from "react";
 import iconUp from "../../icon/icon-up.svg";
 import iconDown from "../../icon/icon-down.svg";
 import { SelectedCardContext } from "../../context/context";
+import axios from "axios";
 
 const IncomeExpense = ({ sortAmount, transaction }) => {
   const { selectedCard, setSelectedCard } = useContext(SelectedCardContext);
@@ -17,13 +18,11 @@ const IncomeExpense = ({ sortAmount, transaction }) => {
     let expenseAmount = 0;
 
     transaction?.map((elm) => {
-      if (elm.cardId === selectedCard) {
-        if (elm.amount > 0) {
-          if (elm.transactionType === "income") {
-            incomeAmount += elm.amount;
-          } else {
-            expenseAmount += elm.amount;
-          }
+      if (elm.amount > 0) {
+        if (elm.transactionType === "income") {
+          incomeAmount += elm.amount;
+        } else {
+          expenseAmount += elm.amount;
         }
       }
       setIncome(incomeAmount);

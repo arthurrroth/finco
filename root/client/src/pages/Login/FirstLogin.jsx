@@ -7,6 +7,7 @@ import axios from "axios";
 
 // import components
 import Header from "../../components/Header/Header";
+import HeaderSetup from "../../components/Header/HeaderSetup";
 
 const FirstLogin = () => {
 
@@ -63,14 +64,16 @@ const FirstLogin = () => {
 
   return (
     <>
+      <HeaderSetup />
       <main className="firstLogin-main">
         <h1>Login</h1>
         <h3>Put your password for your first login</h3>
-        <h4>{email} "Email"</h4>
+        <h4>{email}</h4>
 
         <form onSubmit={handleSubmit}>
           <input
             className="login-input"
+            type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             placeholder="password"

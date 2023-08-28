@@ -1,10 +1,10 @@
+
 import "./App.css";
 // import methods
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { useEffect, useState } from "react";
 // import pages
-import LoadingAnimation from "./components/LoadingAnimation/LoadingAnimation";
-import Onboard1 from "./pages/Onboard1/Onboard1.jsx";
+import Onboard1 from "./pages/Onboard1/Onboard1";
 import Onboard2 from "./pages/Onboard2/Onboard2.jsx";
 import SignUp from "./pages/SignUp/SignUp.jsx";
 import Login from "./pages/Login/Login.jsx";
@@ -30,21 +30,22 @@ import PrivateRoute from "./components/utils/PrivateRoute";
 import FirstLogin from "./pages/Login/FirstLogin";
 import TestCard from "./pages/Login/TestCard";
 
+import { checkAuthentication } from "./utils/authUtils";
+
 function App() {
   const [page, setPage] = useState("");
   const [openBox, setOpenBox] = useState(false);
   const [selectedCard, setSelectedCard] = useState("");
-  const [loading, setLoading] = useState(true);
+  const [userCheck, setUserCheck] = useState(true);
 
   useEffect(() => {
-    setTimeout(() => {
-      setLoading(false);
-    }, 1500);
-  }, []);
-
-  if (loading) {
-    return <LoadingAnimation />
-  }
+    const checkUser = async () => {
+      const user = await checkAuthentication();
+      console.log(user.isAuthenticated);
+      setUserCheck(user.isAuthenticated);
+    };
+    checkUser();
+  }, [page]);
 
   return (
     <>
@@ -53,9 +54,12 @@ function App() {
           <PageContext.Provider value={{ page, setPage }}>
             <BrowserRouter>
               <Routes>
-                <Route path="/" element={<PrivateRoute />}>
+                {userCheck ? (
                   <Route path="/" element={<Home />} />
-                </Route>
+                ) : (
+                  <Route path="/" element={<PrivateRoute />} />
+                )}
+
                 <Route path="/account-setup" element={<AccountSetup />} />
                 <Route path="/test-card" element={<TestCard />} />
                 <Route path="/forgot-password" element={<ForgotPassword />} />
@@ -68,6 +72,7 @@ function App() {
                 <Route path="/addexpenses" element={<AddExpenses />} />
                 <Route path="/reports" element={<Reports />} />
                 <Route path="/account" element={<Account />} />
+                <Route path="/onboard1" element={<Onboard1 />} />
                 <Route path="/onboard2" element={<Onboard2 />} />
                 <Route path="/faq" element={<FAQ />} />
                 <Route path="/mywallet" element={<MyWallet />} />
@@ -82,3 +87,4 @@ function App() {
 }
 
 export default App;
+

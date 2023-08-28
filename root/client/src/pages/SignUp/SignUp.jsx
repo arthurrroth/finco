@@ -7,6 +7,7 @@ import { NavLink, useNavigate } from "react-router-dom";
 
 // import components
 import Header from "../../components/Header/Header";
+import HeaderSetup from "../../components/Header/HeaderSetup";
 
 const SignUp = () => {
   const [username, setUsername] = useState("");
@@ -56,6 +57,7 @@ const SignUp = () => {
 
   return (
     <>
+      <HeaderSetup />
       <main className="signup-wrapper">
         <article className="signup-heading">
           <h1>

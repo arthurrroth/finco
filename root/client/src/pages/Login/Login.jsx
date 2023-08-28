@@ -2,6 +2,7 @@ import { NavLink, useNavigate } from "react-router-dom";
 import "./Login.css";
 import { useState } from "react";
 import axios from "axios";
+import HeaderSetup from "../../components/Header/HeaderSetup";
 
 const Login = () => {
   const nav = useNavigate();
@@ -36,13 +37,10 @@ const Login = () => {
 
   return (
     <>
+      <HeaderSetup />
       <main className="login-main">
         <div className="login-header">
           <h1>Welcome back</h1>
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam
-            impedit vel nobis recusandae voluptatum.
-          </p>
         </div>
 
         <form onSubmit={handleSubmit} className="login-form">

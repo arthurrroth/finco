@@ -1,3 +1,4 @@
+
 import "./Header.css";
 
 // import methods
@@ -35,42 +36,35 @@ const Header = ({
 
   const Navigate = useNavigate();
 
-
   const navigateBack = () => {
     Navigate(-1);
   };
 
   const getCards = async () => {
-
-    const userRes = await checkAuthentication()
+    const userRes = await checkAuthentication();
     const user = userRes.user.data;
     setSelectedName(user.username);
 
     const reqBody = {
-      id: user._id
+      id: user._id,
     };
     if (!reqBody.id) {
-      return null
-    };
-    console.log({ reqBody })
-    const response = await axios.post('/auth-api/users/acc', reqBody);
+      return null;
+    }
+    console.log({ reqBody });
+    const response = await axios.post("/auth-api/users/acc", reqBody);
     const userAcc = response.data;
 
     console.log({ userAcc });
     console.log({ cards });
     setCards(userAcc.Wallet);
-    console.log(userAcc.Wallet[0])
 
-
-    Promise.all(cards.map((card) => {
+    userAcc.Wallet.map((card) => {
       if (card.selected === true) {
-        console.log("On GetCards: ", card.cardTitle);
         setSelectedCard(card.cardNumber);
-
+        setFindedCard(card);
       }
-    }));
-
-    console.log({ selectedCard });
+    });
   };
 
   useEffect(() => {
@@ -79,7 +73,7 @@ const Header = ({
         await checkAuthentication();
         await getCards();
       } catch (error) {
-        console.error('Error fetching cards:', error);
+        console.error("Error fetching cards:", error);
       }
     };
 
@@ -95,12 +89,17 @@ const Header = ({
     setSelectedCard(id);
 
     try {
-      await Promise.all(cards.map(async (card) => {
-        if (card.selected === true) {
-          console.log("Currently Selected card: ", card.cardTitle);
-          await axios.put(`/finco/cards/${card.cardNumber}/update/selected`, setFalse);
-        }
-      }));
+      await Promise.all(
+        cards.map(async (card) => {
+          if (card.selected === true) {
+            console.log("Currently Selected card: ", card.cardTitle);
+            await axios.put(
+              `/finco/cards/${card.cardNumber}/update/selected`,
+              setFalse
+            );
+          }
+        })
+      );
     } catch (error) {
       console.log("set all cards to selectedCard: false ", error);
     }
@@ -108,7 +107,6 @@ const Header = ({
     try {
       console.log("Set New Selected Card");
       await axios.put(`/finco/cards/${id}/update/selected/`, setTrue);
-      await getCards(); // Fetch updated cards after selecting a new card
       // Now find the selected card again and update the findedCard state
       const response = await axios.get(`/finco/cards/${id}`);
       const card = response.data;
@@ -163,7 +161,9 @@ const Header = ({
                         <div className="navCard-list" key={card.cardNumber}>
                           <div
                             className="icon-creditCard"
-                            onClick={(e) => handleSelectCard(e, card.cardNumber)}>
+                            onClick={(e) =>
+                              handleSelectCard(e, card.cardNumber)
+                            }>
                             <img
                               className="creditCard-mini"
                               src={creditCard}
@@ -201,3 +201,4 @@ const Header = ({
 };
 
 export default Header;
+

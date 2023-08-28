@@ -2,14 +2,17 @@ import "./AccountSetup.css";
 
 // import methods
 import axios from "axios";
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 
 // import components
 import Header from "../../components/Header/Header";
 import CardDesign from "../../components/CardDesign/CardDesign";
+import HeaderSetup from "../../components/Header/HeaderSetup";
+import { PageContext } from "../../context/context";
 
 const AccountSetup = () => {
+  const { page, setPage } = useContext(PageContext)
   const location = useLocation();
   const userID = location.state.userID;
   const [cardTitle, setCardTitle] = useState("");
@@ -49,15 +52,13 @@ const AccountSetup = () => {
       console.log("create the first card", error);
     }
 
-    Navigate("/", {
-      state: {
-        userAcc: userAcc,
-      }
-    });
+    setPage('account-setup');
+    Navigate("/");
   };
 
   return (
     <>
+      <HeaderSetup />
 
       <main className="accountSetup-main">
         <h1>Create your first Card</h1>
