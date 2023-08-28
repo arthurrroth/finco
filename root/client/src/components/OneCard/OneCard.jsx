@@ -65,11 +65,6 @@ const OneCard = ({ cards, card, setRefresh }) => {
 
       <div className="cardDescription">
         <section className="cardBoxSection">
-          <div className="card-box">
-            <p className="cardDescriptionHeading">Cardholder</p>
-            <h4>Max Müller</h4>
-          </div>
-
           <hr />
 
           <div className="card-box">
